@@ -78,19 +78,6 @@
 	var reactMixin = __webpack_require__(159);
 	exports.B2 = B2;
 
-	var count = 0;
-
-	function createWebSocket(path) {
-	  var host = window.location.hostname;
-	  if (host == '') host = 'localhost';
-	  var uri = 'ws://' + host + ':3015' + path;
-
-	  var Socket = "MozWebSocket" in window ? MozWebSocket : WebSocket;
-	  return new Socket(uri);
-	}
-
-	var DES_ws = createWebSocket('/');
-
 	var GroupNew = (function (_React$Component) {
 	  _inherits(GroupNew, _React$Component);
 
@@ -112,7 +99,7 @@
 	          'label',
 	          null,
 	          'Player defined group name:  ',
-	          _react2['default'].createElement('input', { type: 'text', id: 'cow', onKeyDown: _this.handleEnter.bind(_this),
+	          _react2['default'].createElement('input', { autoFocus: true, type: 'text', id: 'cow', onKeyDown: _this.handleEnter.bind(_this),
 	            onClick: _this.click.bind(_this), style: { width: 90, backgroundColor: '#d8d17d', marginLeft: 10 } })
 	        )
 	      );
@@ -148,833 +135,36 @@
 
 	;
 
-	var Chat = (function (_React$Component2) {
-	  _inherits(Chat, _React$Component2);
-
-	  function Chat(props) {
-	    var _this2 = this;
-
-	    _classCallCheck(this, Chat);
-
-	    _get(Object.getPrototypeOf(Chat.prototype), 'constructor', this).call(this, props);
-
-	    this.render = function () {
-	      return _react2['default'].createElement(
-	        'div',
-	        { style: { fontSize: 22 } },
-	        'Message:',
-	        _react2['default'].createElement(
-	          'label',
-	          null,
-	          _react2['default'].createElement('input', { type: 'text', onKeyDown: _this2.handleEnter.bind(_this2), onClick: _this2.click.bind(_this2),
-	            style: { width: 230, backgroundColor: '#d8d17d' } })
-	        )
-	      );
-	    };
-	  }
-
-	  _createClass(Chat, [{
-	    key: 'handleEnter',
-	    value: function handleEnter(event) {
-	      var message = event.target.value;
-	      if (event.keyCode == 13 && message != '') {
-	        this.props.changeMessage(message);
-	        event.target.value = '';
-	      }
-	    }
-	  }, {
-	    key: 'click',
-	    value: function click(event) {
-	      var message = event.target.value;
-	      if (message != '') {
-	        this.props.changeMessage(message);
-	        event.target.value = '';
-	      }
-	    }
-	  }]);
-
-	  return Chat;
-	})(_react2['default'].Component);
-
-	;
-
-	var Number1 = (function (_React$Component3) {
-	  _inherits(Number1, _React$Component3);
-
-	  function Number1(props) {
-	    var _this3 = this;
-
-	    _classCallCheck(this, Number1);
-
-	    _get(Object.getPrototypeOf(Number1.prototype), 'constructor', this).call(this, props);
-
-	    this.handleChange = function (event) {
-	      _this3.props.change(event.target.value);
-	    };
-
-	    this.handleEnter = function (event) {
-	      var s1 = event.target.value;
-	      if (event.keyCode == 13 && s1 != '') {
-	        _this3.props.change(s1);
-	        event.target.value = '';
-	      }
-	    };
-
-	    this.click = function (event) {
-	      var s1 = event.target.value;
-	      if (s1 != '') {
-	        _this3.props.change(s1);
-	        event.target.value = '';
-	      }
-	    };
-
-	    this.render = function () {
-	      return _react2['default'].createElement('input', { type: 'text', onKeyDown: _this3.handleEnter, onChange: _this3.handleChange, onClick: _this3.click,
-	        style: { paddingTop: 1.1, paddingBottom: 0.9, paddingLeft: 1, paddingRight: 1, color: '#ff0000',
-	          fontSize: 22, backgroundColor: '#d8d17d', marginLeft: 8, width: 25, textAlign: 'center' } });
-	    };
-	  }
-
-	  return Number1;
-	})(_react2['default'].Component);
-
-	;
-
-	var Number2 = (function (_React$Component4) {
-	  _inherits(Number2, _React$Component4);
-
-	  function Number2(props) {
-	    var _this4 = this;
-
-	    _classCallCheck(this, Number2);
-
-	    _get(Object.getPrototypeOf(Number2.prototype), 'constructor', this).call(this, props);
-
-	    this.handleChange = function (event) {
-	      _this4.props.change(event.target.value);
-	    };
-
-	    this.handleEnter = function (event) {
-	      var s2 = event.target.value;
-	      if (event.keyCode == 13 && s2 != '') {
-	        _this4.props.change(s2);
-	        event.target.value = '';
-	      }
-	    };
-
-	    this.click = function (event) {
-	      var s2 = event.target.value;
-	      if (s2 != '') {
-	        _this4.props.change(s2);
-	        event.target.value = '';
-	      }
-	    };
-
-	    this.render = function () {
-	      return _react2['default'].createElement('input', { type: 'text', onKeyDown: _this4.handleEnter, onChange: _this4.handleChange, onClick: _this4.click,
-	        style: { paddingTop: 1.1, paddingBottom: 0.9, paddingLeft: 1, paddingRight: 1, color: '#ff0000',
-	          fontSize: 22, backgroundColor: '#d8d17d', marginLeft: 8, width: 25, textAlign: 'center' } });
-	    };
-	  }
-
-	  return Number2;
-	})(_react2['default'].Component);
-
-	;
-
-	var Number3 = (function (_React$Component5) {
-	  _inherits(Number3, _React$Component5);
-
-	  function Number3(props) {
-	    var _this5 = this;
-
-	    _classCallCheck(this, Number3);
-
-	    _get(Object.getPrototypeOf(Number3.prototype), 'constructor', this).call(this, props);
-
-	    this.handleChange = function (event) {
-	      _this5.props.change(event.target.value);
-	    };
-
-	    this.render = function () {
-	      return _react2['default'].createElement('input', { type: 'text', onKeyDown: _this5.handleEnter.bind(_this5), onChange: _this5.handleChange, onClick: _this5.click.bind(_this5),
-	        style: { paddingTop: 1.1, paddingBottom: 0.9, paddingLeft: 1, paddingRight: 1, color: '#ff0000',
-	          fontSize: 22, backgroundColor: '#d8d17d', marginLeft: 8, width: 25, textAlign: 'center' } });
-	    };
-	  }
-
-	  _createClass(Number3, [{
-	    key: 'handleEnter',
-	    value: function handleEnter(event) {
-	      var s3 = event.target.value;
-	      if (event.keyCode == 13 && s3 != '') {
-	        this.props.change(s3);
-	        event.target.value = '';
-	      }
-	    }
-	  }, {
-	    key: 'click',
-	    value: function click(event) {
-	      var s3 = event.target.value;
-	      if (s3 != '') {
-	        this.props.change(s3);
-	        event.target.value = '';
-	      }
-	    }
-	  }]);
-
-	  return Number3;
-	})(_react2['default'].Component);
-
-	;
-
-	var Number4 = (function (_React$Component6) {
-	  _inherits(Number4, _React$Component6);
-
-	  function Number4(props) {
-	    var _this6 = this;
-
-	    _classCallCheck(this, Number4);
-
-	    _get(Object.getPrototypeOf(Number4.prototype), 'constructor', this).call(this, props);
-
-	    this.handleChange = function (event) {
-
-	      _this6.props.change(event.target.value);
-	    };
-
-	    this.render = function () {
-	      return _react2['default'].createElement('input', { type: 'text', onKeyDown: _this6.handleEnter.bind(_this6), onChange: _this6.handleChange, onClick: _this6.click.bind(_this6),
-	        style: { paddingTop: 1.1, paddingBottom: 0.9, paddingLeft: 1, paddingRight: 1, color: '#ff0000',
-	          fontSize: 22, backgroundColor: '#d8d17d', marginLeft: 8, width: 25, textAlign: 'center' } });
-	    };
-	  }
-
-	  _createClass(Number4, [{
-	    key: 'handleEnter',
-	    value: function handleEnter(event) {
-	      var s4 = event.target.value;
-	      if (event.keyCode == 13 && s4 != '') {
-	        this.props.change(s4);
-	        event.target.value = '';
-	      }
-	    }
-	  }, {
-	    key: 'click',
-	    value: function click(event) {
-	      var s4 = event.target.value;
-	      if (s4 != '') {
-	        this.props.change(s4);
-	        event.target.value = '';
-	      }
-	    }
-	  }]);
-
-	  return Number4;
-	})(_react2['default'].Component);
-
-	;
-
-	var Goal = (function (_React$Component7) {
-	  _inherits(Goal, _React$Component7);
-
-	  function Goal(props) {
-	    var _this7 = this;
-
-	    _classCallCheck(this, Goal);
-
-	    _get(Object.getPrototypeOf(Goal.prototype), 'constructor', this).call(this, props);
-
-	    this.render = function () {
-	      return _react2['default'].createElement('input', { type: 'text', onKeyDown: _this7.handleEnter.bind(_this7), onClick: _this7.click.bind(_this7),
-	        style: { paddingTop: 1.1, paddingBottom: 0.9, paddingLeft: 1, paddingRight: 1, color: '#ff0000',
-	          fontSize: 22, backgroundColor: '#d8d17d', marginLeft: 8, width: 25, textAlign: 'center' } });
-	    };
-	  }
-
-	  _createClass(Goal, [{
-	    key: 'handleEnter',
-	    value: function handleEnter(event) {
-	      var g = event.target.value;
-	      if (event.keyCode == 13 && g != '') {
-	        this.props.change(g);
-	        event.target.value = '';
-	      }
-	    }
-	  }, {
-	    key: 'click',
-	    value: function click(event) {
-	      var g = event.target.value;
-	      if (g != '') {
-	        this.props.change(g);
-	        event.target.value = '';
-	      }
-	    }
-	  }]);
-
-	  return Goal;
-	})(_react2['default'].Component);
-
-	;
-
-	var Sides1 = (function (_React$Component8) {
-	  _inherits(Sides1, _React$Component8);
-
-	  function Sides1(props) {
-	    var _this8 = this;
-
-	    _classCallCheck(this, Sides1);
-
-	    _get(Object.getPrototypeOf(Sides1.prototype), 'constructor', this).call(this, props);
-
-	    this.render = function () {
-	      return _react2['default'].createElement('input', { type: 'text', onKeyDown: _this8.handleEnter.bind(_this8), onClick: _this8.click.bind(_this8),
-	        style: { paddingTop: 1.1, paddingBottom: 0.9, paddingLeft: 1, paddingRight: 1, color: '#ff0000',
-	          fontSize: 22, backgroundColor: '#d8d17d', marginLeft: 8, width: 25, textAlign: 'center' } });
-	    };
-	  }
-
-	  _createClass(Sides1, [{
-	    key: 'handleEnter',
-	    value: function handleEnter(event) {
-	      var s1 = event.target.value;
-	      if (event.keyCode == 13 && s1 != '') {
-	        this.props.change({ sides1: s1 });
-	        event.target.value = '';
-	      }
-	    }
-	  }, {
-	    key: 'click',
-	    value: function click(event) {
-	      var s1 = event.target.value;
-	      if (s1 != '') {
-	        this.props.change({ sides1: s1 });
-	        event.target.value = '';
-	      }
-	    }
-	  }]);
-
-	  return Sides1;
-	})(_react2['default'].Component);
-
-	;
-
-	var Sides2 = (function (_React$Component9) {
-	  _inherits(Sides2, _React$Component9);
-
-	  function Sides2(props) {
-	    var _this9 = this;
-
-	    _classCallCheck(this, Sides2);
-
-	    _get(Object.getPrototypeOf(Sides2.prototype), 'constructor', this).call(this, props);
-
-	    this.render = function () {
-	      return _react2['default'].createElement('input', { type: 'text', onKeyDown: _this9.handleEnter.bind(_this9), onClick: _this9.click.bind(_this9),
-	        style: { paddingTop: 1.1, paddingBottom: 0.9, paddingLeft: 1, paddingRight: 1, color: '#ff0000',
-	          fontSize: 22, backgroundColor: '#d8d17d', marginLeft: 8, width: 25, textAlign: 'center' } });
-	    };
-	  }
-
-	  _createClass(Sides2, [{
-	    key: 'handleEnter',
-	    value: function handleEnter(event) {
-	      var s2 = event.target.value;
-	      if (event.keyCode == 13 && s2 != '') {
-	        this.props.change({ sides2: s2 });
-	        event.target.value = '';
-	      }
-	    }
-	  }, {
-	    key: 'click',
-	    value: function click(event) {
-	      var s2 = event.target.value;
-	      if (s2 != '') {
-	        this.props.change({ sides2: s2 });
-	        event.target.value = '';
-	      }
-	    }
-	  }]);
-
-	  return Sides2;
-	})(_react2['default'].Component);
-
-	;
-
-	var Sides3 = (function (_React$Component10) {
-	  _inherits(Sides3, _React$Component10);
-
-	  function Sides3(props) {
-	    var _this10 = this;
-
-	    _classCallCheck(this, Sides3);
-
-	    _get(Object.getPrototypeOf(Sides3.prototype), 'constructor', this).call(this, props);
-
-	    this.render = function () {
-	      return _react2['default'].createElement('input', { type: 'text', onKeyDown: _this10.handleEnter.bind(_this10), onClick: _this10.click.bind(_this10),
-	        style: { paddingTop: 1.1, paddingBottom: 0.9, paddingLeft: 1, paddingRight: 1, color: '#ff0000',
-	          fontSize: 22, backgroundColor: '#d8d17d', marginLeft: 8, width: 25, textAlign: 'center' } });
-	    };
-	  }
-
-	  _createClass(Sides3, [{
-	    key: 'handleEnter',
-	    value: function handleEnter(event) {
-	      var s3 = event.target.value;
-	      if (event.keyCode == 13 && s3 != '') {
-	        this.props.change({ sides3: s3 });
-	        event.target.value = '';
-	      }
-	    }
-	  }, {
-	    key: 'click',
-	    value: function click(event) {
-	      var s3 = event.target.value;
-	      if (s3 != '') {
-	        this.props.change({ sides3: s3 });
-	        event.target.value = '';
-	      }
-	    }
-	  }]);
-
-	  return Sides3;
-	})(_react2['default'].Component);
-
-	;
-
-	var Sides4 = (function (_React$Component11) {
-	  _inherits(Sides4, _React$Component11);
-
-	  function Sides4(props) {
-	    var _this11 = this;
-
-	    _classCallCheck(this, Sides4);
-
-	    _get(Object.getPrototypeOf(Sides4.prototype), 'constructor', this).call(this, props);
-
-	    this.render = function () {
-	      return _react2['default'].createElement('input', { type: 'text', onKeyDown: _this11.handleEnter.bind(_this11), onClick: _this11.click.bind(_this11),
-	        style: { paddingTop: 1.1, paddingBottom: 0.9, paddingLeft: 1, paddingRight: 1, color: '#ff0000',
-	          fontSize: 22, backgroundColor: '#d8d17d', marginLeft: 8, width: 25, textAlign: 'center' } });
-	    };
-	  }
-
-	  _createClass(Sides4, [{
-	    key: 'handleEnter',
-	    value: function handleEnter(event) {
-	      var s4 = event.target.value;
-	      if (event.keyCode == 13 && s4 != '') {
-	        this.props.change({ sides4: s4 });
-	        event.target.value = '';
-	      }
-	    }
-	  }, {
-	    key: 'click',
-	    value: function click(event) {
-	      var s4 = event.target.value;
-	      if (s4 != '') {
-	        this.props.change({ sides4: s4 });
-	        event.target.value = '';
-	      }
-	    }
-	  }]);
-
-	  return Sides4;
-	})(_react2['default'].Component);
-
-	;
-
-	var SetGoal = (function (_React$Component12) {
-	  _inherits(SetGoal, _React$Component12);
-
-	  function SetGoal(props) {
-	    var _this12 = this;
-
-	    _classCallCheck(this, SetGoal);
-
-	    _get(Object.getPrototypeOf(SetGoal.prototype), 'constructor', this).call(this, props);
-
-	    this.render = function () {
-	      return _react2['default'].createElement('input', { type: 'text', onKeyDown: _this12.handleEnter.bind(_this12), onClick: _this12.click.bind(_this12),
-	        style: { paddingTop: 1.1, paddingBottom: 0.9, paddingLeft: 1, paddingRight: 1, color: '#ff0000',
-	          fontSize: 22, backgroundColor: '#d8d17d', marginLeft: 8, width: 25, textAlign: 'center' } });
-	    };
-	  }
-
-	  _createClass(SetGoal, [{
-	    key: 'handleEnter',
-	    value: function handleEnter(event) {
-	      var g = event.target.value;
-	      if (event.keyCode == 13 && g != '') {
-	        this.props.change({ goal: g });
-	        event.target.value = '';
-	      }
-	    }
-	  }, {
-	    key: 'click',
-	    value: function click(event) {
-	      var g = event.target.value;
-	      if (g != '') {
-	        this.props.change({ goal: g });
-	        event.target.value = '';
-	      }
-	    }
-	  }]);
-
-	  return SetGoal;
-	})(_react2['default'].Component);
-
-	;
-
-	var ChangeCountdown = (function (_React$Component13) {
-	  _inherits(ChangeCountdown, _React$Component13);
-
-	  function ChangeCountdown(props) {
-	    var _this13 = this;
-
-	    _classCallCheck(this, ChangeCountdown);
-
-	    _get(Object.getPrototypeOf(ChangeCountdown.prototype), 'constructor', this).call(this, props);
-
-	    this.handleChange = function (event) {
-	      data.COUNTDOWN = event.target.value;
-	    };
-
-	    this.handleEnter = function (event) {
-	      var cd = event.target.value;
-	      if (event.keyCode == 13 && cd != '') {
-	        data.COUNTDOWN = cd;
-	        event.target.value = '';
-	      }
-	    };
-
-	    this.click = function (event) {
-	      var cd = event.target.value;
-	      if (cd != '') {
-	        data.COUNTDOWN = cd;
-	        event.target.value = '';
-	      }
-	    };
-
-	    this.render = function () {
-	      return _react2['default'].createElement('input', { type: 'text', onKeyDown: _this13.handleEnter, onChange: _this13.handleChange, onClick: _this13.click,
-	        style: { paddingTop: 1.1, paddingBottom: 0.9, paddingLeft: 1, paddingRight: 1, color: '#ff0000',
-	          fontSize: 22, backgroundColor: '#d8d17d', marginLeft: 8, width: 25, textAlign: 'center' } });
-	    };
-	  }
-
-	  return ChangeCountdown;
-	})(_react2['default'].Component);
-
-	;
-
-	var ChangeColor = (function (_React$Component14) {
-	  _inherits(ChangeColor, _React$Component14);
-
-	  function ChangeColor(props) {
-	    var _this14 = this;
-
-	    _classCallCheck(this, ChangeColor);
-
-	    _get(Object.getPrototypeOf(ChangeColor.prototype), 'constructor', this).call(this, props);
-
-	    this.render = function () {
-	      return _react2['default'].createElement(
-	        'div',
-	        { style: { fontSize: 22 } },
-	        _react2['default'].createElement(
-	          'label',
-	          null,
-	          _react2['default'].createElement('input', { type: 'text', onKeyDown: _this14.handleEnter.bind(_this14), onClick: _this14.click.bind(_this14),
-	            style: { width: 70, backgroundColor: '#d8d17d' } }),
-	          'Font Color'
-	        )
-	      );
-	    };
-	  }
-
-	  _createClass(ChangeColor, [{
-	    key: 'handleEnter',
-	    value: function handleEnter(event) {
-	      var color = event.target.value;
-	      if (event.keyCode == 13 && color != '') {
-	        this.props.changeC(color);
-	      }
-	    }
-	  }, {
-	    key: 'click',
-	    value: function click(event) {
-	      var color = event.target.value;
-	      if (color != '') {
-	        this.props.changeC(color);
-	      }
-	    }
-	  }]);
-
-	  return ChangeColor;
-	})(_react2['default'].Component);
-
-	;
-
-	var ChangeBackground = (function (_React$Component15) {
-	  _inherits(ChangeBackground, _React$Component15);
-
-	  function ChangeBackground(props) {
-	    var _this15 = this;
-
-	    _classCallCheck(this, ChangeBackground);
-
-	    _get(Object.getPrototypeOf(ChangeBackground.prototype), 'constructor', this).call(this, props);
-
-	    this.render = function () {
-	      return _react2['default'].createElement(
-	        'div',
-	        { style: { fontSize: 22 } },
-	        _react2['default'].createElement(
-	          'label',
-	          null,
-	          _react2['default'].createElement('input', { type: 'text', onKeyDown: _this15.handleEnter.bind(_this15), onClick: _this15.click.bind(_this15),
-	            style: { width: 70, backgroundColor: '#d8d17d' } }),
-	          'Background Color'
-	        )
-	      );
-	    };
-	  }
-
-	  _createClass(ChangeBackground, [{
-	    key: 'handleEnter',
-	    value: function handleEnter(event) {
-	      var color = event.target.value;
-	      if (event.keyCode == 13 && color != '') {
-	        this.props.changeB(color);
-	      }
-	    }
-	  }, {
-	    key: 'click',
-	    value: function click(event) {
-	      var col = event.target.value;
-	      if (col != '') {
-	        this.props.changeC(col);
-	      }
-	    }
-	  }]);
-
-	  return ChangeBackground;
-	})(_react2['default'].Component);
-
-	;
-
-	var Login = (function (_React$Component16) {
-	  _inherits(Login, _React$Component16);
-
-	  function Login(props) {
-	    var _this16 = this;
-
-	    _classCallCheck(this, Login);
-
-	    _get(Object.getPrototypeOf(Login.prototype), 'constructor', this).call(this, props);
-
-	    this.handleChange = function (event) {
-	      _this16.props.change({ name: event.target.value });
-	    };
-
-	    this.handleEnter = function (event) {
-	      mouseHandler.Sbackground = mouseHandler.rSbackground;
-	      mouseHandler.Sborder = mouseHandler.rSborder;
-	      mouseHandler.Scolor = mouseHandler.rScolor;
-	      if (_this16.props.name == '') {
-	        _this16.props.change({
-	          info: ''
-	        });
-	      } else {
-	        var ENTER = 13;
-	        if (event.keyCode == ENTER) {
-	          var _name = _this16.props.name;
-	          _this16.props.change({
-	            hidden: true,
-	            hidden2: false,
-	            name: _name,
-	            startDisplay: 'inline'
-	          });
-	          DES_ws.send('CC#$42' + _name);
-	        }
-	      }
-	    };
-
-	    this.click = function () {
-	      if (_this16.props.name == '') {
-	        _this16.props.change({
-	          info: 'Please enter a name.'
-	        });
-	      } else {
-	        var _name2 = _this16.props.name;
-	        _this16.props.change({
-	          hidden: true,
-	          hidden2: false,
-	          name: _name2,
-	          startDisplay: 'inline',
-	          messageDisplay: 'inline'
-	        });
-	        DES_ws.send('CC#$42' + _name2);
-	      }
-	    };
-
-	    this.render = function () {
-	      if (_this16.props.hidden) {
-	        return null;
-	      }
-	      var name = _this16.props.name;
-	      return _react2['default'].createElement(
-	        'div',
-	        null,
-	        _react2['default'].createElement(
-	          'button',
-	          { onClick: _this16.click, style: { backgroundColor: '#d8d17d', color: '#f00' } },
-	          'Please enter a name:'
-	        ),
-	        _react2['default'].createElement('input', { autoFocus: true, type: 'text', name: name, onChange: _this16.handleChange,
-	          style: { backgroundColor: '#d8d17d' },
-	          onKeyDown: _this16.handleEnter }),
-	        _this16.props.name
-	      );
-	    };
-	  }
-
-	  return Login;
-	})(_react2['default'].Component);
-
-	;
-
-	var Messages = (function (_React$Component17) {
-	  _inherits(Messages, _React$Component17);
-
-	  function Messages(props) {
-	    var _this17 = this;
-
-	    _classCallCheck(this, Messages);
-
-	    _get(Object.getPrototypeOf(Messages.prototype), 'constructor', this).call(this, props);
-
-	    this.render = function () {
-	      return _react2['default'].createElement(
-	        'button',
-	        { style: { fontSize: 17, marginLeft: 7, backgroundColor: '#2C2106', color: '#F8EDD2',
-	            textAlign: 'left', borderColor: '#000', borderRadius: 12 } },
-	        _this17.props.information
-	      );
-	    };
-	  }
-
-	  return Messages;
-	})(_react2['default'].Component);
-
-	;
-
 	var mouseHandlerx = {
 	  Abackground: '#000',
 	  Aborder: 'green',
-	  Acolor: '#d5f765',
+	  Acolor: 'burlywood',
 	  Asize: 12,
 	  Bbackground: '#000',
 	  Bborder: 'green',
-	  Bcolor: '#d5f765',
+	  Bcolor: 'burlywood',
 	  Bsize: 12,
 	  Cbackground: '#000',
 	  Cborder: 'green',
-	  Ccolor: '#d5f765',
+	  Ccolor: 'burlywood',
 	  Csize: 12,
 	  Sbackground: '#000',
 	  Sborder: 'green',
-	  Scolor: '#d5f765',
+	  Scolor: 'burlywood',
 	  Ssize: 12,
 	  rSbackground: 'green',
 	  rSborder: 'lightgreen',
 	  rScolor: 'yellow',
-	  2100: 'gold',
-	  550: '#01afaf',
-	  55010: 'blue',
-	  5501: '#40E0D0',
-	  551: '#01afaf',
-	  55110: 'blue',
-	  5511: '#40E0D0',
-	  552: '#01afaf',
-	  55210: 'blue',
-	  5521: '#40E0D0',
-	  3: '#01afaf',
-	  310: 'blue',
-	  31: '#40E0D0',
-	  4: '#01afaf',
-	  410: 'blue',
-	  41: '#40E0D0',
-	  5: '#01afaf',
-	  510: 'blue',
-	  51: '#40E0D0',
-	  6: '#01afaf',
-	  610: 'blue',
-	  61: '#40E0D0',
-	  7: '#01afaf',
-	  710: 'blue',
-	  71: '#40E0D0',
-	  8: '#01afaf',
-	  810: 'blue',
-	  81: '#40E0D0',
-	  559: '#01afaf',
-	  55910: 'blue',
-	  5591: '#40E0D0',
-	  90: 'darkred',
-	  10: '#f7b16f',
-	  11: '#f7b16f',
-	  12: '#f7b16f',
-	  13: '#000',
-	  14: '#000',
-	  15: '#f7b16f',
-	  19: '#000',
-	  9: '#000',
-	  20: '#9fc972',
-	  22: '#000000',
-	  23: '#000000',
-	  24: '#000000',
-	  25: '#000000',
-	  26: '#000000',
-	  120: '#01afaf',
-	  130: 'darkred',
-	  140: 'darkred',
-	  150: '#01afaf',
-	  160: '#01afaf',
-	  170: '#01afaf',
-	  180: '#01afaf',
-	  190: 'darkred',
-	  1000: '#01afaf',
-	  1100: '#01afaf',
-	  1200: '#01afaf',
-	  1300: '#01afaf',
-	  1400: '#01afaf',
-	  220: 'darkred',
-	  230: 'darkred',
-	  240: 'darkred',
-	  250: 'darkred',
-	  260: 'darkred',
-	  270: 'darkred',
-	  27: '#000000'
+	  27: '#000',
+	  270: 'darkred'
 	};
 
 	var mouseHandler = _mobservable2['default'].makeReactive(mouseHandlerx);
 
 	var data = _mobservable2['default'].makeReactive({
 	  group: 'solo',
-	  timerSize: '18',
 	  groupBackup: 'solo',
-	  chatMessage: '',
-	  chatArray: [],
-	  information: 'click ROLL to begin playing.',
-	  resPrevious: '',
-	  dd1: 0,
-	  dd2: 0,
-	  dd3: 0,
-	  dd4: 0,
-	  goal2: 20,
-	  COUNTDOWN: 10,
+	  name: '',
 	  test: true,
 	  groupWatch: function groupWatch() {
 	    if (this.group === 'GroupA' && this.test) {
@@ -983,534 +173,111 @@
 	      mouseHandler.Acolor = 'yellow';
 	      mouseHandler.Bbackground = '#000';
 	      mouseHandler.Bborder = 'green';
-	      mouseHandler.Bcolor = '#d5f765';
+	      mouseHandler.Bcolor = 'burlywood';
 	      mouseHandler.Cbackground = '#000';
 	      mouseHandler.Cborder = 'green';
-	      mouseHandler.Ccolor = '#d5f765';
+	      mouseHandler.Ccolor = 'burlywood';
 	      mouseHandler.Sbackground = '#000';
 	      mouseHandler.Sborder = 'green';
-	      mouseHandler.Scolor = '#d5f765';
+	      mouseHandler.Scolor = 'burlywood';
 	    } else if (this.group === 'GroupB' && this.test) {
 	      mouseHandler.Bbackground = 'green';
 	      mouseHandler.Bborder = 'lawngreen';
 	      mouseHandler.Bcolor = 'yellow';
 	      mouseHandler.Abackground = '#000';
 	      mouseHandler.Aborder = 'green';
-	      mouseHandler.Acolor = '#d5f765';
+	      mouseHandler.Acolor = 'burlywood';
 	      mouseHandler.Cbackground = '#000';
 	      mouseHandler.Cborder = 'green';
-	      mouseHandler.Ccolor = '#d5f765';
+	      mouseHandler.Ccolor = 'burlywood';
 	      mouseHandler.Sbackground = '#000';
 	      mouseHandler.Sborder = 'green';
-	      mouseHandler.Scolor = '#d5f765';
+	      mouseHandler.Scolor = 'burlywood';
 	    } else if (this.group === 'GroupC' && this.test) {
 	      mouseHandler.Cbackground = 'green';
 	      mouseHandler.Cborder = 'lawngreen';
 	      mouseHandler.Ccolor = 'yellow';
 	      mouseHandler.Abackground = '#000';
 	      mouseHandler.Aborder = 'green';
-	      mouseHandler.Acolor = '#d5f765';
+	      mouseHandler.Acolor = 'burlywood';
 	      mouseHandler.Bbackground = '#000';
 	      mouseHandler.Bborder = 'green';
-	      mouseHandler.Bcolor = '#d5f765';
+	      mouseHandler.Bcolor = 'burlywood';
 	      mouseHandler.Sbackground = '#000';
 	      mouseHandler.Sborder = 'green';
-	      mouseHandler.Scolor = '#d5f765';
+	      mouseHandler.Scolor = 'burlywood';
 	    } else if (this.group === 'solo' && this.test) {
 	      mouseHandler.Sbackground = 'green';
 	      mouseHandler.Sborder = 'lawngreen';
 	      mouseHandler.Scolor = 'yellow';
 	      mouseHandler.Abackground = '#000';
 	      mouseHandler.Aborder = 'green';
-	      mouseHandler.Acolor = '#d5f765';
+	      mouseHandler.Acolor = 'burlywood';
 	      mouseHandler.Bbackground = '#000';
 	      mouseHandler.Bborder = 'green';
-	      mouseHandler.Bcolor = '#d5f765';
+	      mouseHandler.Bcolor = 'burlywood';
 	      mouseHandler.Cbackground = '#000';
 	      mouseHandler.Cborder = 'green';
-	      mouseHandler.Ccolor = '#d5f765';
+	      mouseHandler.Ccolor = 'burlywood';
 	    } else if (this.test) {
 	      mouseHandler.Abackground = '#000';
 	      mouseHandler.Aborder = 'green';
-	      mouseHandler.Acolor = '#d5f765';
+	      mouseHandler.Acolor = 'burlywood';
 	      mouseHandler.Bbackground = '#000';
 	      mouseHandler.Bborder = 'green';
-	      mouseHandler.Bcolor = '#d5f765';
+	      mouseHandler.Bcolor = 'burlywood';
 	      mouseHandler.Cbackground = '#000';
 	      mouseHandler.Cborder = 'green';
-	      mouseHandler.Ccolor = '#d5f765';
+	      mouseHandler.Ccolor = 'burlywood';
 	      mouseHandler.Sbackground = '#000';
 	      mouseHandler.Sborder = 'green';
-	      mouseHandler.Scolor = '#d5f765';
+	      mouseHandler.Scolor = 'burlywood';
 	    }
 	  }
 	});
 
-	data.ddChange1 = function (x) {
-	  data.dd1 = x;
-	};
-	data.ddChange2 = function (x) {
-	  data.dd2 = x;
-	};
-	data.ddChange3 = function (x) {
-	  data.dd3 = x;
-	};
-	data.ddChange4 = function (x) {
-	  data.dd4 = x;
-	};
-	data.ddChangeGoal2 = function (x) {
-	  data.goal2 = x;
-	};
-
-	var disp = _mobservable2['default'].makeReactive({
-	  rulesDisplayOn: 'none',
-	  rulesDisplayOff: 'inline',
-	  scoreDisplay: 'inline',
-	  scoreDisplay2: 'none'
-	});
-
-	var B2X = (function (_React$Component18) {
-	  _inherits(B2X, _React$Component18);
+	var B2X = (function (_React$Component2) {
+	  _inherits(B2X, _React$Component2);
 
 	  // shouldComponentUpdate = shouldPureComponentUpdate;
 
 	  function B2X(props) {
-	    var _this18 = this;
+	    var _this2 = this;
 
 	    _classCallCheck(this, B2X);
 
 	    _get(Object.getPrototypeOf(B2X.prototype), 'constructor', this).call(this, props);
 
-	    this.changeMessage = function (x) {
-	      var name = _this18.state.name;
-	      var gr = _this18.data.group;
-	      DES_ws.send('CD#$42,' + gr + ',' + name + ',' + name + ',' + name + ': ' + x);
-	    };
-
-	    this.setColorState = function (fn) {
-	      return _this18.setState(function (_ref) {
-	        var colors = _ref.colors;
-	        return {
-	          colors: fn(colors)
-	        };
-	      });
-	    };
-
-	    this.changeBackground = function (color) {
-	      _this18.setState({
-	        dynamicBg: color
-	      });
-	    };
-
-	    this.changeColor = function (col) {
-	      _this18.setState({
-	        dynamicColor: col,
-	        sty: { color: col, width: 50, marginLeft: 30, padding: 10 }
-	      });
-	    };
-
-	    this.solutions = function () {
-	      var group = _this18.data.group;
-	      var name = _this18.state.name;
-	      var goal = _this18.state.goal;
-	      DES_ws.send('CZ#$42,' + group + ',' + name + ',' + goal);
-	    };
-
-	    this.displayHandler = function () {};
-
-	    this.rollDice = function () {
-	      var col = _this18.state.dynamicColor;
-	      _this18.mouse[2] = '#83f7d8';
-	      _this18.setState({
-	        DS_T: '',
-	        test: false,
-	        score: false,
-	        impossible: false,
-	        interrupt: false,
-	        sty: { color: col, width: 50, marginLeft: 30, padding: 10 },
-	        impossibleDisplay: 'inline',
-	        scoreDisplay: 'inline',
-	        scoreDisplay2: 'none',
-	        numDisplay: 'inline',
-	        rollnumsDisplay: 'none',
-	        showParamsButton: 'inline',
-	        hideParamsButton: 'none',
-	        paramsDiv: 'none',
-	        showSolutionsButton: 'inline',
-	        hideSolutionsButton: 'none'
-	      });
-	      var name = _this18.state.name;
-	      var group = _this18.data.group;
-	      var a = _this18.state.sides1;
-	      var b = _this18.state.sides2;
-	      var c = _this18.state.sides3;
-	      var d = _this18.state.sides4;
-	      DES_ws.send('CF#$42,' + group + ',' + name + ',');
-	      DES_ws.send('CA#$42,' + group + ',' + name + ',' + a + ',' + b + ',' + c + ',' + d);
-	    };
-
-	    this.handleGroupA = function () {
-	      if (_this18.data.group !== 'GroupA') {
-	        var _name3 = _this18.state.name;
-	        var group = _this18.data.group;
-	      }
-	    };
-
-	    this.handleGroupB = function () {
-	      if (_this18.data.group !== 'GroupB') {
-	        var _name4 = _this18.state.name;
-	        var group = _this18.data.group;
-	      }
-	    };
-
-	    this.handleGroupC = function () {
-	      if (_this18.data.group !== 'GroupC') {
-	        var _name5 = _this18.state.name;
-	        var group = _this18.data.group;
-	      }
-	    };
-
 	    this.setGroup = function (x) {
-	      var name = _this18.state.name;
-	      var group = _this18.data.group;
-	      _this18.data.group = x;
-	      DES_ws.send('CO#$42,' + group + ',' + name + ',' + x);
-	      _this18.data.chatMessage = '';
-	      _this18.data.chatArray = [];
-	    };
-
-	    this.newPlayer = function (x) {
-	      _this18.setState({ name: x });
-	      DES_ws.send("CC#42$" + x);
-	    };
-
-	    this.changeItem = function (x) {
-	      _this18.setState(x);
-	    };
-
-	    this.buttonHandler = function () {
-	      var name = _this18.state.name;
-	      var group = _this18.data.group;
-	      DES_ws.send('IA#$42,' + group + ',' + name + ',Click SCORE to begin');
-	      _this18.rollDice();
-	    };
-
-	    this.handleB40 = function () {
-	      var name = _this18.state.name;
-	      var group = _this18.data.group;
-	      var num = _this18.state.message1;
-	      if (_this18.state.mes0 === 'Number') {
-	        _this18.setState({ message1: '', mes0: num }, function () {
-	          DES_ws.send('CQ#$42,' + group + ',' + name + ',' + num);
-	        });
-	      } else if (_this18.state.mes2 === 'Number') {
-	        _this18.setState({ message1: '', mes2: num }, function () {
-	          DES_ws.send('DQ#$42,' + group + ',' + name + ',' + num);
-	          if (_this18.state.mes1 !== 'Operator') {
-	            _this18.calc(_this18.state.mes0, _this18.state.mes1, num);
-	          }
-	        });
-	      }
-	    };
-
-	    this.handleB41 = function () {
-	      var name = _this18.state.name;
-	      var group = _this18.data.group;
-	      var num = _this18.state.message2;
-	      if (_this18.state.mes0 === 'Number') {
-	        _this18.setState({ message2: '', mes0: num }, function () {
-	          DES_ws.send('CQ#$42,' + group + ',' + name + ',' + num);
-	        });
-	      } else if (_this18.state.mes2 === 'Number') {
-	        _this18.setState({ message2: '', mes2: num }, function () {
-	          DES_ws.send('DQ#$42,' + group + ',' + name + ',' + num);
-	          if (_this18.state.mes1 !== 'Operator') {
-	            _this18.calc(_this18.state.mes0, _this18.state.mes1, num);
-	          }
-	        });
-	      }
-	    };
-
-	    this.handleB42 = function () {
-	      var name = _this18.state.name;
-	      var group = _this18.data.group;
-	      var num = _this18.state.message3;
-	      if (_this18.state.mes0 === 'Number') {
-	        _this18.setState({ message3: '', mes0: num }, function () {
-	          DES_ws.send('CQ#$42,' + group + ',' + name + ',' + num);
-	        });
-	      } else if (_this18.state.mes2 === 'Number') {
-	        _this18.setState({ message3: '', mes2: num }, function () {
-	          DES_ws.send('DQ#$42,' + group + ',' + name + ',' + num);
-	          if (_this18.state.mes1 !== 'Operator') {
-	            _this18.calc(_this18.state.mes0, _this18.state.mes1, num);
-	          }
-	        });
-	      }
-	    };
-
-	    this.handleB43 = function () {
-	      var name = _this18.state.name;
-	      var group = _this18.data.group;
-	      var num = _this18.state.message4;
-	      if (_this18.state.mes0 === 'Number') {
-	        _this18.setState({ message4: '', mes0: num }, function () {
-	          DES_ws.send('CQ#$42,' + group + ',' + name + ',' + num);
-	        });
-	      } else if (_this18.state.mes2 === 'Number') {
-	        _this18.setState({ message4: '', mes2: num }, function () {
-	          DES_ws.send('DQ#$42,' + group + ',' + name + ',' + num);
-	          if (_this18.state.mes1 !== 'Operator') {
-	            _this18.calc(_this18.state.mes0, _this18.state.mes1, num);
-	          }
-	        });
-	      }
-	    };
-
-	    this.handleOp0 = function () {
-	      var name = _this18.state.name;
-	      var group = _this18.data.group;
-	      DES_ws.send('EQ#$42,' + group + ',' + name + ',+');
-	      var test = _this18.state.mes0 !== 'Number' && _this18.state.mes2 !== 'Number';
-	      if (test) {
-	        _this18.setState({ mes1: '+' }, function () {
-	          _this18.calc(_this18.state.mes0, '+', _this18.state.mes2);
-	        });
-	      }
-	    };
-
-	    this.handleOp1 = function () {
-	      var name = _this18.state.name;
-	      var group = _this18.data.group;
-	      DES_ws.send('EQ#$42,' + group + ',' + name + ',-');
-	      var test = _this18.state.mes0 !== 'Number' && _this18.state.mes2 !== 'Number';
-	      if (test) {
-	        _this18.setState({ mes1: '-' }, function () {
-	          _this18.calc(_this18.state.mes0, '-', _this18.state.mes2);
-	        });
-	      }
-	    };
-
-	    this.handleOp2 = function () {
-	      var name = _this18.state.name;
-	      var group = _this18.data.group;
-	      DES_ws.send('EQ#$42,' + group + ',' + name + ',*');
-	      var test = _this18.state.mes0 !== 'Number' && _this18.state.mes2 !== 'Number';
-	      if (test) {
-	        _this18.setState({ mes1: '*' }, function () {
-	          _this18.calc(_this18.state.mes0, '*', _this18.state.mes2);
-	        });
-	      }
-	    };
-
-	    this.handleOp3 = function () {
-	      var name = _this18.state.name;
-	      var group = _this18.data.group;
-	      DES_ws.send('EQ#$42,' + group + ',' + name + ',/');
-	      var test = _this18.state.mes0 !== 'Number' && _this18.state.mes2 !== 'Number';
-	      if (test) {
-	        _this18.setState({ mes1: '/' }, function () {
-	          _this18.calc(_this18.state.mes0, '/', _this18.state.mes2);
-	        });
-	      }
-	    };
-
-	    this.handleOp4 = function () {
-	      var name = _this18.state.name;
-	      var group = _this18.data.group;
-	      DES_ws.send('EQ#$42,' + group + ',' + name + ',Concat');
-	      var test = _this18.state.mes0 !== 'Number' && _this18.state.mes2 !== 'Number';
-	      if (test) {
-	        _this18.setState({ mes1: 'Concat' }, function () {
-	          _this18.calc(_this18.state.mes0, 'Concat', _this18.state.mes2);
-	        });
-	      }
-	    };
-
-	    this.handleScore = function () {
-	      var name = _this18.state.name;
-	      var group = _this18.data.group;
-	      DES_ws.send('CY#$42,' + group + ',' + name + ',' + name);
-	    };
-
-	    this.handleScore2 = function () {
-	      var name = _this18.state.name;
-	      var group = _this18.data.group;
-	      _this18.setState({ numDisplay: 'inline' });
-	      DES_ws.send('XY#$42,' + group + ',' + name + ',' + name);
-	    };
-
-	    this.handleImpossible = function () {
-	      var name = _this18.state.name;
-	      var group = _this18.data.group;
-	      DES_ws.send('DY#$42,' + group + ',' + name + ',' + name);
-	    };
-
-	    this.eraseMessages = function () {
-	      _this18.data.chatArray = [];
-	      _this18.data.chatMessage = '';
-	    };
-
-	    this.handleExtra = function () {
-	      _this18.setState({
-	        gameDisplay: 'none',
-	        extraDisplay: 'inlineBlock'
-	      });
-	    };
-
-	    this.handleGame = function () {
-	      _this18.setState({
-	        gameDisplay: 'inlineBlock',
-	        extraDisplay: 'none'
-	      });
-	    };
-
-	    this.showSolutionsHandler = function () {
-	      _this18.data.groupBackup = _this18.data.group;
-	      _this18.data.information = '';
-	      var playGroup = _this18.data.groupBackup;
-	      _this18.data.group = 'solo';
-	      var name = _this18.state.name;
-	      DES_ws.send('DO#$42,' + playGroup + ',' + name + ',solo');
-	      var a = _this18.state.d1;
-	      var b = _this18.state.d2;
-	      var c = _this18.state.d3;
-	      var d = _this18.state.d4;
-	      var goal = _this18.state.goal;
-	      DES_ws.send('CZ#$42,solo,' + name + ',' + a + ',' + b + ',' + c + ',' + d + ',' + goal);
-	      _this18.setState({
-	        rollDisplay: 'none',
-	        scoreDisplay: 'none',
-	        impossibleDisplay: 'none',
-	        scoreDisplay2: 'none',
-	        showSolutionsButton: 'none',
-	        hideSolutionsButton: 'inline',
-	        DS_T: 'Group participation is temporarily suspended.'
-	      });
-	    };
-
-	    this.showSolutionsHandler_2 = function () {
-	      _this18.data.information = '';
-	      _this18.data.groupBackup = _this18.data.group;
-	      var playGroup = _this18.data.groupBackup;
-	      _this18.data.group = 'solo';
-	      var name = _this18.state.name;
-	      DES_ws.send('DO#$42,' + playGroup + ',' + name + ',solo');
-	      var goal2 = _this18.data.goal2;
-	      var a = _this18.data.dd1;
-	      var b = _this18.data.dd2;
-	      var c = _this18.data.dd3;
-	      var d = _this18.data.dd4;
-	      DES_ws.send('CZ#$42,solo,' + name + ',' + a + ',' + b + ',' + c + ',' + d + ',' + goal2);
-	      _this18.setState({
-	        rollDisplay: 'none',
-	        scoreDisplay: 'none',
-	        impossibleDisplay: 'none',
-	        scoreDisplay2: 'none',
-	        showSolutionsButton: 'none',
-	        hideSolutionsButton: 'inline',
-	        DS_T: 'Group participation is temporarily suspended.'
-	      });
-	    };
-
-	    this.hideSolutionsHandler = function () {
-	      _this18.data.group = _this18.data.groupBackup;
-	      _this18.data.timerSize = 18;
-	      var group = _this18.data.groupBackup;
-	      var name = _this18.state.name;
-	      DES_ws.send('DO#$42,' + group + ',' + name + ',' + group);
-	      _this18.data.information = 'To resume play, click ROLL (or wait until another group member starts the next round).';
-	      _this18.setState({
-	        message: 'Solutions were displayed. Play can resume on the next round. ',
-	        DS_T: 'Caution. Clicking ROLL could disrupt a current group session. You might want to send a message asking other group members if it is ok to click ROLL.',
-	        showSolutionsButton: 'inline',
-	        hideSolutionsButton: 'none',
-	        rollDisplay: 'inline',
-	        sol: []
-	      });
-	    };
-
-	    this.showParamsHandler = function () {
-	      _this18.setState({
-	        scoreDisplay: 'none',
-	        scoreDisplay2: 'none',
-	        impossibleDisplay: 'none',
-	        message: 'SCORE! and IMPOSSIBLE will return when you shrink the Parameters area.',
-	        showParamsButton: 'none',
-	        hideParamsButton: 'inline',
-	        paramsDiv: 'inline'
-	      });
-	    };
-
-	    this.hideParamsHandler = function () {
-	      _this18.setState({
-	        paramsDisplay: 'none',
-	        scoreDisplay: 'inline',
-	        impossibleDisplay: 'inline',
-	        message: 'Back in competition.',
-	        showParamsButton: 'inline',
-	        hideParamsButton: 'none',
-	        paramsDiv: 'none'
-	      });
-	    };
-
-	    this.style4 = function (x, y, z) {
-	      return { backgroundColor: x, borderColor: y, borderTopWidth: 3, borderLeftWidth: 3,
-	        borderBottomWidth: 2, borderRightWidth: 2, color: z,
-	        paddingTop: 1.3, paddingLeft: 12, paddingRight: 12,
-	        paddingBottom: 0.3, marginRight: 3, marginLeft: 10, fontSize: _this18.state.timeSize };
-	    };
-
-	    this.style5 = function (x) {
-	      return { backgroundColor: x, borderWidth: 2, borderColor: 'green', paddingTop: 1.3, paddingLeft: 12, paddingRight: 12,
-	        paddingBottom: 0.9, marginRight: 3, marginLeft: 10, fontSize: _this18.state.timeSize };
-	    };
-
-	    this.style6 = function (x, y) {
-	      return { backgroundColor: x, display: y, paddingBottom: 0.9,
-	        marginRight: 3, marginLeft: 10, fontSize: _this18.state.timeSize };
-	    };
-
-	    this.style7 = function (x, y, z) {
-	      return { backgroundColor: x, textAlign: 'left', color: '#fcca05', borderColor: y,
-	        display: z, borderRadius: 10, paddingTop: 1.1, paddingBottom: 0.9, marginRight: 3, marginLeft: 12, fontSize: 20 };
+	      _this2.data.group = x;
 	    };
 
 	    this.style8 = function (x, y, z) {
-	      return { backgroundColor: x, textAlign: 'left', borderColor: y,
-	        color: z, borderRadius: 10, paddingTop: 1.1, paddingBottom: 0.9, marginRight: 3, marginLeft: 12, fontSize: 12 };
-	    };
-
-	    this.style9 = function (x, y, z) {
-	      return { backgroundColor: x, textAlign: 'left', borderColor: y, color: z,
-	        borderRadius: 6, paddingTop: 1.1, paddingBottom: 0.4, marginRight: 3,
-	        marginLeft: 18, fontSize: _this18.state.timeSize };
+	      return { backgroundColor: x, textAlign: 'left', borderColor: y, outline: 0,
+	        color: z, borderRadius: 10, paddingTop: 1.1, paddingBottom: 0.9, marginRight: 3, marginLeft: 12, fontSize: 20 };
 	    };
 
 	    this.render = function () {
-	      var groupWatch = _this18.data.groupWatch;
-	      var styleGroupA = _this18.mouse.styleGroupA;
-	      var styleGroupB = _this18.mouse.styleGroupB;
-	      var styleGroupC = _this18.mouse.styleGroupC;
-	      var styleGroupS = _this18.mouse.styleGroupS;
+	      var group = _this2.data.group;
+	      var groupWatch = _this2.data.groupWatch;
 	      var Abackground = '#000';
 	      var Aborder = 'green';
-	      var Acolor = '#d5f765';
+	      var Acolor = 'burlywood';
 	      var Bbackground = '#000';
 	      var Bborder = 'green';
-	      var Bcolor = '#d5f765';
+	      var Bcolor = 'burlywood';
 	      var Cbackground = '#000';
 	      var Cborder = 'green';
-	      var Ccolor = '#d5f765';
+	      var Ccolor = 'burlywood';
 	      var Sbackground = '#000';
 	      var Sborder = 'green';
-	      var Scolor = '#d5f765';
+	      var Scolor = 'burlywood';
 	      var Ubackground = '#000';
 	      var Uborder = 'green';
-	      var Ucolor = '#d5f765';
+	      var Ucolor = 'burlywood';
 	      var Tbackground = '#000';
 	      var Tborder = 'green';
-	      var Tcolor = '#d5f765';
+	      var Tcolor = 'burlywood';
 	      var rAbackground = 'green';
 	      var rAborder = 'lightgreen';
 	      var rAcolor = 'yellow';
@@ -1523,1586 +290,155 @@
 	      var rSbackground = 'green';
 	      var rSborder = 'lightgreen';
 	      var rScolor = 'yellow';
-	      console.log(_this18);
-	      count += 1;
-	      console.log('The count is now ' + count + ' and the color is ' + _this18.mouse[15]);
-	      var data = _this18.data;
-	      var timerSize = _this18.data.timerSize;
-	      var information = _this18.data.information;
-	      var dd1 = _this18.data.dd1;
-	      var dd2 = _this18.data.dd2;
-	      var dd3 = _this18.data.dd3;
-	      var dd4 = _this18.data.dd4;
-	      var goal2 = _this18.data.goal2;
-	      var ddChange1 = _this18.data.ddChange1;
-	      var ddChange2 = _this18.data.ddChange2;
-	      var ddChange3 = _this18.data.ddChange3;
-	      var ddChange4 = _this18.data.ddChange4;
-	      var dataChange = _this18.data.dataChange;
-	      var ddChangeGoal2 = _this18.data.ddChangeGoal2;
-	      var name = _this18.state.name;
-	      var group = _this18.data.group;
-	      var dynB = _this18.state.dynamicBg;
-	      var dynC = _this18.state.dynamicColor;
-	      var dynF = _this18.state.dynamicFont;
-	      var buttonDisplay = _this18.state.buttonDisplay;
-	      var startDisplay = _this18.state.startDisplay;
-	      var impossibleDisplay = _this18.state.impossibleDisplay;
-	      var scoreDisplay = _this18.state.scoreDisplay;
-	      var scoreDisplay2 = _this18.state.scoreDisplay2;
-	      var timerDisplay = _this18.state.timerDisplay;
-	      var timerDisplay2 = _this18.state.timerDisplay2;
-	      var rollDisplay = _this18.state.rollDisplay;
-	      var messageDisplay = _this18.state.messageDisplay;
-	      var numDisplay = _this18.state.numDisplay;
-	      var solutionsDisplay = _this18.state.solutionsDisplay;
-	      var rollnumsDisplay = _this18.state.rollnumsDisplay;
-	      var rightDisplay = _this18.state.rightDisplay;
-	      var leftDisplay = _this18.state.leftDisplay;
-	      var extraDisplay = _this18.state.extraDisplay;
-	      var m1 = _this18.state.message1;
-	      var timeSize = _this18.state.timeSize;
-	      var paramsDisplay = _this18.state.paramsDisplay;
-	      var paramsButton = _this18.state.paramsButton;
-	      var paramsDiv = _this18.state.paramsDiv;
-	      var shrinkSol = _this18.state.shrinkSol;
-	      var shrinkPar = _this18.state.shrinkPar;
-	      var showSolutionsButton = _this18.state.showSolutionsButton;
-	      var hideSolutionsButton = _this18.state.hideSolutionsButton;
-	      var showParamsButton = _this18.state.showParamsButton;
-	      var hideParamsButton = _this18.state.hideParamsButton;
-	      var sol = _this18.state.sol;
-	      var base = '#f7b16f';
-	      var base2 = '#000000';
-	      var d1 = _this18.state.d1;
-	      var d2 = _this18.state.d2;
-	      var d3 = _this18.state.d3;
-	      var d4 = _this18.state.d4;
-	      var sides1 = _this18.state.sides1;
-	      var sides2 = _this18.state.sides2;
-	      var sides3 = _this18.state.sides3;
-	      var sides4 = _this18.state.sides4;
-	      var goal = _this18.state.goal;
-	      var cr2100 = _this18.mouse[2100];
-	      var cr15 = _this18.mouse[15];
-	      var cr11 = _this18.mouse[11];
-	      var cr12 = _this18.mouse[12];
-	      var cr550 = _this18.mouse[550];
-	      var cr5501 = _this18.mouse[5501];
-	      var cr55010 = _this18.mouse[55010];
-	      var cr551 = _this18.mouse[551];
-	      var cr5511 = _this18.mouse[5511];
-	      var cr55110 = _this18.mouse[55110];
-	      var cr552 = _this18.mouse[552];
-	      var cr5521 = _this18.mouse[5521];
-	      var cr55210 = _this18.mouse[55210];
-	      var cr3 = _this18.mouse[3];
-	      var cr31 = _this18.mouse[31];
-	      var cr310 = _this18.mouse[310];
-	      var cr4 = _this18.mouse[4];
-	      var cr41 = _this18.mouse[41];
-	      var cr410 = _this18.mouse[410];
-	      var cr5 = _this18.mouse[5];
-	      var cr51 = _this18.mouse[51];
-	      var cr510 = _this18.mouse[510];
-	      var cr6 = _this18.mouse[6];
-	      var cr61 = _this18.mouse[61];
-	      var cr610 = _this18.mouse[610];
-	      var cr7 = _this18.mouse[7];
-	      var cr71 = _this18.mouse[71];
-	      var cr710 = _this18.mouse[710];
-	      var cr8 = _this18.mouse[8];
-	      var cr81 = _this18.mouse[81];
-	      var cr810 = _this18.mouse[810];
-	      var cr559 = _this18.mouse[559];
-	      var cr5591 = _this18.mouse[5591];
-	      var cr55910 = _this18.mouse[55910];
-	      var cr90 = _this18.mouse[90];
-	      var cr9 = _this18.mouse[9];
-	      var cr10 = _this18.mouse[10];
-	      var cr13 = _this18.mouse[13];
-	      var cr130 = _this18.mouse[130];
-	      var cr14 = _this18.mouse[14];
-	      var cr140 = _this18.mouse[140];
-	      var cr19 = _this18.mouse[19];
-	      var cr190 = _this18.mouse[190];
-	      var cr20 = _this18.mouse[20];
-	      var cr22 = _this18.mouse[22];
-	      var cr220 = _this18.mouse[220];
-	      var cr23 = _this18.mouse[23];
-	      var cr230 = _this18.mouse[230];
-	      var cr24 = _this18.mouse[24];
-	      var cr240 = _this18.mouse[240];
-	      var cr25 = _this18.mouse[25];
-	      var cr250 = _this18.mouse[250];
-	      var cr26 = _this18.mouse[26];
-	      var cr260 = _this18.mouse[260];
-	      var cr27 = _this18.mouse[27];
-	      var cr270 = _this18.mouse[270];
-	      var cr100 = _this18.mouse[100];
+	      var cr27 = _this2.mouse[27];
+	      var cr270 = _this2.mouse[270];
 
-	      var rulesDisplayOn = _this18.disp.rulesDisplayOn;
-	      var rulesDisplayOff = _this18.disp.rulesDisplayOff;
-	      var toggleRules = _this18.disp.toggleRules;
-	      var handleRulesDisplay = _this18.data.handleRulesDisplay;
-	      var handleRulesDisplay2 = _this18.data.handleRulesDisplay2;
-	      var style3 = { paddingTop: 1.1, paddingBottom: 0.9, marginRight: 3, marginLeft: 10, fontSize: 18 };
 	      return _react2['default'].createElement(
 	        'div',
-	        { style: { backgroundColor: dynB, color: dynC, fontSize: dynF,
-	            display: rightDisplay, width: '100%', height: '200%' } },
+	        { style: { backgroundColor: '#000', height: 800, color: 'turquoise' } },
 	        _react2['default'].createElement(
 	          'div',
-	          { style: { width: '35%', float: 'right', display: startDisplay } },
-	          _react2['default'].createElement(ChangeColor, { key: 'ChangeColor', changeC: _this18.changeColor,
-	            style: { width: 8 } }),
-	          _react2['default'].createElement(ChangeBackground, { key: 'ChangeBackground', changeB: _this18.changeBackground,
-	            style: { width: 8 } }),
+	          { style: { width: '80%', marginLeft: 85 } },
 	          _react2['default'].createElement('br', null),
 	          _react2['default'].createElement('br', null),
-	          _react2['default'].createElement(
-	            'button',
-	            { style: { backgroundColor: '#4c1616', color: '#f2f246', textAlign: 'center',
-	                display: 'inline', paddingTop: 1.1, paddingBottom: 0.9, marginRight: 3, fontSize: 18 } },
-	            'Score Board ',
-	            _react2['default'].createElement('br', null),
-	            'name [score]',
-	            _react2['default'].createElement(
-	              'div',
-	              { style: { textAlign: 'left' } },
-	              ' ',
-	              _this18.state.scoreB.map(function (line) {
-	                return _react2['default'].createElement(
-	                  'p',
-	                  { key: line.id },
-	                  ' ',
-	                  line,
-	                  ' '
-	                );
-	              })
-	            )
-	          ),
 	          _react2['default'].createElement('br', null),
-	          ' ',
-	          _react2['default'].createElement('br', null),
-	          _react2['default'].createElement(
-	            'button',
-	            { style: { backgroundColor: '#4c1616', color: '#f2f246', textAlign: 'center',
-	                display: 'inlineBlock', paddingTop: 1.1, paddingBottom: 0.9, marginRight: 3, fontSize: 18 } },
-	            'Message Board ',
-	            _react2['default'].createElement('br', null),
-	            _react2['default'].createElement(
-	              'div',
-	              { style: { textAlign: 'left' } },
-	              ' ',
-	              _this18.data.chatArray.map(function (line) {
-	                return _react2['default'].createElement(
-	                  'p',
-	                  { key: line.id },
-	                  ' ',
-	                  line,
-	                  ' '
-	                );
-	              })
-	            )
-	          ),
-	          _react2['default'].createElement(
-	            'button',
-	            { onClick: _this18.eraseMessages, style: { backgroundColor: '#4c1616', color: '#f2f246',
-	                fontSize: 14, marginLeft: 10 } },
-	            'Erase Messages'
-	          ),
-	          _react2['default'].createElement(
-	            Chat,
-	            { changeMessage: _this18.changeMessage },
-	            ' '
-	          ),
+	          'This set of buttons are inter-connected with one another and the input box. Click the buttons and enter some text to see how they interact.',
 	          _react2['default'].createElement('br', null),
 	          _react2['default'].createElement('br', null),
-	          _react2['default'].createElement(
-	            'h2',
-	            null,
-	            'Get All Solutions'
-	          ),
-	          'Current Numbers:',
-	          _react2['default'].createElement(
-	            'button',
-	            { style: { backgroundColor: '#000', color: 'red', borderColor: 'lightBlue', fontSize: 24,
-	                paddingTop: 1.8, paddingBottom: 0.4 } },
-	            ' ',
-	            dd1,
-	            ' '
-	          ),
-	          _react2['default'].createElement(
-	            'button',
-	            { style: { backgroundColor: '#000', color: 'red', borderColor: 'lightBlue', fontSize: 24,
-	                paddingTop: 1.8, paddingBottom: 0.4 } },
-	            ' ',
-	            dd2,
-	            ' '
-	          ),
-	          _react2['default'].createElement(
-	            'button',
-	            { style: { backgroundColor: '#000', color: 'red', borderColor: 'lightBlue', fontSize: 24,
-	                paddingTop: 1.8, paddingBottom: 0.4 } },
-	            ' ',
-	            dd3,
-	            ' '
-	          ),
-	          _react2['default'].createElement(
-	            'button',
-	            { style: { backgroundColor: '#000', color: 'red', borderColor: 'lightBlue', fontSize: 24,
-	                paddingTop: 1.8, paddingBottom: 0.4 } },
-	            ' ',
-	            dd4,
-	            ' '
-	          ),
-	          _react2['default'].createElement('br', null),
-	          'Current Goal:',
-	          _react2['default'].createElement(
-	            'button',
-	            { style: { backgroundColor: '#000', color: 'red', borderColor: 'lightBlue', fontSize: 24,
-	                paddingTop: 1.8, paddingBottom: 0.4 } },
-	            ' ',
-	            goal2,
-	            ' '
-	          ),
-	          _react2['default'].createElement('br', null),
-	          _react2['default'].createElement('br', null),
-	          'Put new number in a box, then click on the box or press \'Enter\'. The number disappears and the result is shown above. Click "Solutions" when you are done.',
-	          _react2['default'].createElement('br', null),
-	          'New Numbers:',
-	          _react2['default'].createElement(Number1, { change: ddChange1 }),
-	          _react2['default'].createElement(Number2, { change: ddChange2 }),
-	          _react2['default'].createElement(Number3, { change: ddChange3 }),
-	          _react2['default'].createElement(Number4, { change: ddChange4 }),
-	          _react2['default'].createElement('br', null),
-	          'New Goal:',
-	          _react2['default'].createElement(Goal, { change: ddChangeGoal2 }),
-	          _react2['default'].createElement('br', null),
-	          'Show Solutions',
-	          _react2['default'].createElement(
-	            'button',
-	            { onClick: _this18.showSolutionsHandler_2,
-	              style: _this18.style7(cr26, cr260, showSolutionsButton),
-	              onMouseEnter: function () {
-	                _this18.mouse[26] = 'blue';_this18.mouse[260] = '#01afaf';
-	              },
-	              onMouseLeave: function () {
-	                _this18.mouse[26] = '#000';_this18.mouse[260] = 'darkred';
-	              } },
-	            'Solutions'
-	          )
-	        ),
-	        _react2['default'].createElement(Login, { key: 'Login', newPlayer: _this18.newPlayer.bind(_this18), name: _this18.state.name,
-	          setGroup: _this18.setGroup, change: _this18.changeItem,
-	          group: group, hidden: _this18.state.hidden, info: _this18.state.info }),
-	        _react2['default'].createElement(
-	          'div',
-	          { style: { display: startDisplay, paddingTop: 3.8, width: '60%',
-	              paddingBottom: 0.8, fontSize: 20, marginLeft: 5 } },
-	          _react2['default'].createElement(
-	            'div',
-	            { style: { display: rulesDisplayOn, color: '#e9eab6' } },
-	            _react2['default'].createElement(
-	              'span',
-	              { style: { fontSize: 26 } },
-	              'Dedication:'
-	            ),
-	            ' This game is dedicated to Bloomington, Indiana\'s Templeton Elementary School and to the "K through 6" program\'s teachers, Risa Reinier and Kevin Gallagher, who nurture and sustain a wonderful community which will always be a home away from home for my son Alexander. -- David Schalk, August 22, 2015.',
-	            _react2['default'].createElement('br', null),
-	            _react2['default'].createElement('br', null),
-	            'The table-top game of Score involves four dice and a one-minute \'hourglass\'. The dice might include one twenty-sided, one twelve-sided, and two six-sided dice. Twelve and twenty-sided dice are completely symetrical and therefore roll nicely on the table.',
-	            _react2['default'].createElement('br', null),
-	            _react2['default'].createElement('br', null),
-	            'After the dice are rolled, each player has the opportunity to call out "Score" or "Impossible". A player who calls "Score" must quickly show how to make the number "20" in two or three steps using addition, subtraction, multiplication, division, and/or concatenation. Success gains the player one point. Floundering and failing to quickly show a solution costs the player one point. If a player calls "Impossible", the hourglass is turned over and all participants, including the player who called "Impossible", may call "Score" untill the hourglass runs out; that is, the players have one minute in which to find a solution. If the time runs out, the player who called "Impossible" gains one point. If someone calls "Score" before the time runs out and succeeds in quickly making the number "20", that player gains one point and the player who called "Impossible" loses two points. If the player who called "Impossible" subsequently calls "Score" and succeeds in quickly making the number "20", that player loses two points and gains one point for a net loss of one point. If a player calls "Impossible" and then calls "Score" but fails to quickly show a solution, the normal rules are superceded by the "Blocking Violation" rule. The normal rules would give the player one point because nobody found a solution within one minute and subtact one point for failure to quickly show a solution after calling "Score". The net result would be 1 - 1 = 0; that is, no change in score. That would be like calling "Impossible" and then taking it back.  But because the player called "Score" and thereby prevented other players from calling "Score" and possibly succeeding, the player committed a blocking violation. A blocking violation costs the player two points.',
-	            _react2['default'].createElement('br', null),
-	            _react2['default'].createElement('br', null),
-	            'The online Game of Score! is slightly different. After clicking "Score", a player has ten seconds in which to perform the first computation and then another ten seconds in which to perform a second computation. If the second computation uses the result of the first computation and results in the number "20", the player gains one point. Otherwise, if any computation is performed within the ten-second window of opportunity, the player gets another ten seconds in which to try to compute the number "20". Letting the time run out or computing anything other than "20" in the third computation costs the player one point.',
-	            _react2['default'].createElement('br', null),
-	            _react2['default'].createElement('br', null),
-	            'Players can join one of the three standard groups, or they can create a group of their own by clicking "Create a New Group" and entering whatever group name they choose. Players would need to coordinate through the chat window, email, or telephone so they can agree on a group name. As explained below, they can also agree on different sided dice and a goal other than "20".',
-	            _react2['default'].createElement('br', null),
-	            _react2['default'].createElement('br', null),
-	            'Each group has its own scoreboard and chat area. A player who has not joined a group is automatically in group "solo". Players in "solo" do not share a scoreboard or chat message box. They play solitairre until they join a regular group.',
-	            _react2['default'].createElement('br', null),
-	            _react2['default'].createElement('br', null),
-	            'There is an area under the chat window where players can see all possible solutions for whatever four dice numbers and whatever goal they choose. Players cannot use the "Get All Solutions" area during competition, but once they hide the solutions and click ROLL, or wait for another group member to click ROLL, play resumes where it left off.',
-	            _react2['default'].createElement('br', null),
-	            _react2['default'].createElement('br', null),
-	            'A detailed explanation of computer code underlying the game can be found at ',
-	            _react2['default'].createElement(
-	              'a',
-	              { href: 'https://www.fpcomplete.com/user/dschalk/Websockets%20Game%20of%20Score', target: '_blank', style: { color: 'darkred' } },
-	              'Game Analysis'
-	            ),
-	            '. The source code is available at ',
-	            _react2['default'].createElement(
-	              'a',
-	              { href: 'https://github.com/dschalk/websockets-react', target: '_blank', style: { color: 'red' } },
-	              'Game Source Code'
-	            ),
-	            _react2['default'].createElement('br', null),
-	            _react2['default'].createElement('br', null),
-	            ' ',
-	            _react2['default'].createElement(
-	              'span',
-	              { style: { fontSize: 26 } },
-	              'Modifying The Game: '
-	            ),
-	            'To modify the game, click "Create a New Group" and change the number of sides of whichever die you select. You can also change the goal to something other than the default number "20". Each player in a modified group must modify his or her own game interface in order to coordinate with other players. Modified games are fun for competition and also for solitairre experimentation.',
-	            _react2['default'].createElement('br', null),
-	            _react2['default'].createElement('br', null)
-	          ),
 	          _react2['default'].createElement(
 	            'button',
 	            { onClick: function () {
-	                _this18.disp.rulesDisplayOff = 'none';
-	                _this18.disp.rulesDisplayOn = 'inline';
-	              }, style: _this18.style7(cr27, cr270, rulesDisplayOff),
-	              onMouseEnter: function () {
-	                _this18.mouse[27] = 'blue';_this18.mouse[270] = '#01afaf';
-	              },
-	              onMouseLeave: function () {
-	                _this18.mouse[27] = '#000';_this18.mouse[270] = 'darkred';
-	              } },
-	            'Show Rules'
-	          ),
-	          _react2['default'].createElement(
-	            'button',
-	            { onClick: function () {
-	                _this18.disp.rulesDisplayOn = 'none';
-	                _this18.disp.rulesDisplayOff = 'inline';
-	              }, style: _this18.style7(cr27, cr270, rulesDisplayOn),
-	              onMouseEnter: function () {
-	                _this18.mouse[27] = 'blue';_this18.mouse[270] = '#01afaf';
-	              },
-	              onMouseLeave: function () {
-	                _this18.mouse[27] = '#000';_this18.mouse[270] = 'darkred';
-	              } },
-	            'Hide Rules'
-	          ),
-	          _react2['default'].createElement('br', null),
-	          'Current roll:',
-	          _react2['default'].createElement(
-	            'button',
-	            { style: { backgroundColor: '#000', color: 'red', borderColor: 'lightBlue', fontSize: 24,
-	                paddingTop: 1.8, paddingBottom: 0.4 } },
-	            ' ',
-	            d1,
-	            ' '
-	          ),
-	          _react2['default'].createElement(
-	            'button',
-	            { style: { backgroundColor: '#000', color: 'red', borderColor: 'lightBlue', fontSize: 24,
-	                paddingTop: 1.8, paddingBottom: 0.4 } },
-	            ' ',
-	            d2,
-	            ' '
-	          ),
-	          _react2['default'].createElement(
-	            'button',
-	            { style: { backgroundColor: '#000', color: 'red', borderColor: 'lightBlue', fontSize: 24,
-	                paddingTop: 1.8, paddingBottom: 0.4 } },
-	            ' ',
-	            d3,
-	            ' '
-	          ),
-	          _react2['default'].createElement(
-	            'button',
-	            { style: { backgroundColor: '#000', color: 'red', borderColor: 'lightBlue', fontSize: 24,
-	                paddingTop: 1.8, paddingBottom: 0.4 } },
-	            ' ',
-	            d4,
-	            ' '
-	          ),
-	          _react2['default'].createElement(
-	            'div',
-	            { style: { marginLeft: 5 } },
-	            'Group:',
-	            _react2['default'].createElement(
-	              'button',
-	              { style: { backgroundColor: '#000', color: '#f00', marginLeft: 5, borderColor: '#93b1f2' } },
-	              _this18.data.group,
-	              ' '
-	            ),
-	            'Sides:',
-	            _react2['default'].createElement(
-	              'button',
-	              { style: { backgroundColor: '#000', color: '#f00', marginLeft: 5, borderColor: '#93b1f2' } },
-	              sides1,
-	              ', ',
-	              sides2,
-	              ', ',
-	              sides3,
-	              ', ',
-	              sides4,
-	              '  '
-	            ),
-	            'Goal:',
-	            _react2['default'].createElement(
-	              'button',
-	              { style: { backgroundColor: '#000', color: '#f00', marginLeft: 5, borderColor: '#93b1f2' } },
-	              goal,
-	              ' '
-	            )
-	          ),
-	          _react2['default'].createElement(
-	            'div',
-	            { style: { marginLeft: 5 } },
-	            ' ',
-	            _this18.state.info,
-	            ' '
-	          ),
-	          _react2['default'].createElement(
-	            'button',
-	            { onClick: function () {
-	                _this18.data.group = 'GroupA';
-	                _this18.data.test = true;
-	                _this18.data.chatMessage = '';
-	                _this18.data.chatArray = [];
-	                DES_ws.send('CO#$42,' + group + ',' + name + ',GroupA');
+	                _this2.data.group = 'GroupA';
+	                _this2.data.test = true;
 	              },
 	              onMouseEnter: function () {
 	                if (group !== 'GroupA') {
-	                  _this18.data.test = false;
-	                  _this18.mouse.Abackground = rAbackground;
-	                  _this18.mouse.Aborder = rAborder;
-	                  _this18.mouse.Acolor = rAcolor;
+	                  _this2.data.test = false;
+	                  _this2.mouse.Abackground = rAbackground;
+	                  _this2.mouse.Aborder = rAborder;
+	                  _this2.mouse.Acolor = rAcolor;
 	                }
 	              },
 	              onMouseLeave: function () {
 	                if (group !== 'GroupA') {
-	                  _this18.data.test = true;
-	                  _this18.mouse.Abackground = Abackground;
-	                  _this18.mouse.Aborder = Aborder;
-	                  _this18.mouse.Acolor = Acolor;
+	                  _this2.data.test = true;
+	                  _this2.mouse.Abackground = Abackground;
+	                  _this2.mouse.Aborder = Aborder;
+	                  _this2.mouse.Acolor = Acolor;
 	                }
 	              },
-	              style: _this18.style8(_this18.mouse.Abackground, _this18.mouse.Aborder, _this18.mouse.Acolor) },
+	              style: _this2.style8(_this2.mouse.Abackground, _this2.mouse.Aborder, _this2.mouse.Acolor) },
 	            'GroupA'
 	          ),
 	          _react2['default'].createElement(
 	            'button',
 	            { onClick: function () {
-	                _this18.data.group = 'GroupB';
-	                _this18.data.test = true;
-	                _this18.data.chatMessage = '';
-	                _this18.data.chatArray = [];
-	                DES_ws.send('CO#$42,' + group + ',' + name + ',GroupB');
+	                _this2.data.group = 'GroupB';
+	                _this2.data.test = true;
 	              },
 	              onMouseEnter: function () {
 	                if (group !== 'GroupB') {
-	                  _this18.data.test = false;
-	                  _this18.mouse.Bbackground = rBbackground;
-	                  _this18.mouse.Bborder = rBborder;
-	                  _this18.mouse.Ncolor = rBcolor;
+	                  _this2.data.test = false;
+	                  _this2.mouse.Bbackground = rBbackground;
+	                  _this2.mouse.Bborder = rBborder;
+	                  _this2.mouse.Ncolor = rBcolor;
 	                }
 	              },
 	              onMouseLeave: function () {
 	                if (group !== 'GroupB') {
-	                  _this18.data.test = true;
-	                  _this18.mouse.Bbackground = Bbackground;
-	                  _this18.mouse.Bborder = Bborder;
-	                  _this18.mouse.Bcolor = Bcolor;
+	                  _this2.data.test = true;
+	                  _this2.mouse.Bbackground = Bbackground;
+	                  _this2.mouse.Bborder = Bborder;
+	                  _this2.mouse.Bcolor = Bcolor;
 	                }
 	              },
-	              style: _this18.style8(_this18.mouse.Bbackground, _this18.mouse.Bborder, _this18.mouse.Bcolor) },
+	              style: _this2.style8(_this2.mouse.Bbackground, _this2.mouse.Bborder, _this2.mouse.Bcolor) },
 	            'GroupB'
 	          ),
 	          _react2['default'].createElement(
 	            'button',
 	            { onClick: function () {
-	                _this18.data.group = 'GroupC';
-	                _this18.data.test = true;
-	                _this18.data.chatMessage = '';
-	                _this18.data.chatArray = [];
-	                DES_ws.send('CO#$42,' + group + ',' + name + ',GroupC');
+	                _this2.data.group = 'GroupC';
+	                _this2.data.test = true;
 	              },
 	              onMouseEnter: function () {
 	                if (group !== 'GroupC') {
-	                  _this18.data.test = false;
-	                  _this18.mouse.Cbackground = rCbackground;
-	                  _this18.mouse.Cborder = rCborder;
-	                  _this18.mouse.Ccolor = rCcolor;
+	                  _this2.data.test = false;
+	                  _this2.mouse.Cbackground = rCbackground;
+	                  _this2.mouse.Cborder = rCborder;
+	                  _this2.mouse.Ccolor = rCcolor;
 	                }
 	              },
 	              onMouseLeave: function () {
 	                if (group !== 'GroupC') {
-	                  _this18.data.test = true;
-	                  _this18.mouse.Cbackground = Cbackground;
-	                  _this18.mouse.Cborder = Cborder;
-	                  _this18.mouse.Ccolor = Ccolor;
+	                  _this2.data.test = true;
+	                  _this2.mouse.Cbackground = Cbackground;
+	                  _this2.mouse.Cborder = Cborder;
+	                  _this2.mouse.Ccolor = Ccolor;
 	                }
 	              },
-	              style: _this18.style8(_this18.mouse.Cbackground, _this18.mouse.Cborder, _this18.mouse.Ccolor) },
+	              style: _this2.style8(_this2.mouse.Cbackground, _this2.mouse.Cborder, _this2.mouse.Ccolor) },
 	            'GroupC'
 	          ),
 	          _react2['default'].createElement(
 	            'button',
 	            { onClick: function () {
-	                _this18.data.group = 'solo';
-	                _this18.data.test = true;
-	                _this18.data.chatMessage = '';
-	                _this18.data.chatArray = [];
-	                DES_ws.send('CO#$42,' + group + ',' + name + ',GroupA');
+	                _this2.data.group = 'solo';
+	                _this2.data.test = true;
 	              },
 	              onMouseEnter: function () {
 	                if (group !== 'solo') {
-	                  _this18.data.test = false;
-	                  _this18.mouse.Sbackground = rSbackground;
-	                  _this18.mouse.Sborder = rSborder;
-	                  _this18.mouse.Scolor = rScolor;
+	                  _this2.data.test = false;
+	                  _this2.mouse.Sbackground = rSbackground;
+	                  _this2.mouse.Sborder = rSborder;n;
+	                  _this2.mouse.Scolor = rScolor;
 	                }
 	              },
 	              onMouseLeave: function () {
 	                if (group !== 'solo') {
-	                  _this18.data.test = true;
-	                  _this18.mouse.Sbackground = Sbackground;
-	                  _this18.mouse.Sborder = Sborder;
-	                  _this18.mouse.Scolor = Scolor;
+	                  _this2.data.test = true;
+	                  _this2.mouse.Sbackground = Sbackground;
+	                  _this2.mouse.Sborder = Sborder;
+	                  _this2.mouse.Scolor = Scolor;
 	                }
 	              },
-	              style: _this18.style8(_this18.mouse.Sbackground, _this18.mouse.Sborder, _this18.mouse.Scolor) },
+	              style: _this2.style8(_this2.mouse.Sbackground, _this2.mouse.Sborder, _this2.mouse.Scolor) },
 	            'solo'
 	          ),
 	          _react2['default'].createElement('br', null),
-	          _react2['default'].createElement(GroupNew, { key: 'GroupNew', setGroup: _this18.setGroup, name: _this18.state.name }),
 	          _react2['default'].createElement('br', null),
-	          _react2['default'].createElement(
-	            'div',
-	            { style: { width: '60%' } },
-	            _react2['default'].createElement(Messages, { information: information })
-	          ),
-	          _react2['default'].createElement(
-	            'div',
-	            { style: { paddingTop: 1.1, paddingBottom: 0.9, marginRight: 3, fontSize: 20 } },
-	            _this18.state.str1,
-	            ' ',
-	            _react2['default'].createElement('br', null),
-	            ' ',
-	            _this18.state.str2,
-	            ' ',
-	            _react2['default'].createElement('br', null),
-	            ' ',
-	            _this18.state.str3,
-	            ' ',
-	            _react2['default'].createElement('br', null),
-	            ' ',
-	            _this18.state.str4
-	          ),
-	          _react2['default'].createElement(
-	            'div',
-	            { style: { width: '60%', backgroundColor: dynB, textAlign: 'left', padding: 0 } },
-	            _react2['default'].createElement(
-	              'button',
-	              { style: _this18.style9('#2C2106', '#000', '#F8EDD2') },
-	              _this18.state.DS_T
-	            )
-	          ),
-	          _react2['default'].createElement(
-	            'div',
-	            { style: { width: '60%', backgroundColor: dynB, padding: 10 } },
-	            ' '
-	          ),
-	          _react2['default'].createElement(
-	            'div',
-	            { style: { display: rollnumsDisplay } },
-	            _react2['default'].createElement(
-	              'button',
-	              { style: { backgroundColor: '#000', color: 'red', borderColor: 'lightBlue', fontSize: 24,
-	                  paddingTop: 1.8, paddingBottom: 0.4 } },
-	              ' ',
-	              d1,
-	              ' '
-	            ),
-	            _react2['default'].createElement(
-	              'button',
-	              { style: { backgroundColor: '#000', color: 'red', borderColor: 'lightBlue', fontSize: 24,
-	                  paddingTop: 1.8, paddingBottom: 0.4 } },
-	              ' ',
-	              d2,
-	              ' '
-	            ),
-	            _react2['default'].createElement(
-	              'button',
-	              { style: { backgroundColor: '#000', color: 'red', borderColor: 'lightBlue', fontSize: 24,
-	                  paddingTop: 1.8, paddingBottom: 0.4 } },
-	              ' ',
-	              d3,
-	              ' '
-	            ),
-	            _react2['default'].createElement(
-	              'button',
-	              { style: { backgroundColor: '#000', color: 'red', borderColor: 'lightBlue', fontSize: 24,
-	                  paddingTop: 1.8, paddingBottom: 0.4 } },
-	              ' ',
-	              d4,
-	              ' '
-	            )
-	          ),
-	          _react2['default'].createElement(
-	            'button',
-	            { onClick: _this18.handleScore,
-	              style: _this18.style7(cr9, cr90, scoreDisplay),
-	              onMouseEnter: function () {
-	                _this18.mouse[9] = 'blue';_this18.mouse[90] = '#01afaf';
-	              },
-	              onMouseLeave: function () {
-	                _this18.mouse[9] = '#000';_this18.mouse[90] = 'darkred';
-	              } },
-	            'SCORE!'
-	          ),
-	          _react2['default'].createElement(
-	            'button',
-	            { onClick: _this18.handleScore2,
-	              style: _this18.style7(cr19, cr190, scoreDisplay2),
-	              onMouseEnter: function () {
-	                _this18.mouse[19] = 'blue';_this18.mouse[190] = '#01afaf';
-	              },
-	              onMouseLeave: function () {
-	                _this18.mouse[19] = '#000';_this18.mouse[190] = 'darkred';
-	              } },
-	            'SCORE!'
-	          ),
-	          _react2['default'].createElement(
-	            'button',
-	            { onClick: _this18.handleImpossible,
-	              style: _this18.style7(cr14, cr140, impossibleDisplay),
-	              onMouseEnter: function () {
-	                _this18.mouse[14] = 'blue';_this18.mouse[140] = '#01afaf';
-	              },
-	              onMouseLeave: function () {
-	                _this18.mouse[14] = '#000';_this18.mouse[140] = 'darkred';
-	              } },
-	            'IMPOSSIBLE'
-	          ),
-	          _react2['default'].createElement(
-	            'div',
-	            { style: { width: '60%', backgroundColor: dynB, padding: 10 } },
-	            ' '
-	          ),
-	          _react2['default'].createElement(
-	            'div',
-	            { style: { width: '60%', backgroundColor: dynB, padding: 10, display: numDisplay } },
-	            _react2['default'].createElement(
-	              'button',
-	              { onClick: _this18.handleB40,
-	                onMouseEnter: function () {
-	                  _this18.mouse[551] = '#40E0D0';_this18.mouse[5511] = '#01afaf';_this18.mouse[55110] = 'purple';
-	                },
-	                onMouseLeave: function () {
-	                  _this18.mouse[551] = '#01afaf';_this18.mouse[5511] = '#40E0D0';_this18.mouse[55110] = 'blue';
-	                },
-	                style: _this18.style4(cr551, cr5511, cr55110) },
-	              _this18.state.message1
-	            ),
-	            _react2['default'].createElement(
-	              'button',
-	              { onClick: _this18.handleB41,
-	                onMouseEnter: function () {
-	                  _this18.mouse[552] = '#40E0D0';_this18.mouse[5521] = '#01afaf';_this18.mouse[55210] = 'purple';
-	                },
-	                onMouseLeave: function () {
-	                  _this18.mouse[552] = '#01afaf';_this18.mouse[5521] = '#40E0D0';_this18.mouse[55210] = 'blue';
-	                },
-	                style: _this18.style4(cr552, cr5521, cr55210) },
-	              _this18.state.message2
-	            ),
-	            _react2['default'].createElement(
-	              'button',
-	              { onClick: _this18.handleB42,
-	                onMouseEnter: function () {
-	                  _this18.mouse[3] = '#40E0D0';_this18.mouse[31] = '#01afaf';_this18.mouse[310] = 'purple';
-	                },
-	                onMouseLeave: function () {
-	                  _this18.mouse[3] = '#01afaf';_this18.mouse[31] = '#40E0D0';_this18.mouse[310] = 'blue';
-	                },
-	                style: _this18.style4(cr3, cr31, cr310) },
-	              _this18.state.message3
-	            ),
-	            _react2['default'].createElement(
-	              'button',
-	              { onClick: _this18.handleB43,
-	                onMouseEnter: function () {
-	                  _this18.mouse[4] = '#40E0D0';_this18.mouse[41] = '#01afaf';_this18.mouse[410] = 'purple';
-	                },
-	                onMouseLeave: function () {
-	                  _this18.mouse[4] = '#01afaf';_this18.mouse[41] = '#40E0D0';_this18.mouse[410] = 'blue';
-	                },
-	                style: _this18.style4(cr4, cr41, cr410) },
-	              _this18.state.message4
-	            ),
-	            _react2['default'].createElement(
-	              'div',
-	              { style: { width: '60%', padding: 10 } },
-	              ' '
-	            ),
-	            _react2['default'].createElement(
-	              'button',
-	              { onClick: _this18.handleOp0,
-	                onMouseEnter: function () {
-	                  _this18.mouse[5] = '#40E0D0';_this18.mouse[51] = '#01afaf';_this18.mouse[510] = 'purple';
-	                },
-	                onMouseLeave: function () {
-	                  _this18.mouse[5] = '#01afaf';_this18.mouse[51] = '#40E0D0';_this18.mouse[510] = 'blue';
-	                },
-	                style: _this18.style4(cr5, cr51, cr510) },
-	              '+'
-	            ),
-	            _react2['default'].createElement(
-	              'button',
-	              { onClick: _this18.handleOp1,
-	                onMouseEnter: function () {
-	                  _this18.mouse[6] = '#40E0D0';_this18.mouse[61] = '#01afaf';_this18.mouse[610] = 'purple';
-	                },
-	                onMouseLeave: function () {
-	                  _this18.mouse[6] = '#01afaf';_this18.mouse[61] = '#40E0D0';_this18.mouse[610] = 'blue';
-	                },
-	                style: _this18.style4(cr6, cr61, cr610) },
-	              '-'
-	            ),
-	            _react2['default'].createElement(
-	              'button',
-	              { onClick: _this18.handleOp2,
-	                onMouseEnter: function () {
-	                  _this18.mouse[7] = '#40E0D0';_this18.mouse[71] = '#01afaf';_this18.mouse[710] = 'purple';
-	                },
-	                onMouseLeave: function () {
-	                  _this18.mouse[7] = '#01afaf';_this18.mouse[71] = '#40E0D0';_this18.mouse[710] = 'blue';
-	                },
-	                style: _this18.style4(cr7, cr71, cr710) },
-	              '*'
-	            ),
-	            _react2['default'].createElement(
-	              'button',
-	              { onClick: _this18.handleOp3,
-	                onMouseEnter: function () {
-	                  _this18.mouse[8] = '#40E0D0';_this18.mouse[81] = '#01afaf';_this18.mouse[810] = 'purple';
-	                },
-	                onMouseLeave: function () {
-	                  _this18.mouse[8] = '#01afaf';_this18.mouse[81] = '#40E0D0';_this18.mouse[810] = 'blue';
-	                },
-	                style: _this18.style4(cr8, cr81, cr810) },
-	              '/'
-	            ),
-	            _react2['default'].createElement(
-	              'button',
-	              { onClick: _this18.handleOp4,
-	                onMouseEnter: function () {
-	                  _this18.mouse[559] = '#40E0D0';_this18.mouse[5591] = '#01afaf';_this18.mouse[55910] = 'purple';
-	                },
-	                onMouseLeave: function () {
-	                  _this18.mouse[559] = '#01afaf';_this18.mouse[5591] = '#40E0D0';_this18.mouse[55910] = 'blue';
-	                },
-	                style: _this18.style4(cr559, cr5591, cr55910) },
-	              'Concat'
-	            )
-	          ),
-	          _react2['default'].createElement('div', { style: { width: '60%', padding: 10 } }),
-	          _react2['default'].createElement(
-	            'span',
-	            { style: style3 },
-	            _this18.state.mes0
-	          ),
-	          _react2['default'].createElement(
-	            'span',
-	            { style: style3 },
-	            _this18.state.mes1
-	          ),
-	          _react2['default'].createElement(
-	            'span',
-	            { style: style3 },
-	            _this18.state.mes2
-	          ),
-	          _react2['default'].createElement(
-	            'span',
-	            { style: style3 },
-	            '='
-	          ),
-	          _react2['default'].createElement(
-	            'span',
-	            { style: style3 },
-	            _this18.state.res
-	          ),
-	          _react2['default'].createElement(
-	            'div',
-	            { style: { width: '00%', padding: 10 } },
-	            '  '
-	          ),
-	          _react2['default'].createElement(
-	            'div',
-	            { style: { display: rollDisplay } },
-	            _react2['default'].createElement(
-	              'button',
-	              {
-	                style: _this18.style7(cr13, cr130, showSolutionsButton),
-	                onMouseEnter: function () {
-	                  _this18.mouse[13] = 'blue';_this18.mouse[130] = '#01afaf';
-	                },
-	                onMouseLeave: function () {
-	                  _this18.mouse[13] = '#000';_this18.mouse[130] = 'darkred';
-	                },
-	                onClick: _this18.buttonHandler },
-	              'Roll'
-	            )
-	          ),
-	          _react2['default'].createElement('br', null),
-	          ' ',
-	          _react2['default'].createElement('br', null),
-	          ' ',
-	          _react2['default'].createElement('br', null),
-	          ' ',
-	          _react2['default'].createElement('br', null),
-	          _react2['default'].createElement(
-	            'button',
-	            { onClick: _this18.showSolutionsHandler,
-	              style: _this18.style7(cr22, cr220, showSolutionsButton),
-	              onMouseEnter: function () {
-	                _this18.mouse[22] = 'blue';_this18.mouse[220] = '#01afaf';
-	              },
-	              onMouseLeave: function () {
-	                _this18.mouse[22] = '#000';_this18.mouse[220] = 'darkred';
-	              } },
-	            'Solutions'
-	          ),
-	          _react2['default'].createElement(
-	            'button',
-	            { onClick: _this18.hideSolutionsHandler,
-	              style: _this18.style7(cr23, cr230, hideSolutionsButton),
-	              onMouseEnter: function () {
-	                _this18.mouse[23] = 'blue';_this18.mouse[230] = '#01afaf';
-	              },
-	              onMouseLeave: function () {
-	                _this18.mouse[23] = '#000';_this18.mouse[230] = 'darkred';
-	              } },
-	            'Hide Solutions'
-	          ),
-	          _react2['default'].createElement(
-	            'div',
-	            { style: { backgroundColor: '#000038', textAlign: 'left', color: '#fcca05', width: '64%',
-	                paddingTop: 1.1, paddingBottom: 0.9, marginRight: 3, marginLeft: 12, fontSize: 20 } },
-	            sol.map(function (line) {
-	              return _react2['default'].createElement(
-	                'p',
-	                null,
-	                line
-	              );
-	            })
-	          ),
-	          _react2['default'].createElement('br', null),
-	          _react2['default'].createElement(
-	            'button',
-	            { onClick: _this18.hideSolutionsHandler,
-	              style: _this18.style7(cr23, cr230, hideSolutionsButton),
-	              onMouseEnter: function () {
-	                _this18.mouse[23] = 'blue';_this18.mouse[230] = '#01afaf';
-	              },
-	              onMouseLeave: function () {
-	                _this18.mouse[23] = '#000';_this18.mouse[230] = 'darkred';
-	              } },
-	            'Hide Solutions'
-	          ),
+	          _react2['default'].createElement(GroupNew, { key: 'GroupNew', setGroup: function (x) {
+	              _this2.data.group = x;
+	            }, name: _this2.data.name }),
 	          _react2['default'].createElement('br', null),
 	          _react2['default'].createElement('br', null),
+	          _react2['default'].createElement('br', null),
+	          'When the value of \'data.test\' is \'true\', data.groupWatch() automatically changes button highlighting when the value of \'data.group\' changes. When the mouse enters a button, data.test is set to \'false\' allowing the rollover effect to override \'data.groupWatch()\'.',
+	          _react2['default'].createElement('br', null),
+	          _react2['default'].createElement('br', null),
+	          'If we created a form with select buttons, we would still need an additional hack to remove highlighting from all buttons when a user entered a group name not included in the buttons. And then we would have to do something to make buttons light up when a user entered a name that is included, such as \'GroupA\' or \'solo\'. Michel Weststrate\'s mobservable project showcases a major advancement in front-end website development. The movement from MVC frameworks to Facebook\'s React to Mr. Weststrate\'s mobservable-React hybrid seems to portend a progression into a future hybrid not only free from Flux and its progeny, but possibly free even from React\'s \'state\' object, which at first appears to be essential. Now it could be that Facebook\'s website needs Flux, and would flounder if it were to substitue mobservable for its dispatchers, stores, state object , and Flux. My websockets-react project isn\'t handling much traffic, but it is fairly complex. The more I convert over to mobservable, the more smoothly it seems to run. As I move things out of the \'state\' object and into mobservable objects, I remove the associated \'setState\' code, along with the getter code, and install a function that causes the application to take care of itself. That is what I did with these buttons.',
+	          _react2['default'].createElement('br', null),
+	          _react2['default'].createElement('br', null),
+	          'With mobservable, there is no need to designate listeners, as there would be with RxJS and Bacon. The buttons shown here work fine with React\'s state and props objects left empty. You might wonder why I use React at all. Mobservable doesn\'t rely on React. Well, this code is a snippet from my websockets-react project. The complete code is available at ',
 	          _react2['default'].createElement(
-	            'button',
-	            { onClick: _this18.showParamsHandler,
-	              style: _this18.style7(cr24, cr240, showParamsButton),
-	              onMouseEnter: function () {
-	                _this18.mouse[24] = 'blue';_this18.mouse[240] = '#01afaf';
-	              },
-	              onMouseLeave: function () {
-	                _this18.mouse[24] = '#000';_this18.mouse[240] = 'darkred';
-	              } },
-	            'Create a New Group'
+	            'a',
+	            { style: { color: 'red' }, href: 'https://github.com/dschalk/websockets-react' },
+	            'https://github.com/dschalk/websockets-react'
 	          ),
+	          '. An explanation of the project is at ',
 	          _react2['default'].createElement(
-	            'div',
-	            { style: { display: paramsDiv, width: '60%', float: 'left' } },
-	            _react2['default'].createElement(GroupNew, { key: 'GroupNew', setGroup: _this18.setGroup, name: _this18.state.name }),
-	            _react2['default'].createElement(
-	              'p',
-	              null,
-	              'In this section, you can change the number of seconds you have for each computation. If you don\'t change it, the time interval will stay at the default value of 10 seconds. ',
-	              _react2['default'].createElement('br', null),
-	              _react2['default'].createElement('br', null),
-	              _react2['default'].createElement(ChangeCountdown, null),
-	              _this18.data.COUNTDOWN,
-	              _react2['default'].createElement('br', null),
-	              _react2['default'].createElement('br', null),
-	              'You can also choose the numbers of sides of each of the dice, and you can also select the goal. For example, you could select 6,6,6, and 6 for the dice and 10 for the goal. A roll of 1,1,2,3 would have a solution:',
-	              _react2['default'].createElement('br', null),
-	              '1 + 1 = 2',
-	              _react2['default'].createElement('br', null),
-	              '2 + 3 = 5',
-	              _react2['default'].createElement('br', null),
-	              '2 * 5 = 10',
-	              _react2['default'].createElement('br', null),
-	              'You can click \'Solutions\' to see a computer-generated list of all the solutions.'
-	            ),
-	            _react2['default'].createElement(
-	              'p',
-	              null,
-	              'Changing parameters does not change them for other group members. You can use the chat window, email, telephone, or whatever to coordinate a change with other players. If other group members don\'t know that you modified the parameters in your browser, they might be very surprised to see you get a point for computing, say, the number \'18\'.'
-	            ),
-	            _react2['default'].createElement('br', null),
-	            'Sides:',
-	            _react2['default'].createElement(
-	              Sides1,
-	              { change: _this18.changeItem },
-	              ' Side 1 '
-	            ),
-	            _react2['default'].createElement(
-	              Sides2,
-	              { change: _this18.changeItem },
-	              ' Side 2 '
-	            ),
-	            _react2['default'].createElement(
-	              Sides3,
-	              { change: _this18.changeItem },
-	              ' Side 3 '
-	            ),
-	            _react2['default'].createElement(
-	              Sides4,
-	              { change: _this18.changeItem },
-	              ' Side 4 '
-	            ),
-	            _react2['default'].createElement('br', null),
-	            ' ',
-	            _react2['default'].createElement('br', null),
-	            'Goal',
-	            _react2['default'].createElement(SetGoal, { change: _this18.changeItem }),
-	            _react2['default'].createElement('br', null),
-	            ' ',
-	            _react2['default'].createElement('br', null),
-	            'Collapse Parameters Display:',
-	            _react2['default'].createElement(
-	              'button',
-	              { onClick: _this18.hideParamsHandler.bind(_this18),
-	                style: _this18.style7(cr25, cr250, hideParamsButton),
-	                onMouseEnter: function () {
-	                  _this18.mouse[25] = 'blue';_this18.mouse[250] = '#01afaf';
-	                },
-	                onMouseLeave: function () {
-	                  _this18.mouse[25] = '#000';_this18.mouse[250] = 'darkred';
-	                } },
-	              'Hide New Group Parameters'
-	            )
-	          )
-	        ),
-	        _react2['default'].createElement('div', { style: { paddingBottom: 500 } })
+	            'a',
+	            { style: { color: 'red' }, href: 'https://www.fpcomplete.com/user/dschalk/Websockets%20Game%20of%20Score' },
+	            'https://www.fpcomplete.com/user/dschalk/Websockets%20Game%20of%20Score'
+	          ),
+	          '. My server is a modified Haskell Wai-Websockets server. Like mobservable, it does much in a very simple and elegant manner.'
+	        )
 	      );
 	    };
 
 	    this.mouse = mouseHandler;
 	    this.data = data;
-	    this.disp = disp;
-	    this.state = {
-	      d1: 0,
-	      d2: 0,
-	      d3: 0,
-	      d4: 0,
-	      sides1: '6',
-	      sides2: '6',
-	      sides3: '12',
-	      sides4: '20',
-	      mes0: 'Number',
-	      mes1: 'Operator',
-	      mes2: 'Number',
-	      temp: 'temp',
-	      sol: [],
-	      message1: 0,
-	      message2: 0,
-	      message3: 0,
-	      message4: 0,
-	      mAr: [0, 0, 0, 0, 'result'],
-	      op1: '+',
-	      op2: '-',
-	      op3: '*',
-	      op4: '/',
-	      op5: 'Concat',
-	      selection0: '77777',
-	      selection1: '88888',
-	      selection2: '99999',
-	      res: 'result',
-	      str1: "",
-	      str2: "",
-	      str3: "",
-	      str4: "",
-	      hidden: false,
-	      hidden2: true,
-	      togDice: false,
-	      name: "",
-	      N: 0,
-	      DS_T: 'Click ROLL to begin playing. Otherwise, you can change game parameters in the "Create a New Group" section, or you can get all of the solutions to any roll you select in the "Get All Solutions." section',
-	      impossibleClicker: "a@F$Uy&imp",
-	      scoreClicker: "a@F$Uy&sc",
-	      interruptClicker: "a@F$intrup%$",
-	      scoreB: ["Greetings new player."],
-	      chatArray: [""],
-	      info: '',
-	      dynamicBg: '#000000',
-	      dynamicColor: '#d5f765',
-	      dynamicFont: 20,
-	      test: false,
-	      message: '',
-	      score: false,
-	      impossible: false,
-	      interrupt: false,
-	      goal: '20',
-	      sty: { color: '#d5f765', width: 50, marginLeft: 30, padding: 10 },
-	      startDisplay: 'none',
-	      messageDisplay: 'none',
-	      impossibleDisplay: 'none',
-	      scoreDisplay: 'none',
-	      scoreDisplay2: 'none',
-	      timerDisplay: 'none',
-	      rollDisplay: 'inline',
-	      rollnumsDisplay: 'none',
-	      numDisplay: 'none',
-	      showParamsButton: 'inline',
-	      hideParamsButton: 'none',
-	      showSolutionsButton: 'inline',
-	      hideSolutionsButton: 'none',
-	      paramsDiv: 'none',
-	      timeSize: 20,
-	      extraDisplay: 'none',
-	      gameDisplay: 'inlineBlock',
-	      leftDisplay: 'inlineBlock',
-	      rightDisplay: 'inlineBlock'
-	    };
-
-	    var that = this;
-
-	    DES_ws.onopen = function (e) {
-	      console.log("DES_ws.onopen");
-	    };
-
-	    DES_ws.onmessage = function (event) {
-	      var gameArray = event.data.split(",");
-	      console.log(event);
-	      console.log(gameArray);
-	      var makeStr = function makeStr(x) {
-	        var l = x.length;
-	        var str = '';
-	        for (var i = 5; i < l; i += 1) {
-	          str = str + ', ' + x[i];
-	        }
-	        return x[4] + ' ' + str;
-	      };
-	      var d2 = event.data.substring(0, 6);
-	      // let d3 = event.data.substring(2,6);
-	      var sendersGroup = gameArray[1];
-	      var sender = gameArray[2];
-	      var extra = gameArray[3];
-	      var ext4 = gameArray[4];
-	      var ext5 = gameArray[5];
-	      var ext6 = gameArray[6];
-	      var ext7 = gameArray[7];
-	      var ext8 = gameArray[8];
-	      var group = that.data.group;
-	      var name = that.state.name;
-	      var ar = extra.split("<br>");
-	      var ar2 = ar.map(function (x) {
-	        return x.split("_");
-	      });
-	      switch (d2) {
-	        case "CC#$42":
-	          // Not broadcast. Login message.
-	          if (extra === '%#8*&&^1#$%^') {
-	            that.setState({ info: 'You entered a name which is already taken' });
-	            setTimeout(function () {
-	              document.location.reload(false);
-	            }, 2000);
-	          } else {
-	            that.data.group = 'solo';
-	            that.setState({
-	              info: "Click ROLL for numbers. Click SCORE! to try for a point."
-	            });
-	            DES_ws.send('CO#$42,solo,' + name + ',' + name);
-	          }
-	          break;
-
-	        case "CZ#$42":
-	          // Solutions.
-	          that.data.information = 'You must hide the solutions in order to resume play';
-	          var s = extra.split("<br />");
-	          that.setState({ sol: s });
-	          break;
-
-	        case "CA#$42":
-	          // Triggedarkred by ROLL
-	          that.data.information = 'You must click SCORE! or IMPOSSIBLE to gain a point.';
-	          that.setState({
-	            message1: extra,
-	            message2: ext4,
-	            message3: ext5,
-	            message4: ext6,
-	            str1: '',
-	            str2: '',
-	            str3: '',
-	            scoreDisplay2: 'none',
-	            scoreClicker: "a@F$Uy&sc",
-	            impossibleClicker: "a@F$Uy&imp",
-	            interruptClicker: "a@F$intrup%$",
-	            sol: [],
-	            d1: extra,
-	            d2: ext4,
-	            d3: ext5,
-	            d4: ext6,
-	            score: false,
-	            impossible: false,
-	            interrupt: false,
-	            DS_T: 'ready',
-	            numDisplay: 'inline',
-	            impossibleDisplay: 'inline',
-	            rollDisplay: 'inline',
-	            rollnumsDisplay: 'none',
-	            showParamsButton: 'inline',
-	            hideParamsButton: 'none',
-	            paramsDiv: 'none',
-	            showSolutionsButton: 'inline',
-	            hideSolutionsButton: 'none',
-	            timerDisplay: 'none',
-	            scoreDisplay: 'inline'
-	          });
-	          break;
-
-	        case "DI#$42":
-	          // Changes data.information .
-	          that.data.information = extra;
-	          break;
-
-	        case "CE#$42":
-	          // Updates numbers during play.
-	          that.setState({
-	            message1: extra,
-	            message2: ext4,
-	            message3: ext5,
-	            message4: ext6
-	          });
-	          break;
-
-	        case "CB#$42":
-	          // Updates the scoreboaard.
-	          that.setState({
-	            scoreB: ar2
-	          });
-	          //  }
-	          break;
-
-	        case "CD#$42":
-	          var xm = that.data.chatMessage;
-	          var newM = makeStr(gameArray);
-	          var xmess = newM + "<br>" + xm;
-	          that.data.chatArray = xmess.split("<br>");
-	          that.data.chatMessage = xmess;
-	          break;
-
-	        case "CF#$42":
-	          // Re-set after a each clculation.
-	          that.setState({
-	            mes0: 'Number',
-	            mes1: 'Operator',
-	            mes2: 'Number',
-	            res: 'result',
-	            timeSize: 20,
-	            DS_T: extra,
-	            info: extra
-	          });
-	          break;
-
-	        case "CH#$42":
-	          that.data.information = ext4;
-	          that.setState({
-	            DS_T: extra,
-	            rollDisplay: 'inline',
-	            numDisplay: 'none',
-	            scoreDisplay: 'none',
-	            scoreDisplay2: 'none'
-	          });
-	          break;
-
-	        case "CK#$42":
-	          // Updates DS_T after each calculation.
-	          that.data.information = ext4;
-	          that.setState({
-	            mes0: 'Number',
-	            mes1: 'Operator',
-	            mes2: 'Number',
-	            res: 'result',
-	            info: extra,
-	            DS_T: extra
-	          });
-	          break;
-
-	        case "CQ#$42":
-	          that.setState({ mes0: extra });
-	          break;
-
-	        case "DQ#$42":
-	          that.setState({ mes2: extra });
-	          break;
-
-	        case "EQ#$42":
-	          that.setState({ mes1: extra });
-	          break;
-
-	        case "FQ#$42":
-	          that.setState({ str1: extra });
-	          break;
-
-	        case "GQ#$42":
-	          that.setState({ str2: extra });
-	          break;
-
-	        case "HQ#$42":
-	          that.setState({ str3: extra });
-	          break;
-
-	        case "CR#$42":
-	          // Resets the player interface after each round.
-	          that.setState({
-	            impossibleDisplay: 'none',
-	            numDisplay: 'none',
-	            showParamsButton: 'inline',
-	            hideParamsButton: 'none',
-	            paramsDiv: 'none',
-	            showSolutionsButton: 'inline',
-	            hideSolutionsButton: 'none',
-	            rollDisplay: 'inline',
-	            scoreDisplay: 'none',
-	            scoreDisplay2: 'none',
-	            message1: 0,
-	            message2: 0,
-	            message3: 0,
-	            message4: 0,
-	            timeSize: 20,
-	            mes0: 'Number',
-	            mes1: 'Operator',
-	            mes2: 'Number',
-	            res: 'result'
-	          });
-	          break;
-
-	        case "CY#$42":
-	          // Triggedarkred by clicking "SCORE!".
-	          that.data.information = '';
-	          that.data.timerSize = 35;
-	          that.setState({
-	            scoreClicker: extra,
-	            score: true,
-	            DS_T: that.data.COUNTDOWN,
-	            impossibleDisplay: 'none',
-	            solutionsDisplay: 'none',
-	            paramsDisplay: 'none',
-	            shrinkSol: 'none',
-	            showSolutionsButton: 'none',
-	            paramsButton: 'none',
-	            shrinkPar: 'none',
-	            timerDisplay: 'inline',
-	            scoreDisplay: 'none',
-	            rollDisplay: 'none'
-	          });
-	          if (extra !== name) {
-	            that.setState({ numDisplay: 'none' }); // Players can see calculations after wait.
-	            setTimeout(function () {
-	              that.setState({ solutionsDisplay: 'inline' });
-	            }, 8000);
-	          }
-	          break;
-
-	        case "XY#$42":
-	          // Triggedarkred by clicking "SCORE!" after "IMPOSSIBLE".
-	          that.data.information = sender + ' clicked SCORE!.';
-	          that.setState({
-	            interruptClicker: extra,
-	            interrupt: true,
-	            message: '',
-	            DS_T: that.data.COUNTDOWN, // Default is set at 10 in data.
-	            scoreDisplay2: 'none',
-	            solutionsDisplay: 'none',
-	            paramsDisplay: 'none',
-	            shrinkSol: 'none',
-	            showSolutionsButton: 'none',
-	            paramsButton: 'none',
-	            shrinkPar: 'none',
-	            rollnumsDisplay: 'none'
-	          });
-	          break;
-
-	        case "DY#$42":
-	          // Triggered by clicking  "IMPOSSIBLE".
-	          that.data.information = 'Click SCORE! if you want to show a solution and gain a point.';
-	          that.setState({
-	            impossibleClicker: extra,
-	            impossible: true,
-	            message: '',
-	            DS_T: 60,
-	            impossibleDisplay: 'none',
-	            numDisplay: 'none',
-	            scoreDisplay: 'none',
-	            scoreDisplay2: 'inline',
-	            timerDisplay: 'inline',
-	            rollDisplay: 'none',
-	            rollnumsDisplay: 'inline',
-	            showParamsButton: 'inline',
-	            hideParamsButton: 'none',
-	            paramsDiv: 'none',
-	            showSolutionsButton: 'none',
-	            hideSolutionsButton: 'none'
-	          });
-	          break;
-
-	        case "DC#$42":
-	          that.setState({});
-	          break;
-
-	        case "DZ#$42":
-	          // NOT IN USE
-	          var this2 = that;
-	          if (that.state.scoreClicker !== name) {
-	            (function () {
-	              var solutions = extra;
-	              that.delay(8000).then(function () {
-	                this2.setState({
-	                  sol: solutions.split("<br />")
-	                });
-	              });
-	            })();
-	          }
-	          break;
-
-	        case "IA#$42":
-	          that.setState({ info: extra }); // Broadcast to update info message.
-	          break;
-
-	        default:
-	          console.log("fell through to default");
-	          break;
-	      }
-	    };
-
-	    setInterval(function () {
-	      var name = _this18.state.name;
-	      var gr = _this18.data.group;
-	      var COUNTDOWN = _this18.data.COUNTDOWN;
-	      var scoreClicker = _this18.state.scoreClicker;
-	      var impossibleClicker = _this18.state.impossibleClicker;
-	      var interruptClicker = _this18.state.interruptClicker;
-	      var score = _this18.state.score;
-	      var impossible = _this18.state.impossible;
-	      var interrupt = _this18.state.interrupt;
-
-	      if (_this18.state.DS_T > 0) {
-	        _this18.setState({
-	          DS_T: _this18.state.DS_T - 1,
-	          timeSize: 40
-	        });
-	        _this18.setState({ info: _this18.state.DS_T });
-	      }
-
-	      if (_this18.state.DS_T === 0) {
-	        _this18.setState({
-	          message1: 0, // Wipes the old numbers.
-	          message2: 0,
-	          message3: 0,
-	          message4: 0,
-	          info: '',
-	          timeSize: 20, // Returns number display to normal size.
-	          rollDisplay: 'inline', // Displays the ROLL button.
-	          showParamsButton: 'inline',
-	          hideParamsButton: 'none',
-	          paramsDiv: 'none',
-	          showSolutionsButton: 'inline',
-	          hideSolutionsButton: 'none',
-	          DS_t: -1
-	        });
-
-	        var z = scoreClicker === name;
-	        var z2 = impossibleClicker === name && interruptClicker !== name;
-	        var z3 = impossibleClicker === name && interruptClicker === name;
-
-	        if (z) {
-	          DES_ws.send('CG#$42,' + gr + ',' + name + ',-1');
-	          DES_ws.send('CH#$42,' + gr + ',' + name + ',' + COUNTDOWN + ' seconds expired. ' + scoreClicker + ' loses one point.');
-	        } else if (z2) {
-	          DES_ws.send('CG#$42,' + gr + ',' + name + ',1');
-	          DES_ws.send('CG#$42,' + gr + ',' + interruptClicker + ',-1');
-	          DES_ws.send('CH#$42,' + gr + ',' + name + ',' + interruptClicker + ' did not show a solution; one was point deducted. One point for ' + impossibleClicker + ', ');
-	        } else if (z3) {
-	          DES_ws.send('CG#$42,' + gr + ',' + interruptClicker + ',-2');
-	          DES_ws.send('CH#$42,' + gr + ',' + impossibleClicker + ',\n                      ' + impossibleClicker + ' forfeits two points for blocking with SCORE!,\n                      ' + impossibleClicker + ' clicked IMPOSSIBLE and blocked others from solving by clicking SCORE!\n       ');
-	        }
-	      }
-	    }, 1000);
 	  }
-
-	  _createClass(B2X, [{
-	    key: 'delay',
-	    value: function delay(ms) {
-	      return new Promise(function (resolve, reject) {
-	        setTimeout(resolve, ms);
-	      });
-	    }
-	  }, {
-	    key: 'calc',
-	    value: function calc(mes0, mes1, mes2) {
-	      var that = this;
-	      var res = 0;
-	      var delay = this.delay;
-	      var n = this.state.N;
-	      var resP = this.data.resPrevious;
-	      var ar5 = [mes0, mes2];
-	      var test = resP === mes0 || resP === mes2;
-	      switch (mes1) {
-	        case "+":
-	          that.comp(parseFloat(mes0) + parseFloat(mes2), mes0, mes1, mes2, test);
-	          break;
-	        case "-":
-	          that.comp(parseFloat(mes0) - parseFloat(mes2), mes0, mes1, mes2, test);
-	          break;
-	        case "*":
-	          that.comp(parseFloat(mes0) * parseFloat(mes2), mes0, mes1, mes2, test);;
-	          break;
-	        case "/":
-	          that.comp(parseFloat(mes0) / parseFloat(mes2), mes0, mes1, mes2, test);
-	          break;t;
-	        case "Concat":
-	          that.comp(parseFloat(mes0 + "" + mes2), mes0, mes1, mes2, test);
-	          break;
-	        default:
-	          'operator not selected';
-	      }
-	    }
-	  }, {
-	    key: 'comp',
-	    value: function comp(result, mes0, mes1, mes2, test) {
-	      var str = mes0 + ' ' + mes1 + ' ' + mes2 + ' = ' + result;
-	      this.data.resPrevious = result.toString();
-	      var w1 = this.state.message1;
-	      var w2 = this.state.message2;
-	      var w3 = this.state.message3;
-	      var w4 = this.state.message4;
-	      var startArray = [w1, w2, w3, w4, result];
-	      this.newNums(result, str, test, startArray);
-	    }
-	  }, {
-	    key: 'newNums',
-	    value: function newNums(result, str, test, numbers) {
-	      var j = 0;
-	      var gr = this.data.group;
-	      var COUNTDOWN = this.data.COUNTDOWN;
-	      var ar = [];
-	      var clock = '';
-	      var name = this.state.name;
-	      var impossibleClicker = this.state.impossibleClicker;
-	      var interruptClicker = this.state.interruptClicker;
-	      var scoreClicker = this.state.scoreClicker;
-	      var interrupt = this.state.interrupt;
-	      var test2 = this.state.score || this.state.impossible;
-	      var goal = 1 * this.state.goal; // '1*' and '==' is technically overkill, but seems like insurance.
-
-	      for (var k in numbers) {
-	        if (numbers[k] !== "" && numbers[k] !== undefined) {
-	          ar[j] = numbers[k];
-	          j += 1;
-	        }
-	      }
-	      if (j === 3) {
-	        DES_ws.send('FQ#$42,' + gr + ',' + name + ',' + str);
-	        DES_ws.send('CE#$42,' + gr + ',' + name + ',' + ar[0] + ',' + ar[1] + ',' + ar[2] + ',');
-	        this.mouse[2] = 'yellow';
-	        if (test2) {
-	          DES_ws.send('CK#$42,' + gr + ',' + name + ',' + COUNTDOWN + ',To score in this computation: Use the yellow background number.');
-	        } else {
-	          DES_ws.send('CK#$42,' + gr + ',' + name + ',Did not click SCORE!,Not competing.');
-	        }
-	      } else if (j === 2) {
-	        this.setState({ message: '' });
-	        DES_ws.send('GQ#$42,' + gr + ',' + name + ',' + str);
-	        DES_ws.send('CE#$42,' + gr + ',' + name + ',' + ar[0] + ',' + ar[1] + ',,');
-	        if (result == goal && test && test2 && !interrupt) {
-	          this.setState({ DS_T: -1 });
-	          DES_ws.send('CK#$42,' + gr + ',' + name + ',One point for ' + name + ',Success!');
-	          DES_ws.send('CR#$42,' + gr + ',' + name + ',' + name);
-	          DES_ws.send('CG#$42,' + gr + ',' + name + ',1');
-	        } else if (result == goal && test && test2 && interrupt) {
-	          this.setState({ DS_T: -1 });
-	          DES_ws.send('CK#$42,' + gr + ',' + name + ',Two points deducted from ' + impossibleClicker + ',One point for ' + name);
-	          DES_ws.send('CR#$42,' + gr + ',' + name + ',' + name);
-	          DES_ws.send('CG#$42,' + gr + ',' + name + ',1');
-	          DES_ws.send('CG#$42,' + gr + ',' + impossibleClicker + ',-2');
-	        } else if (test2) {
-	          DES_ws.send('CK#$42,' + gr + ',' + name + ',' + COUNTDOWN + ', ');
-	        } else {
-	          DES_ws.send('CK#$42,' + gr + ',' + name + ',Did not click SCORE!, ');
-	        }
-	      } else if (j === 1) {
-	        this.setState({
-	          message1: 0, // Wipes the old numbers.
-	          message2: 0,
-	          message3: 0,
-	          message4: 0,
-	          info: '',
-	          timeSize: 20, // Returns number display to normal size.
-	          rollDisplay: 'inline', // Displays the ROLL button.
-	          showParamsButton: 'inline',
-	          hideParamsButton: 'none',
-	          paramsDiv: 'none',
-	          showSolutionsButton: 'inline',
-	          hideSolutionsButton: 'none',
-	          DS_t: 'Round Over'
-	        });
-
-	        var z = scoreClicker === name;
-	        var z2 = interruptClicker === name && impossibleClicker !== name;
-	        var z3 = interruptClicker === name && impossibleClicker === name;
-
-	        if (z && test2 && result === goal) {
-	          DES_ws.send('CK#$42,' + gr + ',' + name + ',One point for ' + name + ',Success');
-	          DES_ws.send('CR#$42,' + gr + ',' + name + ',' + name);
-	          DES_ws.send('CG#$42,' + gr + ',' + name + ',1');
-	        }
-
-	        if (z && test2 && result !== goal) {
-	          DES_ws.send('CK#$42,' + gr + ',' + name + ', ' + name + ' loses one point. The result is not \'20\'');
-	          DES_ws.send('CR#$42,' + gr + ',' + name + ',' + name);
-	          DES_ws.send('CG#$42,' + gr + ',' + name + ',-1');
-	        }
-
-	        if (z2 && test2 && result === goal) {
-	          DES_ws.send('CK#$42,' + gr + ',' + name + ',Twopoints taken from ' + impossibleClicker + ',' + name + ' found a solution. +1 for ' + name);
-	          DES_ws.send('CR#$42,' + gr + ',' + name + ',' + name);
-	          DES_ws.send('CG#$42,' + gr + ',' + name + ',1');
-	          DES_ws.send('CG#$42,' + gr + ',' + impossibleClicker + ',-2');
-	        }
-
-	        if (z2 && test2 && result !== goal) {
-	          DES_ws.send('CK#$42,' + gr + ',' + name + ',One point for ' + impossibleClicker + '. No solution found.,' + interruptClicker + ' loses one point.The result is not ' + goal);
-	          DES_ws.send('CR#$42,' + gr + ',' + name + ',' + name);
-	          DES_ws.send('CG#$42,' + gr + ',' + name + ', -1');
-	          DES_ws.send('CG#$42,' + gr + ',' + impossibleClicker + ',1');
-	        }
-
-	        if (z3 && test2 && result === goal) {
-	          DES_ws.send('CR#$42,' + gr + ',' + name + ',' + name);
-	          DES_ws.send('CG#$42,' + gr + ',' + name + ',-1');
-	          DES_ws.send('CH#$42,' + gr + ',' + impossibleClicker + ',\n                      ' + name + ' forfeits two points. A solution was found (by ' + name + ')!,\n                      ' + name + ' gains one point for finding a solution. Net result is -1');
-	        }
-
-	        if (z3 && test2 && result !== goal) {
-	          DES_ws.send('CR#$42,' + gr + ',' + name + ',' + name);
-	          DES_ws.send('CG#$42,' + gr + ',' + name + ',-2');
-	          DES_ws.send('CH#$42,' + gr + ',' + impossibleClicker + ',\n                      ' + impossibleClicker + ' forfeits two points for blocking with SCORE!,\n                      ' + impossibleClicker + ' clicked IMPOSSIBLE and blocked others by clicking SCORE!\n       ');
-	        }
-
-	        DES_ws.send('CE#$42,' + gr + ',' + name + ',' + ar[0] + ',,,');
-	        DES_ws.send('HQ#$42,' + gr + ',' + name + ',' + str);
-	      }
-	    }
-	  }]);
 
 	  return B2X;
 	})(_react2['default'].Component);
@@ -3114,18 +450,6 @@
 
 	var B2 = _mobservable2['default'].reactiveComponent(B2X);
 	_react2['default'].render(_react2['default'].createElement(B2, { key: 'B2' }), document.getElementById('divSix'));
-
-	/*
-	    let Abackground = this.mouse.Abackground;
-	    let Aborder = this.mouse.Aborder;
-	    let Acolor = this.mouse.Acolor;
-	    let Bbackground = this.mouse.Bbackground;
-	    let Bborder = this.mouse.Bborder;
-	    let Bcolor = this.mouse.Bcolor;
-	    let Cbackground = this.mouse.Cbackground;
-	    let Cborder = this.mouse.Cborder;
-	    let Ccolor = this.mouse.Ccolor;
-	*/
 
 /***/ },
 /* 2 */

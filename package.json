@@ -11,7 +11,8 @@
     "mobservable": "^0.6.1",
     "react": "^0.13.3",
     "webpack": "^1.11.0",
-    "react-mixin": "^1.7.0"
+    "webpack-dev-server": "latest",
+    "react-mixin": "latest"
   },
   "devDependencies": {},
   "scripts": {
