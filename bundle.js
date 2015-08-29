@@ -302,6 +302,15 @@
 	          _react2['default'].createElement('br', null),
 	          _react2['default'].createElement('br', null),
 	          _react2['default'].createElement('br', null),
+	          'Current Group:',
+	          _react2['default'].createElement(
+	            'button',
+	            { style: _this2.style8('blue', 'lightgreen', 'red') },
+	            group
+	          ),
+	          _react2['default'].createElement('br', null),
+	          _react2['default'].createElement('br', null),
+	          _react2['default'].createElement('br', null),
 	          'This set of buttons are inter-connected with one another and the input box. Click the buttons and enter some text to see how they interact.',
 	          _react2['default'].createElement('br', null),
 	          _react2['default'].createElement('br', null),

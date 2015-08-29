@@ -199,6 +199,11 @@ class B2X extends React.Component {
       <div style={{ backgroundColor: '#000', height: 800, color: 'turquoise' }}> 
       <div style={{width: '80%', marginLeft: 85}} >
         <br /><br /><br />
+        Current Group: 
+      <button style={this.style8('blue', 'lightgreen', 'red')} >
+        {group}
+      </button>
+        <br /><br /><br />
         This set of buttons are inter-connected with one another and the input box. Click the buttons and enter some text to see how they interact.
         <br /><br />
           <button onClick={() => {
@@ -227,7 +232,6 @@ class B2X extends React.Component {
             GroupA
           </button>
 
-
           <button onClick={() => {
                   this.data.group = 'GroupB';
                   this.data.test = true;
@@ -253,8 +257,6 @@ class B2X extends React.Component {
               style={this.style8(this.mouse.Bbackground,this.mouse.Bborder,this.mouse.Bcolor)} >
             GroupB
           </button>
-
-
 
           <button onClick={() => {
                   this.data.group = 'GroupC';
