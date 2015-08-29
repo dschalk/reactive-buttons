@@ -431,7 +431,7 @@
 	            { style: { color: 'red' }, href: 'https://www.fpcomplete.com/user/dschalk/Websockets%20Game%20of%20Score' },
 	            'https://www.fpcomplete.com/user/dschalk/Websockets%20Game%20of%20Score'
 	          ),
-	          '. My server is a modified Haskell Wai-Websockets server. Like mobservable, it does much in a very simple and elegant manner.'
+	          '. My server is a modified Haskell Wai-Websockets server. Like mobservable, it does much in a very simple and elegant manner. \'react_mixin\' is not necessary for the buttons. I used it to grab a React mixin out of \'node_modules\' to support autoFocus (\'autofocus\' in regular HTML).'
 	        )
 	      );
 	    };
