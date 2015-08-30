@@ -217,18 +217,9 @@ class B2X extends React.Component {
     let cr270 = this.mouse[270];
 
     return (
-      <div style={{ backgroundColor: '#000', height: 1800, color: 'turquoise' }}> 
+      <div style={{ backgroundColor: '#000', height: 800, color: 'turquoise' }}> 
         <div style={{width: '80%', marginLeft: 85}} >
           <br /><br /><br />
-
-          <h2 style={{textAlign: 'center'}} >Sensitivity of Mobservable</h2>
-          <br /> 
-          <p>It appears that every time React renders the B2 component, reactive functions merely mentioned in the render function are executed. The variable 'data.x' is not involved in the method 'g', which computes sequential Fibinacci numbers, yet incrementing x causes the corresponding fibinacci number to be displayed. This correspondence is lost if you roll your mouse over or click the rollover buttons, or if you enter text in the input field. It is reassuring to see that if a roll-over button is already selected, rolling over it or clicking it to select an already-selected group does not increase the Fibinacci number. </p>
-          <p>The line 'let g = this.data.g' in 'render' is all it takes to invoke this behavior. 'g' is not called and its argument is not modified (that is, until g modifies it). This is useful knowledge both for writing concise code and for avoiding bugs. </p> 
-          
-    'let increaseX = this.data.increaseX' is also present in 'render()', but rendering does not trigger its execution. The relevant  difference between 'increaseX' and 'g' from a practical perspective is that 'g' is defined inside of the data object but 'increaseX' is incorporated into data externally with with the code: 'data.increaseX = ...'. 'g' is inside of a mobservable encapsulated object while 'increaseX' was tacked on after encapsulation. The precise explanation lies in the details of the code.
-          <br /><br />
-
           Fibinacci numbers ( [temp][1] ): 
           <button style={this.style8('blue','orange','pink')} >
             {temp[1]}
@@ -238,16 +229,13 @@ class B2X extends React.Component {
           <button style={this.style8('blue','orange','pink')} onClick={() => {return increaseX()}}  >
             {x}
           </button>
-          <br /><br /><br />
-
-          <h2 style={{textAlign: 'center'}} >Roll-Over Buttons</h2>
-
+          <br /><br /><br />   <h1 style={{align: 'center'}}>Roll-Over Buttons</h1>
         Current Group: 
       <button style={this.style8('blue', 'lightgreen', 'red')} >
         {group}
       </button>
         <br /><br /><br />
-        The buttons below are inter-connected with one another and with the input box. Click the buttons and enter some text to see how they interact. These are dumned-down buttons from my <a target=" _blank" style={{color: 'red'}} href="http://machinegun.ninja">Game of Score</a> Haskell websockets multiplayer math game. The buttons presented here demonstrate the full functionality of the roll-over effects, along with some other features that don't come with HTML select/option forms. 
+        This set of buttons are inter-connected with one another and the input box. Click the buttons and enter some text to see how they interact.
         <br /><br />
           <button onClick={() => {
                   this.data.group = 'GroupA';
@@ -359,7 +347,7 @@ class B2X extends React.Component {
           <br /><br />
           If we created a form with select buttons, we would still need an additional hack to remove highlighting from all buttons when a user entered a group name not included in the buttons. And then we would have to do something to make buttons light up when a user entered a name that is included, such as 'GroupA' or 'solo'. Michel Weststrate's mobservable project showcases a major advancement in front-end website development. The movement from MVC frameworks to Facebook's React to Mr. Weststrate's mobservable-React hybrid seems to portend a progression into a future hybrid not only free from Flux and its progeny, but possibly free even from React's 'state' object, which at first appears to be essential. Now it could be that Facebook's website needs Flux, and would flounder if it were to substitue mobservable for its dispatchers, stores, state object , and Flux. My websockets-react project isn't handling much traffic, but it is fairly complex. The more I convert over to mobservable, the more smoothly it seems to run. As I move things out of the 'state' object and into mobservable objects, I remove the associated 'setState' code, along with the getter code, and install a function that causes the application to take care of itself. That is what I did with these buttons. 
           <br /><br />
-            With mobservable, there is no need to designate listeners, as there would be with RxJS and Bacon. The buttons shown here work fine with React's state and props objects left empty. You might wonder why I use React at all. Mobservable doesn't rely on React. Well, this code is a snippet from my websockets-react project. The complete code is available at <a target=" _blank" style={{color: 'red'}} href="https://github.com/dschalk/websockets-react">https://github.com/dschalk/websockets-react</a>. An explanation of the project is at <a target=" _blank" style={{color: 'red'}} href="https://www.fpcomplete.com/user/dschalk/Websockets%20Game%20of%20Score">https://www.fpcomplete.com/user/dschalk/Websockets%20Game%20of%20Score</a>. My server is a modified Haskell Wai-Websockets server. Like mobservable, it does much in a very simple and elegant manner. 
+            With mobservable, there is no need to designate listeners, as there would be with RxJS and Bacon. The buttons shown here work fine with React's state and props objects left empty. You might wonder why I use React at all. Mobservable doesn't rely on React. Well, this code is a snippet from my websockets-react project. The complete code is available at <a style={{color: 'red'}} href="https://github.com/dschalk/websockets-react">https://github.com/dschalk/websockets-react</a>. An explanation of the project is at <a style={{color: 'red'}} href="https://www.fpcomplete.com/user/dschalk/Websockets%20Game%20of%20Score">https://www.fpcomplete.com/user/dschalk/Websockets%20Game%20of%20Score</a>. My server is a modified Haskell Wai-Websockets server. Like mobservable, it does much in a very simple and elegant manner. 
 
             'react_mixin' is not necessary for the buttons. I used it to grab a React mixin out of 'node_modules' to support autoFocus ('autofocus' in regular HTML).
         </div>

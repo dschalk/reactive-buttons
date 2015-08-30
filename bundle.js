@@ -57,6 +57,8 @@
 	  value: true
 	});
 
+	var _slicedToArray = (function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i['return']) _i['return'](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError('Invalid attempt to destructure non-iterable instance'); } }; })();
+
 	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
 	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
@@ -75,7 +77,9 @@
 
 	var _mobservable2 = _interopRequireDefault(_mobservable);
 
-	var reactMixin = __webpack_require__(159);
+	var _mobservableReact = __webpack_require__(159);
+
+	var reactMixin = __webpack_require__(160);
 	exports.B2 = B2;
 
 	var GroupNew = (function (_React$Component) {
@@ -161,10 +165,26 @@
 
 	var mouseHandler = _mobservable2['default'].makeReactive(mouseHandlerx);
 
+	var temp = [1, 1];
+
 	var data = _mobservable2['default'].makeReactive({
 	  group: 'solo',
 	  groupBackup: 'solo',
 	  name: '',
+	  x: 1,
+	  f: function f(_ref) {
+	    var _ref2 = _slicedToArray(_ref, 2);
+
+	    var a = _ref2[0];
+	    var b = _ref2[1];
+
+	    temp = [a + b, a];
+	    return [a + b, a];
+	  },
+	  g: function g() {
+	    temp = this.f(temp);
+	    return temp;
+	  },
 	  test: true,
 	  groupWatch: function groupWatch() {
 	    if (this.group === 'GroupA' && this.test) {
@@ -236,6 +256,11 @@
 	  }
 	});
 
+	data.increaseX = function () {
+	  data.x = data.x + 1;
+	  return data.x;
+	};
+
 	var B2X = (function (_React$Component2) {
 	  _inherits(B2X, _React$Component2);
 
@@ -258,6 +283,10 @@
 	    };
 
 	    this.render = function () {
+	      console.log(_this2);
+	      var x = _this2.data.x;
+	      var g = _this2.data.g;
+	      var increaseX = _this2.data.increaseX;
 	      var group = _this2.data.group;
 	      var groupWatch = _this2.data.groupWatch;
 	      var Abackground = '#000';
@@ -295,13 +324,56 @@
 
 	      return _react2['default'].createElement(
 	        'div',
-	        { style: { backgroundColor: '#000', height: 800, color: 'turquoise' } },
+	        { style: { backgroundColor: '#000', height: 1800, color: 'turquoise' } },
 	        _react2['default'].createElement(
 	          'div',
 	          { style: { width: '80%', marginLeft: 85 } },
 	          _react2['default'].createElement('br', null),
 	          _react2['default'].createElement('br', null),
 	          _react2['default'].createElement('br', null),
+	          _react2['default'].createElement(
+	            'h2',
+	            { style: { textAlign: 'center' } },
+	            'Sensitivity of Mobservable'
+	          ),
+	          _react2['default'].createElement('br', null),
+	          _react2['default'].createElement(
+	            'p',
+	            null,
+	            'It appears that every time React renders the B2 component, reactive functions merely mentioned in the render function are executed. The variable \'data.x\' is not involved in the method \'g\', which computes sequential Fibinacci numbers, yet incrementing x causes the corresponding fibinacci number to be displayed. This correspondence is lost if you roll your mouse over or click the rollover buttons, or if you enter text in the input field. It is reassuring to see that if a roll-over button is already selected, rolling over it or clicking it to select an already-selected group does not increase the Fibinacci number. '
+	          ),
+	          _react2['default'].createElement(
+	            'p',
+	            null,
+	            'The line \'let g = this.data.g\' in \'render\' is all it takes to invoke this behavior. \'g\' is not called and its argument is not modified (that is, until g modifies it). This is useful knowledge both for writing concise code and for avoiding bugs. '
+	          ),
+	          '\'let increaseX = this.data.increaseX\' is also present in \'render()\', but rendering does not trigger its execution. The relevant  difference between \'increaseX\' and \'g\' from a practical perspective is that \'g\' is defined inside of the data object but \'increaseX\' is incorporated into data externally with with the code: \'data.increaseX = ...\'. \'g\' is inside of a mobservable encapsulated object while \'increaseX\' was tacked on after encapsulation. The precise explanation lies in the details of the code.',
+	          _react2['default'].createElement('br', null),
+	          _react2['default'].createElement('br', null),
+	          'Fibinacci numbers ( [temp][1] ):',
+	          _react2['default'].createElement(
+	            'button',
+	            { style: _this2.style8('blue', 'orange', 'pink') },
+	            temp[1]
+	          ),
+	          _react2['default'].createElement('br', null),
+	          _react2['default'].createElement('br', null),
+	          'Value of data.x:',
+	          _react2['default'].createElement(
+	            'button',
+	            { style: _this2.style8('blue', 'orange', 'pink'), onClick: function () {
+	                return increaseX();
+	              } },
+	            x
+	          ),
+	          _react2['default'].createElement('br', null),
+	          _react2['default'].createElement('br', null),
+	          _react2['default'].createElement('br', null),
+	          _react2['default'].createElement(
+	            'h2',
+	            { style: { textAlign: 'center' } },
+	            'Roll-Over Buttons'
+	          ),
 	          'Current Group:',
 	          _react2['default'].createElement(
 	            'button',
@@ -311,7 +383,13 @@
 	          _react2['default'].createElement('br', null),
 	          _react2['default'].createElement('br', null),
 	          _react2['default'].createElement('br', null),
-	          'This set of buttons are inter-connected with one another and the input box. Click the buttons and enter some text to see how they interact.',
+	          'The buttons below are inter-connected with one another and with the input box. Click the buttons and enter some text to see how they interact. These are dumned-down buttons from my ',
+	          _react2['default'].createElement(
+	            'a',
+	            { target: ' _blank', style: { color: 'red' }, href: 'http://machinegun.ninja' },
+	            'Game of Score'
+	          ),
+	          ' Haskell websockets multiplayer math game. The buttons presented here demonstrate the full functionality of the roll-over effects, along with some other features that don\'t come with HTML select/option forms.',
 	          _react2['default'].createElement('br', null),
 	          _react2['default'].createElement('br', null),
 	          _react2['default'].createElement(
@@ -431,13 +509,13 @@
 	          'With mobservable, there is no need to designate listeners, as there would be with RxJS and Bacon. The buttons shown here work fine with React\'s state and props objects left empty. You might wonder why I use React at all. Mobservable doesn\'t rely on React. Well, this code is a snippet from my websockets-react project. The complete code is available at ',
 	          _react2['default'].createElement(
 	            'a',
-	            { style: { color: 'red' }, href: 'https://github.com/dschalk/websockets-react' },
+	            { target: ' _blank', style: { color: 'red' }, href: 'https://github.com/dschalk/websockets-react' },
 	            'https://github.com/dschalk/websockets-react'
 	          ),
 	          '. An explanation of the project is at ',
 	          _react2['default'].createElement(
 	            'a',
-	            { style: { color: 'red' }, href: 'https://www.fpcomplete.com/user/dschalk/Websockets%20Game%20of%20Score' },
+	            { target: ' _blank', style: { color: 'red' }, href: 'https://www.fpcomplete.com/user/dschalk/Websockets%20Game%20of%20Score' },
 	            'https://www.fpcomplete.com/user/dschalk/Websockets%20Game%20of%20Score'
 	          ),
 	          '. My server is a modified Haskell Wai-Websockets server. Like mobservable, it does much in a very simple and elegant manner. \'react_mixin\' is not necessary for the buttons. I used it to grab a React mixin out of \'node_modules\' to support autoFocus (\'autofocus\' in regular HTML).'
@@ -457,7 +535,7 @@
 	reactMixin(B2X.prototype, __webpack_require__(115));
 	B2X.defaultProps = { key: 'B2X' };
 
-	var B2 = _mobservable2['default'].reactiveComponent(B2X);
+	var B2 = (0, _mobservableReact.reactiveComponent)(B2X);
 	_react2['default'].render(_react2['default'].createElement(B2, { key: 'B2' }), document.getElementById('divSix'));
 
 /***/ },
@@ -22143,8 +22221,14 @@
 /* 159 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var mixin = __webpack_require__(160);
-	var assign = __webpack_require__(161);
+	!function(e,t){ true?module.exports=t(__webpack_require__(158),__webpack_require__(2)):"function"==typeof define&&define.amd?define(["mobservable","react"],t):"object"==typeof exports?exports["mobservable-react"]=t(require("mobservable"),require("react")):e["mobservable-react"]=t(e.mobservable,e.react)}(this,function(e,t){return function(e){function t(o){if(n[o])return n[o].exports;var r=n[o]={exports:{},id:o,loaded:!1};return e[o].call(r.exports,r,r.exports,t),r.loaded=!0,r.exports}var n={};return t.m=e,t.c=n,t.p="",t(0)}([function(e,t,n){var o,r,i;!function(){function s(e,t){function n(e){var n=t.findDOMNode(e);c.set(n,e),u.emit({event:"render",renderTime:e.__renderEnd-e.__renderStart,totalTime:Date.now()-e.__renderStart,component:e,node:n})}function o(e,t){var n=e[t],o=d[t];e[t]=function(){n&&n.apply(this,arguments),o.apply(this,arguments)}}function r(e){if(!e)throw new Error("Please pass a valid component to 'reactiveComponent'");var t=e.prototype||e;return["componentWillMount","componentWillUnmount","componentDidMount","componentDidUpdate"].forEach(function(e){o(t,e)}),t.shouldComponentUpdate||(t.shouldComponentUpdate=d.shouldComponentUpdate),e}function i(){if("undefined"==typeof WeakMap)throw new Error("tracking components is not supported in this browser");a||(a=!0)}var s=1,a=!1,p=e.observeUntilInvalid,c="undefined"!=typeof WeakMap?new WeakMap:void 0,u=new e._.SimpleEventEmitter,d={componentWillMount:function(){var e=(this.displayName||this.constructor.name||"ReactiveComponent")+s++,t=this.render;this.render=function(){var n=this;a&&(this.__renderStart=Date.now()),this.__watchDisposer&&this.__watchDisposer();var o=p(function(){return t.call(n)},function(){n.forceUpdate()},{object:this,name:e});return this.__watchDisposer=o[1],this.$mobservable=o[2],a&&(this.__renderEnd=Date.now()),o[0]}},componentWillUnmount:function(){if(this.__watchDisposer&&this.__watchDisposer(),delete this.$mobservable,a){var e=t.findDOMNode(this);e&&(c.delete(e),u.emit({event:"destroy",component:this,node:e}))}},componentDidMount:function(){a&&n(this)},componentDidUpdate:function(){a&&n(this)},shouldComponentUpdate:function(e,t){if(this.state!==t)return!0;var n,o=Object.keys(this.props);if(o.length!==Object.keys(e).length)return!0;for(var r=o.length-1;n=o[r];r--)if(e[n]!==this.props[n])return!0;return!1}};return{reactiveComponent:r,renderReporter:u,componentByNodeRegistery:c,trackComponents:i}}r=[n(1),n(2)],o=s,i="function"==typeof o?o.apply(t,r):o,!(void 0!==i&&(e.exports=i))}()},function(t,n){t.exports=e},function(e,n){e.exports=t}])});
+
+/***/ },
+/* 160 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var mixin = __webpack_require__(161);
+	var assign = __webpack_require__(162);
 
 	var mixinProto = mixin({
 	  // lifecycle stuff is as you'd expect
@@ -22297,7 +22381,7 @@
 
 
 /***/ },
-/* 160 */
+/* 161 */
 /***/ function(module, exports) {
 
 	var objToStr = function(x){ return Object.prototype.toString.call(x); };
@@ -22480,7 +22564,7 @@
 
 
 /***/ },
-/* 161 */
+/* 162 */
 /***/ function(module, exports) {
 
 	'use strict';
