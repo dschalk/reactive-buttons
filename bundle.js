@@ -347,7 +347,7 @@
 	          _react2['default'].createElement(
 	            'p',
 	            null,
-	            'Rolling over any roll-over button or entering text causes the sequence to progress, unless the roll-over or text entry doesn\'t change anything. It is reassuring to see that if a roll-over button is already selected, rolling over it or clicking it to select an already-selected group does not increase the Fibinacci number. That means there is no unnecessary rendering'
+	            'Rolling over any rollover button or entering text causes the sequence to progress, unless the rollover or text entry doesn\'t change anything. It is reassuring to see that if a rollover button is already selected, rolling over it or clicking it to select an already-selected group does not increase the Fibinacci number. That means there is no unnecessary rendering'
 	          ),
 	          _react2['default'].createElement(
 	            'p',
@@ -386,7 +386,7 @@
 	          _react2['default'].createElement(
 	            'h2',
 	            { style: { textAlign: 'center' } },
-	            'Roll-Over Buttons'
+	            'rollover Buttons'
 	          ),
 	          'Current Group:',
 	          _react2['default'].createElement(
@@ -403,7 +403,7 @@
 	            { target: ' _blank', style: { color: 'red' }, href: 'http://machinegun.ninja' },
 	            'Game of Score'
 	          ),
-	          ' Haskell websockets multiplayer math game. The buttons presented here demonstrate the full functionality of the roll-over effects, along with some other features that don\'t come with HTML select/option forms.',
+	          ' Haskell websockets multiplayer math game. The buttons presented here demonstrate the full functionality of the rollover effects, along with some other features that don\'t come with HTML select/option forms.',
 	          _react2['default'].createElement('br', null),
 	          _react2['default'].createElement('br', null),
 	          _react2['default'].createElement(
