@@ -160,7 +160,8 @@
 	  rSborder: 'lightgreen',
 	  rScolor: 'yellow',
 	  27: '#000',
-	  270: 'darkred'
+	  270: 'darkred',
+	  28: 'burlywood'
 	};
 
 	var mouseHandler = _mobservable2['default'].makeReactive(mouseHandlerx);
@@ -321,6 +322,7 @@
 	      var rScolor = 'yellow';
 	      var cr27 = _this2.mouse[27];
 	      var cr270 = _this2.mouse[270];
+	      var cr28 = _this2.mouse[28];
 
 	      return _react2['default'].createElement(
 	        'div',
@@ -340,20 +342,25 @@
 	          _react2['default'].createElement(
 	            'p',
 	            null,
-	            'It appears that every time React renders the B2 component, reactive functions merely mentioned in the render function are executed. The variable \'data.x\' is not involved in the method \'g\', which computes sequential Fibinacci numbers, yet incrementing x causes the corresponding fibinacci number to be displayed. This correspondence is lost if you roll your mouse over or click the rollover buttons, or if you enter text in the input field. It is reassuring to see that if a roll-over button is already selected, rolling over it or clicking it to select an already-selected group does not increase the Fibinacci number. '
+	            'It appears that every time React renders the B2 component, reactive functions merely mentioned in the render function are executed. The variable \'data.x\' is not involved in the method \'g\', which computes sequential Fibinacci numbers, yet incrementing x causes the next fibinacci number to be displayed. In fact, just moving the mouse pointer in or out of the \'Value of data.x" button causes the sequence to increment. You dont\'s have to click the button.'
 	          ),
 	          _react2['default'].createElement(
 	            'p',
 	            null,
-	            'The line \'let g = this.data.g\' in \'render\' is all it takes to invoke this behavior. \'g\' is not called and its argument is not modified (that is, until g modifies it). This is useful knowledge both for writing concise code and for avoiding bugs. '
+	            'Rolling over any roll-over button or entering text causes the sequence to progress, unless the roll-over or text entry doesn\'t change anything. It is reassuring to see that if a roll-over button is already selected, rolling over it or clicking it to select an already-selected group does not increase the Fibinacci number. That means there is no unnecessary rendering'
 	          ),
-	          '\'let increaseX = this.data.increaseX\' is also present in \'render()\', but rendering does not trigger its execution. The relevant  difference between \'increaseX\' and \'g\' from a practical perspective is that \'g\' is defined inside of the data object but \'increaseX\' is incorporated into data externally with with the code: \'data.increaseX = ...\'. \'g\' is inside of a mobservable encapsulated object while \'increaseX\' was tacked on after encapsulation. The precise explanation lies in the details of the code.',
+	          _react2['default'].createElement(
+	            'p',
+	            null,
+	            'The line \'let g = this.data.g\' in \'render\' is all it takes to invoke this behavior. Note that \'g\' is not called and its argument is not modified (that is, not until g modifies it). Being aware of this behavior facilitates writing concise code and avoiding magical bugs. '
+	          ),
+	          'The line \'let increaseX = this.data.increaseX\' is also present in \'render()\', but rendering does not trigger its execution. The relevant difference between \'increaseX\' and \'g\' from a practical perspective is that \'g\' is defined inside of the data object but \'increaseX\' is incorporated into \'data\' externally with with the code: \'data.increaseX = ...\'. Another way of looking at this is to see that \'g\' was inside of \'data\' when it was encapsulated, but \'increaseX\' was tacked on after encapsulation. The precise explanation for this behavior can be found in the details of the code.',
 	          _react2['default'].createElement('br', null),
 	          _react2['default'].createElement('br', null),
 	          'Fibinacci numbers ( [temp][1] ):',
 	          _react2['default'].createElement(
 	            'button',
-	            { style: _this2.style8('blue', 'orange', 'pink') },
+	            { style: _this2.style8(cr27, cr270, cr28) },
 	            temp[1]
 	          ),
 	          _react2['default'].createElement('br', null),
@@ -361,9 +368,16 @@
 	          'Value of data.x:',
 	          _react2['default'].createElement(
 	            'button',
-	            { style: _this2.style8('blue', 'orange', 'pink'), onClick: function () {
+	            { style: _this2.style8(cr27, cr270, cr28), onClick: function () {
 	                return increaseX();
-	              } },
+	              },
+	              onMouseEnter: function () {
+	                _this2.mouse[27] = 'blue', _this2.mouse[270] = 'lightblue', _this2.mouse[28] = 'yellow';
+	              },
+	              onMouseLeave: function () {
+	                _this2.mouse[27] = '#000', _this2.mouse[270] = 'darkred', _this2.mouse[28] = 'burlywood';
+	              }
+	            },
 	            x
 	          ),
 	          _react2['default'].createElement('br', null),

@@ -61,7 +61,8 @@ let mouseHandlerx = {
     rSborder: 'lightgreen',
     rScolor: 'yellow',
     27: '#000',
-    270: 'darkred'
+    270: 'darkred',
+    28: 'burlywood'
 };
 
 let mouseHandler = mobservable.makeReactive(mouseHandlerx);
@@ -215,6 +216,7 @@ class B2X extends React.Component {
     let rScolor = 'yellow';
     let cr27 = this.mouse[27];
     let cr270 = this.mouse[270];
+    let cr28 = this.mouse[28];
 
     return (
       <div style={{ backgroundColor: '#000', height: 1800, color: 'turquoise' }}> 
@@ -223,19 +225,24 @@ class B2X extends React.Component {
 
           <h2 style={{textAlign: 'center'}} >Sensitivity of Mobservable</h2>
           <br /> 
-          <p>It appears that every time React renders the B2 component, reactive functions merely mentioned in the render function are executed. The variable 'data.x' is not involved in the method 'g', which computes sequential Fibinacci numbers, yet incrementing x causes the corresponding fibinacci number to be displayed. This correspondence is lost if you roll your mouse over or click the rollover buttons, or if you enter text in the input field. It is reassuring to see that if a roll-over button is already selected, rolling over it or clicking it to select an already-selected group does not increase the Fibinacci number. </p>
-          <p>The line 'let g = this.data.g' in 'render' is all it takes to invoke this behavior. 'g' is not called and its argument is not modified (that is, until g modifies it). This is useful knowledge both for writing concise code and for avoiding bugs. </p> 
+          <p>It appears that every time React renders the B2 component, reactive functions merely mentioned in the render function are executed. The variable 'data.x' is not involved in the method 'g', which computes sequential Fibinacci numbers, yet incrementing x causes the next fibinacci number to be displayed. In fact, just moving the mouse pointer in or out of the 'Value of data.x" button causes the sequence to increment. You dont's have to click the button.</p>
+          <p>Rolling over any roll-over button or entering text causes the sequence to progress, unless the roll-over or text entry doesn't change anything. It is reassuring to see that if a roll-over button is already selected, rolling over it or clicking it to select an already-selected group does not increase the Fibinacci number. That means there is no unnecessary rendering</p>
+          <p>The line 'let g = this.data.g' in 'render' is all it takes to invoke this behavior. 
+         Note that 'g' is not called and its argument is not modified (that is, not until g modifies it). Being aware of this behavior facilitates writing concise code and avoiding magical bugs. </p> 
           
-    'let increaseX = this.data.increaseX' is also present in 'render()', but rendering does not trigger its execution. The relevant  difference between 'increaseX' and 'g' from a practical perspective is that 'g' is defined inside of the data object but 'increaseX' is incorporated into data externally with with the code: 'data.increaseX = ...'. 'g' is inside of a mobservable encapsulated object while 'increaseX' was tacked on after encapsulation. The precise explanation lies in the details of the code.
+    The line 'let increaseX = this.data.increaseX' is also present in 'render()', but rendering does not trigger its execution. The relevant difference between 'increaseX' and 'g' from a practical perspective is that 'g' is defined inside of the data object but 'increaseX' is incorporated into 'data' externally with with the code: 'data.increaseX = ...'. Another way of looking at this is to see that 'g' was inside of 'data' when it was encapsulated, but 'increaseX' was tacked on after encapsulation. The precise explanation for this behavior can be found in the details of the code.
           <br /><br />
 
           Fibinacci numbers ( [temp][1] ): 
-          <button style={this.style8('blue','orange','pink')} >
+          <button style={this.style8(cr27,cr270,cr28)} >
             {temp[1]}
           </button>
           <br /><br />
           Value of data.x: 
-          <button style={this.style8('blue','orange','pink')} onClick={() => {return increaseX()}}  >
+          <button style={this.style8(cr27,cr270,cr28)} onClick={() => {return increaseX()}} 
+            onMouseEnter={() => {this.mouse[27] = 'blue', this.mouse[270] = 'lightblue', this.mouse[28] = 'yellow'}}
+            onMouseLeave={() => {this.mouse[27] = '#000', this.mouse[270] = 'darkred', this.mouse[28] = 'burlywood'}}
+            >
             {x}
           </button>
           <br /><br /><br />
