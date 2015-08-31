@@ -5,14 +5,16 @@ If you modify the code, you will need to run the following code from your termin
 npm install
 webpack
 ```
-"npm install" installs a "node_modules" directory. After that, all you need to run is "webpack". Webpack loads everything you need into a file named "bundle.js" which is installed in "index.html". After that, you are good to go. 
+"npm install" installs a "node_modules" directory. After that, all you need to run is "webpack". Webpack loads everything you need into a file named "bundle.js" which is installed in "index.html". After that, you are good to go.
+
+If you move "index.html" to a new location, be sure to take the script file "bundle.js" with it. 
 
 A development server is included in this repository, so you can view the buttons on port 8080 by entering:
 
 ```javascript
 webpack-dev-server
 ```
-Commentary is included with the running app. You can see the buttons in action in a larger site at [Gane if Score](http://machinegun.ninja).
+Commentary is included with the running app. You can see the buttons at [http://schalk.ninja](http://schalk.ninja) or see them in action in a larger site at [Game of Score](http://machinegun.ninja).
 
    Here is the commentary out of context:
    
