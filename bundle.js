@@ -161,7 +161,10 @@
 	  rScolor: 'yellow',
 	  27: '#000',
 	  270: 'darkred',
-	  28: 'burlywood'
+	  28: 'burlywood',
+	  37: '#000',
+	  370: 'darkred',
+	  38: 'burlywood'
 	};
 
 	var mouseHandler = _mobservable2['default'].makeReactive(mouseHandlerx);
@@ -170,8 +173,9 @@
 
 	var data = _mobservable2['default'].makeReactive({
 	  group: 'solo',
-	  groupBackup: 'solo',
 	  name: '',
+	  n: 0,
+	  dsp: 'inline',
 	  x: 1,
 	  f: function f(_ref) {
 	    var _ref2 = _slicedToArray(_ref, 2);
@@ -283,6 +287,20 @@
 	        color: z, borderRadius: 10, paddingTop: 1.1, paddingBottom: 0.9, marginRight: 3, marginLeft: 12, fontSize: 20 };
 	    };
 
+	    this.style9 = function (w, x, y, z) {
+	      return { display: w, backgroundColor: x, textAlign: 'left', borderColor: y, outline: 0,
+	        color: z, borderRadius: 10, paddingTop: 1.1, paddingBottom: 0.9, marginRight: 3, marginLeft: 12, fontSize: 20 };
+	    };
+
+	    this.twoTimes = function () {
+	      _this2.data.n += 1;
+	      if (_this2.data.n === 2) {
+	        _this2.data.dsp = 'none';
+	        return;
+	      };
+	      alert("One more click and I'm out of here");
+	    };
+
 	    this.render = function () {
 	      console.log(_this2);
 	      var x = _this2.data.x;
@@ -290,6 +308,7 @@
 	      var increaseX = _this2.data.increaseX;
 	      var group = _this2.data.group;
 	      var groupWatch = _this2.data.groupWatch;
+	      var dsp = _this2.data.dsp;
 	      var Abackground = '#000';
 	      var Aborder = 'green';
 	      var Acolor = 'burlywood';
@@ -323,10 +342,13 @@
 	      var cr27 = _this2.mouse[27];
 	      var cr270 = _this2.mouse[270];
 	      var cr28 = _this2.mouse[28];
+	      var cr37 = _this2.mouse[37];
+	      var cr370 = _this2.mouse[370];
+	      var cr38 = _this2.mouse[38];
 
 	      return _react2['default'].createElement(
 	        'div',
-	        { style: { backgroundColor: '#000', height: 1800, color: 'turquoise' } },
+	        { style: { backgroundColor: '#000', height: 2800, color: 'turquoise' } },
 	        _react2['default'].createElement(
 	          'div',
 	          { style: { width: '80%', marginLeft: 85 } },
@@ -386,7 +408,7 @@
 	          _react2['default'].createElement(
 	            'h2',
 	            { style: { textAlign: 'center' } },
-	            'rollover Buttons'
+	            'Rollover Buttons'
 	          ),
 	          'Current Group:',
 	          _react2['default'].createElement(
@@ -532,7 +554,29 @@
 	            { target: ' _blank', style: { color: 'red' }, href: 'https://www.fpcomplete.com/user/dschalk/Websockets%20Game%20of%20Score' },
 	            'https://www.fpcomplete.com/user/dschalk/Websockets%20Game%20of%20Score'
 	          ),
-	          '. My server is a modified Haskell Wai-Websockets server. Like mobservable, it does much in a very simple and elegant manner. \'react_mixin\' is not necessary for the buttons. I used it to grab a React mixin out of \'node_modules\' to support autoFocus (\'autofocus\' in regular HTML).'
+	          '. My server is a modified Haskell Wai-Websockets server. Like mobservable, it does much in a very simple and elegant manner. \'react_mixin\' is not necessary for the buttons. I used it to grab a React mixin out of \'node_modules\' to support autoFocus (\'autofocus\' in regular HTML).',
+	          _react2['default'].createElement('br', null),
+	          _react2['default'].createElement('br', null),
+	          _react2['default'].createElement(
+	            'h2',
+	            null,
+	            'Unsubscribe'
+	          ),
+	          'You don\'t have to subscribe to anything, but it is easy to do something like RxJS\'s \'unsubscribe\'. After the first click, you get warned. After the second click, the button evaporates.',
+	          _react2['default'].createElement(
+	            'button',
+	            { style: _this2.style9(dsp, cr38, cr370, cr38), onClick: function () {
+	                _this2.twoTimes();
+	              },
+	              onMouseEnter: function () {
+	                _this2.mouse[37] = 'blue', _this2.mouse[370] = 'lightblue', _this2.mouse[38] = 'yellow';
+	              },
+	              onMouseLeave: function () {
+	                _this2.mouse[37] = '#000', _this2.mouse[370] = 'darkred', _this2.mouse[38] = 'burlywood';
+	              }
+	            },
+	            x
+	          )
 	        )
 	      );
 	    };

@@ -62,7 +62,10 @@ let mouseHandlerx = {
     rScolor: 'yellow',
     27: '#000',
     270: 'darkred',
-    28: 'burlywood'
+    28: 'burlywood',
+    37: '#000',
+    370: 'darkred',
+    38: 'burlywood'
 };
 
 let mouseHandler = mobservable.makeReactive(mouseHandlerx);
@@ -71,8 +74,9 @@ let temp = [1,1];
 
 let data = mobservable.makeReactive({
   group: 'solo',
-  groupBackup: 'solo',
   name: '',
+  n: 0,
+  dsp: 'inline',
   x: 1,
   f: function([a,b]) {
     temp = [a + b,a];
@@ -177,6 +181,17 @@ class B2X extends React.Component {
     style8 = (x,y,z) => {return {backgroundColor: x, textAlign: 'left', borderColor: y, outline: 0,
           color: z, borderRadius: 10, paddingTop: 1.1, paddingBottom: 0.9, marginRight: 3, marginLeft: 12, fontSize: 20 }};
 
+    style9 = (w,x,y,z) => {return {display: w, backgroundColor: x, textAlign: 'left', borderColor: y, outline: 0,
+          color: z, borderRadius: 10, paddingTop: 1.1, paddingBottom: 0.9, marginRight: 3, marginLeft: 12, fontSize: 20 }};
+
+    twoTimes = () => {
+      this.data.n += 1;
+      if (this.data.n === 2) {
+        this.data.dsp = 'none';
+        return};
+      alert("One more click and I'm out of here");
+    }
+
   render = () => {
     console.log(this);
     let x = this.data.x;
@@ -184,6 +199,7 @@ class B2X extends React.Component {
     let increaseX = this.data.increaseX;
     let group = this.data.group;
     let groupWatch = this.data.groupWatch;
+    let dsp = this.data.dsp;
     let Abackground = '#000';
     let Aborder = 'green';
     let Acolor = 'burlywood';
@@ -217,9 +233,12 @@ class B2X extends React.Component {
     let cr27 = this.mouse[27];
     let cr270 = this.mouse[270];
     let cr28 = this.mouse[28];
+    let cr37 = this.mouse[37];
+    let cr370 = this.mouse[370];
+    let cr38 = this.mouse[38];
 
     return (
-      <div style={{ backgroundColor: '#000', height: 1800, color: 'turquoise' }}> 
+      <div style={{ backgroundColor: '#000', height: 2800, color: 'turquoise' }}> 
         <div style={{width: '80%', marginLeft: 85}} >
           <br /><br /><br />
 
@@ -247,7 +266,7 @@ class B2X extends React.Component {
           </button>
           <br /><br /><br />
 
-          <h2 style={{textAlign: 'center'}} >rollover Buttons</h2>
+          <h2 style={{textAlign: 'center'}} >Rollover Buttons</h2>
 
         Current Group: 
       <button style={this.style8('blue', 'lightgreen', 'red')} >
@@ -369,6 +388,16 @@ class B2X extends React.Component {
             With mobservable, there is no need to designate listeners, as there would be with RxJS and Bacon. The buttons shown here work fine with React's state and props objects left empty. You might wonder why I use React at all. Mobservable doesn't rely on React. Well, this code is a snippet from my websockets-react project. The complete code is available at <a target=" _blank" style={{color: 'red'}} href="https://github.com/dschalk/websockets-react">https://github.com/dschalk/websockets-react</a>. An explanation of the project is at <a target=" _blank" style={{color: 'red'}} href="https://www.fpcomplete.com/user/dschalk/Websockets%20Game%20of%20Score">https://www.fpcomplete.com/user/dschalk/Websockets%20Game%20of%20Score</a>. My server is a modified Haskell Wai-Websockets server. Like mobservable, it does much in a very simple and elegant manner. 
 
             'react_mixin' is not necessary for the buttons. I used it to grab a React mixin out of 'node_modules' to support autoFocus ('autofocus' in regular HTML).
+            <br /><br />
+            <h2>Unsubscribe</h2>
+            You don't have to subscribe to anything, but it is easy to do something like RxJS's 'unsubscribe'. After the first click, you get warned. After the second click, the button evaporates.
+
+          <button style={this.style9(dsp,cr38,cr370,cr38)} onClick={() => {this.twoTimes()}} 
+            onMouseEnter={() => {this.mouse[37] = 'blue', this.mouse[370] = 'lightblue', this.mouse[38] = 'yellow'}}
+            onMouseLeave={() => {this.mouse[37] = '#000', this.mouse[370] = 'darkred', this.mouse[38] = 'burlywood'}}
+            >
+            {x}
+          </button>
         </div>
   </div>
     )}
