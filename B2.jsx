@@ -226,7 +226,7 @@ class B2X extends React.Component {
           <h2 style={{textAlign: 'center'}} >Sensitivity of Mobservable</h2>
           <br /> 
           <p>It appears that every time React renders the B2 component, reactive functions merely mentioned in the render function are executed. The variable 'data.x' is not involved in the method 'g', which computes sequential Fibinacci numbers, yet incrementing x causes the next fibinacci number to be displayed. In fact, just moving the mouse pointer in or out of the 'Value of data.x" button causes the sequence to increment. You dont's have to click the button.</p>
-          <p>Rolling over any roll-over button or entering text causes the sequence to progress, unless the roll-over or text entry doesn't change anything. It is reassuring to see that if a roll-over button is already selected, rolling over it or clicking it to select an already-selected group does not increase the Fibinacci number. That means there is no unnecessary rendering</p>
+          <p>Rolling over any rollover button or entering text causes the sequence to progress, unless the rollover or text entry doesn't change anything. It is reassuring to see that if a rollover button is already selected, rolling over it or clicking it to select an already-selected group does not increase the Fibinacci number. That means there is no unnecessary rendering</p>
           <p>The line 'let g = this.data.g' in 'render' is all it takes to invoke this behavior. 
          Note that 'g' is not called and its argument is not modified (that is, not until g modifies it). Being aware of this behavior facilitates writing concise code and avoiding magical bugs. </p> 
           
@@ -247,14 +247,14 @@ class B2X extends React.Component {
           </button>
           <br /><br /><br />
 
-          <h2 style={{textAlign: 'center'}} >Roll-Over Buttons</h2>
+          <h2 style={{textAlign: 'center'}} >rollover Buttons</h2>
 
         Current Group: 
       <button style={this.style8('blue', 'lightgreen', 'red')} >
         {group}
       </button>
         <br /><br /><br />
-        The buttons below are inter-connected with one another and with the input box. Click the buttons and enter some text to see how they interact. These are dumned-down buttons from my <a target=" _blank" style={{color: 'red'}} href="http://machinegun.ninja">Game of Score</a> Haskell websockets multiplayer math game. The buttons presented here demonstrate the full functionality of the roll-over effects, along with some other features that don't come with HTML select/option forms. 
+        The buttons below are inter-connected with one another and with the input box. Click the buttons and enter some text to see how they interact. These are dumned-down buttons from my <a target=" _blank" style={{color: 'red'}} href="http://machinegun.ninja">Game of Score</a> Haskell websockets multiplayer math game. The buttons presented here demonstrate the full functionality of the rollover effects, along with some other features that don't come with HTML select/option forms. 
         <br /><br />
           <button onClick={() => {
                   this.data.group = 'GroupA';

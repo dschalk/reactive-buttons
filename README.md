@@ -26,7 +26,7 @@ Commentary is included with the running app. You can see the buttons in action i
 
   It appears that every time React renders the B2 component, reactive functions merely mentioned in the render function are executed. The variable 'data.x' is not involved in the method 'g', which computes sequential Fibinacci numbers, yet incrementing x causes the next fibinacci number to be displayed. In fact, just moving the mouse pointer in or out of the 'Value of data.x" button causes the sequence to increment. You dont's have to click the button.
   
-  Rolling over any roll-over button or entering text causes the sequence to progress, unless the roll-over or text entry doesn't change anything. It is reassuring to see that if a roll-over button is already selected, rolling over it or clicking it to select an already-selected group does not increase the Fibinacci number. That means there is no unnecessary rendering.
+  Rolling over any rollover button or entering text causes the sequence to progress, unless the rollover or text entry doesn't change anything. It is reassuring to see that if a rollover button is already selected, rolling over it or clicking it to select an already-selected group does not increase the Fibinacci number. That means there is no unnecessary rendering.
 
   The line 'let g = this.data.g' in 'render' is all it takes to invoke this behavior. Note that 'g' is not called and its argument is not modified (that is, not until g modifies it). Being aware of this behavior facilitates writing concise code and avoiding magical bugs.  
                                                    
