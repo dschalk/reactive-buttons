@@ -15,7 +15,9 @@
     "webpack-dev-server": "latest",
     "react-mixin": "latest"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "mobservable-react-devtools": "^0.1.0"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
