@@ -160,7 +160,7 @@
 	        _react2['default'].createElement(
 	          'label',
 	          null,
-	          'Player defined group name:  ',
+	          'Enter a number:  ',
 	          _react2['default'].createElement('input', { autoFocus: true, type: 'text', id: 'cow', onKeyDown: _this2.handleEnter.bind(_this2),
 	            style: { width: 90, backgroundColor: '#d8d17d', marginLeft: 10 } })
 	        )

@@ -64,7 +64,7 @@ class Fibonacci extends React.Component {
     if ((this.props.hidden2)) { return ( null ) }
     return (
       <div style={{marginLeft: 5}} >
-        <label>Player defined group name:  <input autoFocus type="text" id='cow' onKeyDown={this.handleEnter.bind(this)}
+        <label>Enter a number:  <input autoFocus type="text" id='cow' onKeyDown={this.handleEnter.bind(this)}
          style={{width: 90, backgroundColor: '#d8d17d', marginLeft: 10}} />
         </label>
       </div>
