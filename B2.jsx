@@ -51,14 +51,6 @@ class Fibonacci extends React.Component {
       this.props.fib(num);
     }
   }
-  click (event) {
-    let num = event.target.value;
-    if (typeof num !== 'number' || num < 0) {
-      console.log('Oh boy');
-      this.props.fib(7);
-      return 888;
-    } else this.props.fib(num)
-  }
 
   render = () => {
     if ((this.props.hidden2)) { return ( null ) }
@@ -202,7 +194,7 @@ data.increaseX = () => {
   return data.x;
 }
 
-let fib = (n) => {
+data.fib = (n) => {
   let ar = [2,1];
   let rf = mobservable.makeReactive(1);
   rf.observe(function(a,b) {
@@ -218,44 +210,42 @@ let fib = (n) => {
 }
 
 class B2X extends React.Component {
-  // shouldComponentUpdate = shouldPureComponentUpdate;
   constructor(props) {
     super(props);
     this.mouse = mouseHandler;
     this.data = data;
-}
+  }
 
-blib = (x) => {
-  this.data.p = x;
-  this.data.q = fib(x);
-}
+  blib = (x) => {
+    this.data.p = x;
+    this.data.q = this.data.fib(x);
+  }
 
-st = () => {
-  let x = this.data.fib2;
-  let y = fib3();
-  let z = [x, y[0], y[1]];
-  console.log(z);
-  return z;
-}
+  st = () => {
+    let x = this.data.fib2;
+    let y = fib3();
+    let z = [x, y[0], y[1]];
+    console.log(z);
+    return z;
+  }
 
   setGroup = x => {
     this.data.group = x;
   }
 
-    style8 = (x,y,z) => {return {backgroundColor: x, textAlign: 'left', borderColor: y, outline: 0,
-          color: z, borderRadius: 10, paddingTop: 1.1, paddingBottom: 0.9, marginRight: 3, marginLeft: 12, fontSize: 20 }};
+  style8 = (x,y,z) => {return {backgroundColor: x, textAlign: 'left', borderColor: y, outline: 0,
+    color: z, borderRadius: 10, paddingTop: 1.1, paddingBottom: 0.9, marginRight: 3, marginLeft: 12, fontSize: 20 }};
 
-    style9 = (w,x,y,z) => {return {display: w, backgroundColor: x, textAlign: 'left', borderColor: y, outline: 0,
-          color: z, borderRadius: 10, paddingTop: 1.1, paddingBottom: 0.9, marginRight: 3, marginLeft: 12, fontSize: 20 }};
+  style9 = (w,x,y,z) => {return {display: w, backgroundColor: x, textAlign: 'left', borderColor: y, outline: 0,
+    color: z, borderRadius: 10, paddingTop: 1.1, paddingBottom: 0.9, marginRight: 3, marginLeft: 12, fontSize: 20 }};
 
-    twoTimes = () => {
-      this.data.n += 1;
-      if (this.data.n === 2) {
-        this.data.dsp = 'none';
-        return};
-      alert("One more click and I'm out of here");
-    }
-
+  twoTimes = () => {
+    this.data.n += 1;
+    if (this.data.n === 2) {
+      this.data.dsp = 'none';
+      return};
+    alert("One more click and I'm out of here");
+   }
 
   render = () => {
     console.log(this);
@@ -316,8 +306,8 @@ st = () => {
           <p>Rolling over any rollover button or entering text causes the sequence to progress, unless the rollover or text entry doesn't change anything. It is reassuring to see that if a rollover button is already selected, rolling over it or clicking it to select an already-selected group does not increase the Fibonacci number. That means there is no unnecessary rendering</p>
           <p>The line 'let g = this.data.g' in 'render' is all it takes to invoke this behavior. 
          Note that 'g' is not called and its argument is not modified (that is, not until g modifies it). Being aware of this behavior facilitates writing concise code and avoiding magical bugs. </p> 
-          
-    The line 'let increaseX = this.data.increaseX' is also present in 'render()', but rendering does not trigger its execution. The relevant difference between 'increaseX' and 'g' from a practical perspective is that 'g' is defined inside of the data object but 'increaseX' is incorporated into 'data' externally with with the code: 'data.increaseX = ...'. Another way of looking at this is to see that 'g' was inside of 'data' when it was encapsulated, but 'increaseX' was tacked on after encapsulation. The precise explanation for this behavior can be found in the details of the code.
+
+       The line 'let increaseX = this.data.increaseX' is also present in 'render()', but rendering does not trigger its execution. The relevant difference between 'increaseX' and 'g' from a practical perspective is that 'g' is defined inside of the data object but 'increaseX' is incorporated into 'data' externally with with the code: 'data.increaseX = ...'. Another way of looking at this is to see that 'g' was inside of 'data' when it was encapsulated, but 'increaseX' was tacked on after encapsulation. The precise explanation for this behavior can be found in the details of the code.
           <br /><br />
 
           Fibonacci numbers ( [temp][1] ): 

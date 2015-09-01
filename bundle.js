@@ -176,16 +176,6 @@
 	        this.props.fib(num);
 	      }
 	    }
-	  }, {
-	    key: 'click',
-	    value: function click(event) {
-	      var num = event.target.value;
-	      if (typeof num !== 'number' || num < 0) {
-	        console.log('Oh boy');
-	        this.props.fib(7);
-	        return 888;
-	      } else this.props.fib(num);
-	    }
 	  }]);
 
 	  return Fibonacci;
@@ -324,7 +314,7 @@
 	  return data.x;
 	};
 
-	var fib = function fib(n) {
+	data.fib = function (n) {
 	  var ar = [2, 1];
 	  var rf = _mobservable2['default'].makeReactive(1);
 	  rf.observe(function (a, b) {
@@ -342,8 +332,6 @@
 	var B2X = (function (_React$Component3) {
 	  _inherits(B2X, _React$Component3);
 
-	  // shouldComponentUpdate = shouldPureComponentUpdate;
-
 	  function B2X(props) {
 	    var _this3 = this;
 
@@ -353,7 +341,7 @@
 
 	    this.blib = function (x) {
 	      _this3.data.p = x;
-	      _this3.data.q = fib(x);
+	      _this3.data.q = _this3.data.fib(x);
 	    };
 
 	    this.st = function () {
