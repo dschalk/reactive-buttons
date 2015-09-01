@@ -104,7 +104,7 @@
 	          'label',
 	          null,
 	          'Player defined group name:  ',
-	          _react2['default'].createElement('input', { autoFocus: true, type: 'text', id: 'cow', onKeyDown: _this.handleEnter.bind(_this),
+	          _react2['default'].createElement('input', { type: 'text', id: 'cow', onKeyDown: _this.handleEnter.bind(_this),
 	            onClick: _this.click.bind(_this), style: { width: 90, backgroundColor: '#d8d17d', marginLeft: 10 } })
 	        )
 	      );
@@ -136,6 +136,59 @@
 	  }]);
 
 	  return GroupNew;
+	})(_react2['default'].Component);
+
+	;
+
+	var Fibonacci = (function (_React$Component2) {
+	  _inherits(Fibonacci, _React$Component2);
+
+	  function Fibonacci(props) {
+	    var _this2 = this;
+
+	    _classCallCheck(this, Fibonacci);
+
+	    _get(Object.getPrototypeOf(Fibonacci.prototype), 'constructor', this).call(this, props);
+
+	    this.render = function () {
+	      if (_this2.props.hidden2) {
+	        return null;
+	      }
+	      return _react2['default'].createElement(
+	        'div',
+	        { style: { marginLeft: 5 } },
+	        _react2['default'].createElement(
+	          'label',
+	          null,
+	          'Player defined group name:  ',
+	          _react2['default'].createElement('input', { autoFocus: true, type: 'text', id: 'cow', onKeyDown: _this2.handleEnter.bind(_this2),
+	            style: { width: 90, backgroundColor: '#d8d17d', marginLeft: 10 } })
+	        )
+	      );
+	    };
+	  }
+
+	  _createClass(Fibonacci, [{
+	    key: 'handleEnter',
+	    value: function handleEnter(event) {
+	      var num = event.target.value;
+	      if (event.keyCode == 13) {
+	        this.props.fib(num);
+	      }
+	    }
+	  }, {
+	    key: 'click',
+	    value: function click(event) {
+	      var num = event.target.value;
+	      if (typeof num !== 'number' || num < 0) {
+	        console.log('Oh boy');
+	        this.props.fib(7);
+	        return 888;
+	      } else this.props.fib(num);
+	    }
+	  }]);
+
+	  return Fibonacci;
 	})(_react2['default'].Component);
 
 	;
@@ -175,8 +228,12 @@
 	var data = _mobservable2['default'].makeReactive({
 	  group: 'solo',
 	  name: '',
+	  nx: [1, 1],
 	  n: 0,
 	  dsp: 'inline',
+	  p: 0,
+	  t: 0,
+	  q: 0,
 	  x: 1,
 	  f: function f(_ref) {
 	    var _ref2 = _slicedToArray(_ref, 2);
@@ -267,20 +324,48 @@
 	  return data.x;
 	};
 
-	var B2X = (function (_React$Component2) {
-	  _inherits(B2X, _React$Component2);
+	var fib = function fib(n) {
+	  var ar = [2, 1];
+	  var rf = _mobservable2['default'].makeReactive(1);
+	  rf.observe(function (a, b) {
+	    ar = [a + b, a];
+	  });
+	  var a = Date.now();
+	  for (var k = 1; k < n; k += 1) {
+	    rf(ar[0]);
+	  }
+	  var b = Date.now();
+	  data.t = b - a;
+	  return ar[1];
+	};
+
+	var B2X = (function (_React$Component3) {
+	  _inherits(B2X, _React$Component3);
 
 	  // shouldComponentUpdate = shouldPureComponentUpdate;
 
 	  function B2X(props) {
-	    var _this2 = this;
+	    var _this3 = this;
 
 	    _classCallCheck(this, B2X);
 
 	    _get(Object.getPrototypeOf(B2X.prototype), 'constructor', this).call(this, props);
 
+	    this.blib = function (x) {
+	      _this3.data.p = x;
+	      _this3.data.q = fib(x);
+	    };
+
+	    this.st = function () {
+	      var x = _this3.data.fib2;
+	      var y = fib3();
+	      var z = [x, y[0], y[1]];
+	      console.log(z);
+	      return z;
+	    };
+
 	    this.setGroup = function (x) {
-	      _this2.data.group = x;
+	      _this3.data.group = x;
 	    };
 
 	    this.style8 = function (x, y, z) {
@@ -294,22 +379,25 @@
 	    };
 
 	    this.twoTimes = function () {
-	      _this2.data.n += 1;
-	      if (_this2.data.n === 2) {
-	        _this2.data.dsp = 'none';
+	      _this3.data.n += 1;
+	      if (_this3.data.n === 2) {
+	        _this3.data.dsp = 'none';
 	        return;
 	      };
 	      alert("One more click and I'm out of here");
 	    };
 
 	    this.render = function () {
-	      console.log(_this2);
-	      var x = _this2.data.x;
-	      var g = _this2.data.g;
-	      var increaseX = _this2.data.increaseX;
-	      var group = _this2.data.group;
-	      var groupWatch = _this2.data.groupWatch;
-	      var dsp = _this2.data.dsp;
+	      console.log(_this3);
+	      var x = _this3.data.x;
+	      var g = _this3.data.g;
+	      var p = _this3.data.p;
+	      var q = _this3.data.q;
+	      var t = _this3.data.t;
+	      var increaseX = _this3.data.increaseX;
+	      var group = _this3.data.group;
+	      var groupWatch = _this3.data.groupWatch;
+	      var dsp = _this3.data.dsp;
 	      var Abackground = '#000';
 	      var Aborder = 'green';
 	      var Acolor = 'burlywood';
@@ -340,12 +428,12 @@
 	      var rSbackground = 'green';
 	      var rSborder = 'lightgreen';
 	      var rScolor = 'yellow';
-	      var cr27 = _this2.mouse[27];
-	      var cr270 = _this2.mouse[270];
-	      var cr28 = _this2.mouse[28];
-	      var cr37 = _this2.mouse[37];
-	      var cr370 = _this2.mouse[370];
-	      var cr38 = _this2.mouse[38];
+	      var cr27 = _this3.mouse[27];
+	      var cr270 = _this3.mouse[270];
+	      var cr28 = _this3.mouse[28];
+	      var cr37 = _this3.mouse[37];
+	      var cr370 = _this3.mouse[370];
+	      var cr38 = _this3.mouse[38];
 
 	      return _react2['default'].createElement(
 	        'div',
@@ -365,12 +453,12 @@
 	          _react2['default'].createElement(
 	            'p',
 	            null,
-	            'It appears that every time React renders the B2 component, reactive functions merely mentioned in the render function are executed. The variable \'data.x\' is not involved in the method \'g\', which computes sequential Fibinacci numbers, yet incrementing x causes the next fibinacci number to be displayed. In fact, just moving the mouse pointer in or out of the \'Value of data.x" button causes the sequence to increment. You dont\'s have to click the button.'
+	            'It appears that every time React renders the B2 component, reactive functions merely mentioned in the render function are executed. The variable \'data.x\' is not involved in the method \'g\', which computes sequential Fibonacci numbers, yet incrementing x causes the next fibonacci number to be displayed. In fact, just moving the mouse pointer in or out of the \'Value of data.x" button causes the sequence to increment. You dont\'s have to click the button.'
 	          ),
 	          _react2['default'].createElement(
 	            'p',
 	            null,
-	            'Rolling over any rollover button or entering text causes the sequence to progress, unless the rollover or text entry doesn\'t change anything. It is reassuring to see that if a rollover button is already selected, rolling over it or clicking it to select an already-selected group does not increase the Fibinacci number. That means there is no unnecessary rendering'
+	            'Rolling over any rollover button or entering text causes the sequence to progress, unless the rollover or text entry doesn\'t change anything. It is reassuring to see that if a rollover button is already selected, rolling over it or clicking it to select an already-selected group does not increase the Fibonacci number. That means there is no unnecessary rendering'
 	          ),
 	          _react2['default'].createElement(
 	            'p',
@@ -380,10 +468,10 @@
 	          'The line \'let increaseX = this.data.increaseX\' is also present in \'render()\', but rendering does not trigger its execution. The relevant difference between \'increaseX\' and \'g\' from a practical perspective is that \'g\' is defined inside of the data object but \'increaseX\' is incorporated into \'data\' externally with with the code: \'data.increaseX = ...\'. Another way of looking at this is to see that \'g\' was inside of \'data\' when it was encapsulated, but \'increaseX\' was tacked on after encapsulation. The precise explanation for this behavior can be found in the details of the code.',
 	          _react2['default'].createElement('br', null),
 	          _react2['default'].createElement('br', null),
-	          'Fibinacci numbers ( [temp][1] ):',
+	          'Fibonacci numbers ( [temp][1] ):',
 	          _react2['default'].createElement(
 	            'button',
-	            { style: _this2.style8(cr27, cr270, cr28) },
+	            { style: _this3.style8(cr27, cr270, cr28) },
 	            temp[1]
 	          ),
 	          _react2['default'].createElement('br', null),
@@ -391,21 +479,65 @@
 	          'Value of data.x:',
 	          _react2['default'].createElement(
 	            'button',
-	            { style: _this2.style8(cr27, cr270, cr28), onClick: function () {
-	                return increaseX();
+	            { style: _this3.style8(cr27, cr270, cr28), onClick: function () {
+	                increaseX();
 	              },
 	              onMouseEnter: function () {
-	                _this2.mouse[27] = 'blue', _this2.mouse[270] = 'lightblue', _this2.mouse[28] = 'yellow';
+	                _this3.mouse[27] = 'blue', _this3.mouse[270] = 'lightblue', _this3.mouse[28] = 'yellow';
 	              },
 	              onMouseLeave: function () {
-	                _this2.mouse[27] = '#000', _this2.mouse[270] = 'darkred', _this2.mouse[28] = 'burlywood';
+	                _this3.mouse[27] = '#000', _this3.mouse[270] = 'darkred', _this3.mouse[28] = 'burlywood';
 	              }
 	            },
 	            x
 	          ),
+	          '********************************************************************************************************************',
+	          _react2['default'].createElement(
+	            'h1',
+	            null,
+	            'More Fibonacci Numbers'
+	          ),
+	          'The 1475th number in the Fibonacci sequence is about the biggest number browsers can display.',
+	          _react2['default'].createElement('br', null),
+	          _react2['default'].createElement('br', null),
+	          'fib(1475) = 1.3069892237633987e+308 ',
+	          _react2['default'].createElement('br', null),
+	          'fib(1500) = Infinity',
+	          _react2['default'].createElement('br', null),
+	          _react2['default'].createElement('br', null),
+	          'You might be interested in seeing how many milliseconds it takes your device to compute fib(1475) the first time, and then another couple of times. The first time after reloading is the slowest. Or maybe try 10000000. That\'s ten million. The display says "Infinity" but the mobservable function will performe ten million computations, mostly computing fib(Infinity) = Infinity or some such nonsense after it gets a little past fib(1475). A browser on modern desktop computer can perform the 10,000,000 computations in around 1500 milliseconds (1.5 seconds).  ',
+	          _react2['default'].createElement('br', null),
+	          _react2['default'].createElement('br', null),
+	          'Mobservable keeps track of state with (current / most recent) pairs (loosely speaking). If the current pair is (a,b), then my fibonacci routine sets the next one to (a+b, a). The next pair has numbers equalling (a+b+a, a+b) and so on and so forth ten million times, in 1.5 seconds. Using mobservable, I hardly had to write any code.',
+	          _react2['default'].createElement('br', null),
+	          _react2['default'].createElement('br', null),
+	          _react2['default'].createElement(
+	            'h2',
+	            null,
+	            ' fib(',
+	            p,
+	            ') = ',
+	            q,
+	            ' '
+	          ),
+	          _react2['default'].createElement(
+	            Fibonacci,
+	            { fib: _this3.blib },
+	            ' '
+	          ),
+	          'Elapsed time = ',
+	          t,
+	          ';',
 	          _react2['default'].createElement('br', null),
 	          _react2['default'].createElement('br', null),
 	          _react2['default'].createElement('br', null),
+	          'The computer code is at ',
+	          _react2['default'].createElement(
+	            'a',
+	            { style: { color: 'red' }, href: 'https://github.com/dschalk/mobservable-react-buttons' },
+	            'mobservable-react-buttons'
+	          ),
+	          '*********************************************************************************************************************',
 	          _react2['default'].createElement(
 	            'h2',
 	            { style: { textAlign: 'center' } },
@@ -414,7 +546,7 @@
 	          'Current Group:',
 	          _react2['default'].createElement(
 	            'button',
-	            { style: _this2.style8('blue', 'lightgreen', 'red') },
+	            { style: _this3.style8('blue', 'lightgreen', 'red') },
 	            group
 	          ),
 	          _react2['default'].createElement('br', null),
@@ -432,108 +564,108 @@
 	          _react2['default'].createElement(
 	            'button',
 	            { onClick: function () {
-	                _this2.data.group = 'GroupA';
-	                _this2.data.test = true;
+	                _this3.data.group = 'GroupA';
+	                _this3.data.test = true;
 	              },
 	              onMouseEnter: function () {
 	                if (group !== 'GroupA') {
-	                  _this2.data.test = false;
-	                  _this2.mouse.Abackground = rAbackground;
-	                  _this2.mouse.Aborder = rAborder;
-	                  _this2.mouse.Acolor = rAcolor;
+	                  _this3.data.test = false;
+	                  _this3.mouse.Abackground = rAbackground;
+	                  _this3.mouse.Aborder = rAborder;
+	                  _this3.mouse.Acolor = rAcolor;
 	                }
 	              },
 	              onMouseLeave: function () {
 	                if (group !== 'GroupA') {
-	                  _this2.data.test = true;
-	                  _this2.mouse.Abackground = Abackground;
-	                  _this2.mouse.Aborder = Aborder;
-	                  _this2.mouse.Acolor = Acolor;
+	                  _this3.data.test = true;
+	                  _this3.mouse.Abackground = Abackground;
+	                  _this3.mouse.Aborder = Aborder;
+	                  _this3.mouse.Acolor = Acolor;
 	                }
 	              },
-	              style: _this2.style8(_this2.mouse.Abackground, _this2.mouse.Aborder, _this2.mouse.Acolor) },
+	              style: _this3.style8(_this3.mouse.Abackground, _this3.mouse.Aborder, _this3.mouse.Acolor) },
 	            'GroupA'
 	          ),
 	          _react2['default'].createElement(
 	            'button',
 	            { onClick: function () {
-	                _this2.data.group = 'GroupB';
-	                _this2.data.test = true;
+	                _this3.data.group = 'GroupB';
+	                _this3.data.test = true;
 	              },
 	              onMouseEnter: function () {
 	                if (group !== 'GroupB') {
-	                  _this2.data.test = false;
-	                  _this2.mouse.Bbackground = rBbackground;
-	                  _this2.mouse.Bborder = rBborder;
-	                  _this2.mouse.Ncolor = rBcolor;
+	                  _this3.data.test = false;
+	                  _this3.mouse.Bbackground = rBbackground;
+	                  _this3.mouse.Bborder = rBborder;
+	                  _this3.mouse.Ncolor = rBcolor;
 	                }
 	              },
 	              onMouseLeave: function () {
 	                if (group !== 'GroupB') {
-	                  _this2.data.test = true;
-	                  _this2.mouse.Bbackground = Bbackground;
-	                  _this2.mouse.Bborder = Bborder;
-	                  _this2.mouse.Bcolor = Bcolor;
+	                  _this3.data.test = true;
+	                  _this3.mouse.Bbackground = Bbackground;
+	                  _this3.mouse.Bborder = Bborder;
+	                  _this3.mouse.Bcolor = Bcolor;
 	                }
 	              },
-	              style: _this2.style8(_this2.mouse.Bbackground, _this2.mouse.Bborder, _this2.mouse.Bcolor) },
+	              style: _this3.style8(_this3.mouse.Bbackground, _this3.mouse.Bborder, _this3.mouse.Bcolor) },
 	            'GroupB'
 	          ),
 	          _react2['default'].createElement(
 	            'button',
 	            { onClick: function () {
-	                _this2.data.group = 'GroupC';
-	                _this2.data.test = true;
+	                _this3.data.group = 'GroupC';
+	                _this3.data.test = true;
 	              },
 	              onMouseEnter: function () {
 	                if (group !== 'GroupC') {
-	                  _this2.data.test = false;
-	                  _this2.mouse.Cbackground = rCbackground;
-	                  _this2.mouse.Cborder = rCborder;
-	                  _this2.mouse.Ccolor = rCcolor;
+	                  _this3.data.test = false;
+	                  _this3.mouse.Cbackground = rCbackground;
+	                  _this3.mouse.Cborder = rCborder;
+	                  _this3.mouse.Ccolor = rCcolor;
 	                }
 	              },
 	              onMouseLeave: function () {
 	                if (group !== 'GroupC') {
-	                  _this2.data.test = true;
-	                  _this2.mouse.Cbackground = Cbackground;
-	                  _this2.mouse.Cborder = Cborder;
-	                  _this2.mouse.Ccolor = Ccolor;
+	                  _this3.data.test = true;
+	                  _this3.mouse.Cbackground = Cbackground;
+	                  _this3.mouse.Cborder = Cborder;
+	                  _this3.mouse.Ccolor = Ccolor;
 	                }
 	              },
-	              style: _this2.style8(_this2.mouse.Cbackground, _this2.mouse.Cborder, _this2.mouse.Ccolor) },
+	              style: _this3.style8(_this3.mouse.Cbackground, _this3.mouse.Cborder, _this3.mouse.Ccolor) },
 	            'GroupC'
 	          ),
 	          _react2['default'].createElement(
 	            'button',
 	            { onClick: function () {
-	                _this2.data.group = 'solo';
-	                _this2.data.test = true;
+	                _this3.data.group = 'solo';
+	                _this3.data.test = true;
 	              },
 	              onMouseEnter: function () {
 	                if (group !== 'solo') {
-	                  _this2.data.test = false;
-	                  _this2.mouse.Sbackground = rSbackground;
-	                  _this2.mouse.Sborder = rSborder;n;
-	                  _this2.mouse.Scolor = rScolor;
+	                  _this3.data.test = false;
+	                  _this3.mouse.Sbackground = rSbackground;
+	                  _this3.mouse.Sborder = rSborder;n;
+	                  _this3.mouse.Scolor = rScolor;
 	                }
 	              },
 	              onMouseLeave: function () {
 	                if (group !== 'solo') {
-	                  _this2.data.test = true;
-	                  _this2.mouse.Sbackground = Sbackground;
-	                  _this2.mouse.Sborder = Sborder;
-	                  _this2.mouse.Scolor = Scolor;
+	                  _this3.data.test = true;
+	                  _this3.mouse.Sbackground = Sbackground;
+	                  _this3.mouse.Sborder = Sborder;
+	                  _this3.mouse.Scolor = Scolor;
 	                }
 	              },
-	              style: _this2.style8(_this2.mouse.Sbackground, _this2.mouse.Sborder, _this2.mouse.Scolor) },
+	              style: _this3.style8(_this3.mouse.Sbackground, _this3.mouse.Sborder, _this3.mouse.Scolor) },
 	            'solo'
 	          ),
 	          _react2['default'].createElement('br', null),
 	          _react2['default'].createElement('br', null),
 	          _react2['default'].createElement(GroupNew, { key: 'GroupNew', setGroup: function (x) {
-	              _this2.data.group = x;
-	            }, name: _this2.data.name }),
+	              _this3.data.group = x;
+	            }, name: _this3.data.name }),
 	          _react2['default'].createElement('br', null),
 	          _react2['default'].createElement('br', null),
 	          _react2['default'].createElement('br', null),
@@ -569,14 +701,14 @@
 	          'You don\'t have to subscribe to anything, but it is easy to do something like RxJS\'s \'unsubscribe\'. After the first click, you get warned. After the second click, the button evaporates.',
 	          _react2['default'].createElement(
 	            'button',
-	            { style: _this2.style9(dsp, cr38, cr370, cr38), onClick: function () {
-	                _this2.twoTimes();
+	            { style: _this3.style9(dsp, cr38, cr370, cr38), onClick: function () {
+	                _this3.twoTimes();
 	              },
 	              onMouseEnter: function () {
-	                _this2.mouse[37] = 'blue', _this2.mouse[370] = 'lightblue', _this2.mouse[38] = 'yellow';
+	                _this3.mouse[37] = 'blue', _this3.mouse[370] = 'lightblue', _this3.mouse[38] = 'yellow';
 	              },
 	              onMouseLeave: function () {
-	                _this2.mouse[37] = '#000', _this2.mouse[370] = 'darkred', _this2.mouse[38] = 'burlywood';
+	                _this3.mouse[37] = '#000', _this3.mouse[370] = 'darkred', _this3.mouse[38] = 'burlywood';
 	              }
 	            },
 	            x

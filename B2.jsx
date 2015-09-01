@@ -33,8 +33,39 @@ class GroupNew extends React.Component {
     if ((this.props.hidden2)) { return ( null ) }
     return (
       <div style={{marginLeft: 5}} >
-        <label>Player defined group name:  <input autoFocus type="text" id='cow' onKeyDown={this.handleEnter.bind(this)}
+        <label>Player defined group name:  <input type="text" id='cow' onKeyDown={this.handleEnter.bind(this)}
           onClick={this.click.bind(this)} style={{width: 90, backgroundColor: '#d8d17d', marginLeft: 10}} />
+        </label>
+      </div>
+    );
+  }
+};
+
+class Fibonacci extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  handleEnter (event) {
+    let num = event.target.value;
+    if (event.keyCode == 13) {
+      this.props.fib(num);
+    }
+  }
+  click (event) {
+    let num = event.target.value;
+    if (typeof num !== 'number' || num < 0) {
+      console.log('Oh boy');
+      this.props.fib(7);
+      return 888;
+    } else this.props.fib(num)
+  }
+
+  render = () => {
+    if ((this.props.hidden2)) { return ( null ) }
+    return (
+      <div style={{marginLeft: 5}} >
+        <label>Player defined group name:  <input autoFocus type="text" id='cow' onKeyDown={this.handleEnter.bind(this)}
+         style={{width: 90, backgroundColor: '#d8d17d', marginLeft: 10}} />
         </label>
       </div>
     );
@@ -76,8 +107,12 @@ let temp = [1,1];
 let data = mobservable.makeReactive({
   group: 'solo',
   name: '',
+  nx: [1,1],
   n: 0,
   dsp: 'inline',
+  p: 0,
+  t: 0,
+  q: 0,
   x: 1,
   f: function([a,b]) {
     temp = [a + b,a];
@@ -167,12 +202,40 @@ data.increaseX = () => {
   return data.x;
 }
 
+let fib = (n) => {
+  let ar = [2,1];
+  let rf = mobservable.makeReactive(1);
+  rf.observe(function(a,b) {
+    ar = [a+b,a];
+  });
+  let a = Date.now();
+  for (let k=1; k<n; k+=1) {
+    rf(ar[0]);
+  }
+  let b = Date.now();
+  data.t = b - a;
+  return ar[1];
+}
+
 class B2X extends React.Component {
   // shouldComponentUpdate = shouldPureComponentUpdate;
   constructor(props) {
     super(props);
     this.mouse = mouseHandler;
     this.data = data;
+}
+
+blib = (x) => {
+  this.data.p = x;
+  this.data.q = fib(x);
+}
+
+st = () => {
+  let x = this.data.fib2;
+  let y = fib3();
+  let z = [x, y[0], y[1]];
+  console.log(z);
+  return z;
 }
 
   setGroup = x => {
@@ -193,10 +256,14 @@ class B2X extends React.Component {
       alert("One more click and I'm out of here");
     }
 
+
   render = () => {
     console.log(this);
     let x = this.data.x;
     let g = this.data.g;
+    let p = this.data.p;
+    let q = this.data.q;
+    let t = this.data.t;
     let increaseX = this.data.increaseX;
     let group = this.data.group;
     let groupWatch = this.data.groupWatch;
@@ -245,28 +312,43 @@ class B2X extends React.Component {
 
           <h2 style={{textAlign: 'center'}} >Sensitivity of Mobservable</h2>
           <br /> 
-          <p>It appears that every time React renders the B2 component, reactive functions merely mentioned in the render function are executed. The variable 'data.x' is not involved in the method 'g', which computes sequential Fibinacci numbers, yet incrementing x causes the next fibinacci number to be displayed. In fact, just moving the mouse pointer in or out of the 'Value of data.x" button causes the sequence to increment. You dont's have to click the button.</p>
-          <p>Rolling over any rollover button or entering text causes the sequence to progress, unless the rollover or text entry doesn't change anything. It is reassuring to see that if a rollover button is already selected, rolling over it or clicking it to select an already-selected group does not increase the Fibinacci number. That means there is no unnecessary rendering</p>
+          <p>It appears that every time React renders the B2 component, reactive functions merely mentioned in the render function are executed. The variable 'data.x' is not involved in the method 'g', which computes sequential Fibonacci numbers, yet incrementing x causes the next fibonacci number to be displayed. In fact, just moving the mouse pointer in or out of the 'Value of data.x" button causes the sequence to increment. You dont's have to click the button.</p>
+          <p>Rolling over any rollover button or entering text causes the sequence to progress, unless the rollover or text entry doesn't change anything. It is reassuring to see that if a rollover button is already selected, rolling over it or clicking it to select an already-selected group does not increase the Fibonacci number. That means there is no unnecessary rendering</p>
           <p>The line 'let g = this.data.g' in 'render' is all it takes to invoke this behavior. 
          Note that 'g' is not called and its argument is not modified (that is, not until g modifies it). Being aware of this behavior facilitates writing concise code and avoiding magical bugs. </p> 
           
     The line 'let increaseX = this.data.increaseX' is also present in 'render()', but rendering does not trigger its execution. The relevant difference between 'increaseX' and 'g' from a practical perspective is that 'g' is defined inside of the data object but 'increaseX' is incorporated into 'data' externally with with the code: 'data.increaseX = ...'. Another way of looking at this is to see that 'g' was inside of 'data' when it was encapsulated, but 'increaseX' was tacked on after encapsulation. The precise explanation for this behavior can be found in the details of the code.
           <br /><br />
 
-          Fibinacci numbers ( [temp][1] ): 
+          Fibonacci numbers ( [temp][1] ): 
           <button style={this.style8(cr27,cr270,cr28)} >
             {temp[1]}
           </button>
           <br /><br />
           Value of data.x: 
-          <button style={this.style8(cr27,cr270,cr28)} onClick={() => {return increaseX()}} 
+          <button style={this.style8(cr27,cr270,cr28)} onClick={() => {increaseX()}} 
             onMouseEnter={() => {this.mouse[27] = 'blue', this.mouse[270] = 'lightblue', this.mouse[28] = 'yellow'}}
             onMouseLeave={() => {this.mouse[27] = '#000', this.mouse[270] = 'darkred', this.mouse[28] = 'burlywood'}}
             >
             {x}
           </button>
-          <br /><br /><br />
+********************************************************************************************************************
+          
+<h1>More Fibonacci Numbers</h1>
+The 1475th number in the Fibonacci sequence is about the biggest number browsers can display.<br /><br />
+fib(1475) = 1.3069892237633987e+308 <br />
+fib(1500) = Infinity<br />
+<br />
 
+You might be interested in seeing how many milliseconds it takes your device to compute fib(1475) the first time, and then another couple of times. The first time after reloading is the slowest. Or maybe try 10000000. That's ten million. The display says "Infinity" but the mobservable function will performe ten million computations, mostly computing fib(Infinity) = Infinity or some such nonsense after it gets a little past fib(1475). A browser on modern desktop computer can perform the 10,000,000 computations in around 1500 milliseconds (1.5 seconds).  <br /><br />
+Mobservable keeps track of state with (current / most recent) pairs (loosely speaking). If the current pair is (a,b), then my fibonacci routine sets the next one to (a+b, a). The next pair has numbers equalling (a+b+a, a+b) and so on and so forth ten million times, in 1.5 seconds. Using mobservable, I hardly had to write any code. 
+<br /><br />
+          <h2> fib({p}) = {q} </h2>
+          <Fibonacci fib = {this.blib}> </Fibonacci>
+          Elapsed time = {t};
+          <br /><br /><br />
+          The computer code is at <a style={{color: 'red'}} href="https://github.com/dschalk/mobservable-react-buttons">mobservable-react-buttons</a>
+*********************************************************************************************************************
           <h2 style={{textAlign: 'center'}} >Rollover Buttons</h2>
 
         Current Group: 
