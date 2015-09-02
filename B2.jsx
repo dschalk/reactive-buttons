@@ -7,7 +7,7 @@ let reactMixin = require('react-mixin');
 export {B2};
 
 
-class GroupNew extends React.Component {
+@reactiveComponent class GroupNew extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -41,7 +41,7 @@ class GroupNew extends React.Component {
   }
 };
 
-class Fibonacci extends React.Component {
+@reactiveComponent class Fibonacci extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -100,7 +100,7 @@ let data = mobservable.makeReactive({
   group: 'solo',
   name: '',
   nx: [1,1],
-  n: 0,
+  n: 1,
   dsp: 'inline',
   p: 0,
   t: 0,
@@ -194,22 +194,34 @@ data.increaseX = () => {
   return data.x;
 }
 
-data.fib = (n) => {
-  let ar = [2,1];
-  let rf = mobservable.makeReactive(1);
-  rf.observe(function(a,b) {
-    ar = [a+b,a];
-  });
-  let a = Date.now();
-  for (let k=1; k<n; k+=1) {
-    rf(ar[0]);
+data.fib = (x) => {
+  let n = 1*x;
+  switch (n) {
+    case 1:
+      return 0;
+    case 2:
+      return 1;
+    case 3:
+      return 1;
   }
-  let b = Date.now();
-  data.t = b - a;
-  return ar[1];
-}
+  if ( n > 3) {
+      let ar = [2,1];
+      let rf = mobservable.makeReactive(1);
+      rf.observe(function(a,b) {
+        ar = [a+b,a];
+      });
+      let a = Date.now();
+      for (let k=4; k<n; k+=1) {
+        rf(ar[0]);
+      }
+      let b = Date.now();
+      data.t = b - a;
+      return ar[0]; }
+      else return "Enter an integer greater than 0";
+};
 
-class B2X extends React.Component {
+
+@reactiveComponent class B2 extends React.Component {
   constructor(props) {
     super(props);
     this.mouse = mouseHandler;
@@ -243,7 +255,8 @@ class B2X extends React.Component {
     this.data.n += 1;
     if (this.data.n === 2) {
       this.data.dsp = 'none';
-      return};
+      return;
+    };
     alert("One more click and I'm out of here");
    }
 
@@ -476,8 +489,7 @@ Mobservable keeps track of state with (current / most recent) pairs (loosely spe
     )}
   };
 
-reactMixin(B2X.prototype, require('./node_modules/react/lib/AutoFocusMixin'));
-B2X.defaultProps = {key: 'B2X'};
+reactMixin(B2.prototype, require('./node_modules/react/lib/AutoFocusMixin'));
+B2.defaultProps = {key: 'B2'};
 
-let B2 = reactiveComponent(B2X);
 React.render(<B2 key='B2' />, document.getElementById('divSix'));

@@ -89,9 +89,9 @@
 	  function GroupNew(props) {
 	    var _this = this;
 
-	    _classCallCheck(this, GroupNew);
+	    _classCallCheck(this, _GroupNew);
 
-	    _get(Object.getPrototypeOf(GroupNew.prototype), 'constructor', this).call(this, props);
+	    _get(Object.getPrototypeOf(_GroupNew.prototype), 'constructor', this).call(this, props);
 
 	    this.render = function () {
 	      if (_this.props.hidden2) {
@@ -135,6 +135,8 @@
 	    }
 	  }]);
 
+	  var _GroupNew = GroupNew;
+	  GroupNew = (0, _mobservableReact.reactiveComponent)(GroupNew) || GroupNew;
 	  return GroupNew;
 	})(_react2['default'].Component);
 
@@ -146,9 +148,9 @@
 	  function Fibonacci(props) {
 	    var _this2 = this;
 
-	    _classCallCheck(this, Fibonacci);
+	    _classCallCheck(this, _Fibonacci);
 
-	    _get(Object.getPrototypeOf(Fibonacci.prototype), 'constructor', this).call(this, props);
+	    _get(Object.getPrototypeOf(_Fibonacci.prototype), 'constructor', this).call(this, props);
 
 	    this.render = function () {
 	      if (_this2.props.hidden2) {
@@ -178,6 +180,8 @@
 	    }
 	  }]);
 
+	  var _Fibonacci = Fibonacci;
+	  Fibonacci = (0, _mobservableReact.reactiveComponent)(Fibonacci) || Fibonacci;
 	  return Fibonacci;
 	})(_react2['default'].Component);
 
@@ -219,7 +223,7 @@
 	  group: 'solo',
 	  name: '',
 	  nx: [1, 1],
-	  n: 0,
+	  n: 1,
 	  dsp: 'inline',
 	  p: 0,
 	  t: 0,
@@ -314,30 +318,41 @@
 	  return data.x;
 	};
 
-	data.fib = function (n) {
-	  var ar = [2, 1];
-	  var rf = _mobservable2['default'].makeReactive(1);
-	  rf.observe(function (a, b) {
-	    ar = [a + b, a];
-	  });
-	  var a = Date.now();
-	  for (var k = 1; k < n; k += 1) {
-	    rf(ar[0]);
+	data.fib = function (x) {
+	  var n = 1 * x;
+	  switch (n) {
+	    case 1:
+	      return 0;
+	    case 2:
+	      return 1;
+	    case 3:
+	      return 1;
 	  }
-	  var b = Date.now();
-	  data.t = b - a;
-	  return ar[1];
+	  if (n > 3) {
+	    var ar = [2, 1];
+	    var rf = _mobservable2['default'].makeReactive(1);
+	    rf.observe(function (a, b) {
+	      ar = [a + b, a];
+	    });
+	    var a = Date.now();
+	    for (var k = 4; k < n; k += 1) {
+	      rf(ar[0]);
+	    }
+	    var b = Date.now();
+	    data.t = b - a;
+	    return ar[0];
+	  } else return "Enter an integer greater than 0";
 	};
 
-	var B2X = (function (_React$Component3) {
-	  _inherits(B2X, _React$Component3);
+	var B2 = (function (_React$Component3) {
+	  _inherits(B2, _React$Component3);
 
-	  function B2X(props) {
+	  function B2(props) {
 	    var _this3 = this;
 
-	    _classCallCheck(this, B2X);
+	    _classCallCheck(this, _B2);
 
-	    _get(Object.getPrototypeOf(B2X.prototype), 'constructor', this).call(this, props);
+	    _get(Object.getPrototypeOf(_B2.prototype), 'constructor', this).call(this, props);
 
 	    this.blib = function (x) {
 	      _this3.data.p = x;
@@ -709,15 +724,16 @@
 	    this.data = data;
 	  }
 
-	  return B2X;
+	  var _B2 = B2;
+	  B2 = (0, _mobservableReact.reactiveComponent)(B2) || B2;
+	  return B2;
 	})(_react2['default'].Component);
 
 	;
 
-	reactMixin(B2X.prototype, __webpack_require__(115));
-	B2X.defaultProps = { key: 'B2X' };
+	reactMixin(B2.prototype, __webpack_require__(115));
+	B2.defaultProps = { key: 'B2' };
 
-	var B2 = (0, _mobservableReact.reactiveComponent)(B2X);
 	_react2['default'].render(_react2['default'].createElement(B2, { key: 'B2' }), document.getElementById('divSix'));
 
 /***/ },
