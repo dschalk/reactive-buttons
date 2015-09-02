@@ -224,6 +224,18 @@
 	  name: '',
 	  nx: [1, 1],
 	  n: 1,
+	  w: 1,
+	  warning: '',
+	  message: 'Do Not Click Me',
+	  twoTimes: function twoTimes() {
+	    if (this.w === 2) {
+	      this.warning = 'If you click me again, I will disappear';this.message = 'YOU HAVE BEEN WARNED';
+	    };
+	    if (this.w === 3) {
+	      this.dsp = 'none';
+	      return;
+	    };
+	  },
 	  dsp: 'inline',
 	  p: 1,
 	  t: 0,
@@ -313,9 +325,14 @@
 	  }
 	});
 
-	data.increaseX = function () {
-	  data.x = data.x + 1;
-	  return data.x;
+	data.increaseMarker = function () {
+	  data.marker = data.marker + 1;
+	  return data.marker;
+	};
+
+	data.increaseW = function () {
+	  data.w = data.w + 1;
+	  return data.w;
 	};
 
 	data.fib = function (x) {
@@ -381,23 +398,19 @@
 	        color: z, borderRadius: 10, paddingTop: 1.1, paddingBottom: 0.9, marginRight: 3, marginLeft: 12, fontSize: 20 };
 	    };
 
-	    this.twoTimes = function () {
-	      _this3.data.n += 1;
-	      if (_this3.data.n === 3) {
-	        _this3.data.dsp = 'none';
-	        return;
-	      };
-	      alert("One more click and I'm out of here");
-	    };
-
 	    this.render = function () {
+	      var twoTimes = _this3.data.twoTimes;
 	      console.log(_this3);
 	      var x = _this3.data.x;
 	      var g = _this3.data.g;
 	      var p = _this3.data.p;
 	      var q = _this3.data.q;
 	      var t = _this3.data.t;
+	      var w = _this3.data.w;
+	      var warning = _this3.data.warning;
+	      var message = _this3.data.message;
 	      var increaseX = _this3.data.increaseX;
+	      var increaseW = _this3.data.increaseW;
 	      var group = _this3.data.group;
 	      var groupWatch = _this3.data.groupWatch;
 	      var dsp = _this3.data.dsp;
@@ -641,21 +654,7 @@
 	          _react2['default'].createElement('br', null),
 	          'The movement from MVC frameworks to Facebook\'s React to Mr. Weststrate\'s mobservable-React hybrid seems to portend a progression into a future hybrid not only free from Flux and its progeny, but possibly free even from React\'s \'state\' object, which at first appears to be essential. Now it could be that Facebook\'s website needs Flux, and would flounder if it were to substitue mobservable for its dispatchers, stores, state object, and Flux. My websockets-react project isn\'t handling much traffic, but it is fairly complex. The more I convert over to mobservable, the easier it gets to follow code logic and add features. I haven\'t noticed an deterioration in performance, and I suspect that it can handle heavier loads than the earlier version which held more tightly to Facebook\'s patterns.  As I move things out of the \'state\' object and into mobservable objects, I remove the associated \'setState\' code, along with the getter code, and install methods in mobservable-encapsulated objects that cause the application to take care of itself automatically. That is what I did with these buttons.',
 	          _react2['default'].createElement('br', null),
-	          _react2['default'].createElement('br', null),
-	          _react2['default'].createElement(
-	            'button',
-	            { style: _this3.style9(dsp, cr38, cr370, cr38), onClick: function () {
-	                _this3.twoTimes();
-	              },
-	              onMouseEnter: function () {
-	                _this3.mouse[37] = 'blue', _this3.mouse[370] = 'lightblue', _this3.mouse[38] = 'yellow';
-	              },
-	              onMouseLeave: function () {
-	                _this3.mouse[37] = '#000', _this3.mouse[370] = 'darkred', _this3.mouse[38] = 'burlywood';
-	              }
-	            },
-	            x
-	          )
+	          _react2['default'].createElement('br', null)
 	        ),
 	        _react2['default'].createElement(
 	          'div',
@@ -716,9 +715,31 @@
 	          _react2['default'].createElement(
 	            'h2',
 	            null,
-	            'Unsubscribe'
+	            'Temporary Button'
 	          ),
-	          'You don\'t have to subscribe to anything, but it is easy to do something like RxJS\'s \'unsubscribe\'. After the first click, you get warned. After the second click, the button evaporates.'
+	          'Clicking this button does nothing but increment \'data.w\', but there there is an observer function named \'data.twoTimes()\' that reacts to changes in \'data.w\' by mutating \'data.message\' and \'data.dsp\'. Click the button and see what happens when data.twoTimes changes the values of \'data.message\' and \'data.dsp\'.',
+	          _react2['default'].createElement('br', null),
+	          _react2['default'].createElement(
+	            'h2',
+	            { style: { display: dsp, color: 'red' } },
+	            ' ',
+	            warning,
+	            ' '
+	          ),
+	          _react2['default'].createElement(
+	            'button',
+	            { style: _this3.style9(dsp, cr38, cr370, '#000'), onClick: function () {
+	                increaseW();
+	              },
+	              onMouseEnter: function () {
+	                _this3.mouse[37] = 'blue', _this3.mouse[370] = 'lightblue', _this3.mouse[38] = 'yellow';
+	              },
+	              onMouseLeave: function () {
+	                _this3.mouse[37] = '#000', _this3.mouse[370] = 'darkred', _this3.mouse[38] = 'burlywood';
+	              }
+	            },
+	            message
+	          )
 	        )
 	      );
 	    };

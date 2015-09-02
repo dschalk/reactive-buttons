@@ -101,6 +101,16 @@ let data = mobservable.makeReactive({
   name: '',
   nx: [1,1],
   n: 1,
+  w: 1,
+  warning: '',
+  message: 'Do Not Click Me',
+  twoTimes: function() {
+    if (this.w === 2) {this.warning = 'If you click me again, I will disappear'; this.message = 'YOU HAVE BEEN WARNED'};
+    if (this.w === 3) {
+      this.dsp = 'none';
+      return;
+    };
+  },
   dsp: 'inline',
   p: 1,
   t: 0,
@@ -189,9 +199,14 @@ let data = mobservable.makeReactive({
   }
 });
 
-data.increaseX = () => {
-  data.x = data.x + 1;
-  return data.x;
+data.increaseMarker = () => {
+  data.marker = data.marker + 1;
+  return data.marker;
+}
+
+data.increaseW = () => {
+  data.w = data.w + 1;
+  return data.w;
 }
 
 data.fib = (x) => {
@@ -251,23 +266,19 @@ data.fib = (x) => {
   style9 = (w,x,y,z) => {return {display: w, backgroundColor: x, textAlign: 'left', borderColor: y, outline: 0,
     color: z, borderRadius: 10, paddingTop: 1.1, paddingBottom: 0.9, marginRight: 3, marginLeft: 12, fontSize: 20 }};
 
-  twoTimes = () => {
-    this.data.n += 1;
-    if (this.data.n === 3) {
-      this.data.dsp = 'none';
-      return;
-    };
-    alert("One more click and I'm out of here");
-   }
-
   render = () => {
+    let twoTimes = this.data.twoTimes;
     console.log(this);
     let x = this.data.x;
     let g = this.data.g;
     let p = this.data.p;
     let q = this.data.q;
     let t = this.data.t;
+    let w = this.data.w;
+    let warning = this.data.warning;
+    let message = this.data.message;
     let increaseX = this.data.increaseX;
+    let increaseW = this.data.increaseW;
     let group = this.data.group;
     let groupWatch = this.data.groupWatch;
     let dsp = this.data.dsp;
@@ -451,12 +462,6 @@ data.fib = (x) => {
           <br /><br />
           The movement from MVC frameworks to Facebook's React to Mr. Weststrate's mobservable-React hybrid seems to portend a progression into a future hybrid not only free from Flux and its progeny, but possibly free even from React's 'state' object, which at first appears to be essential. Now it could be that Facebook's website needs Flux, and would flounder if it were to substitue mobservable for its dispatchers, stores, state object, and Flux. My websockets-react project isn't handling much traffic, but it is fairly complex. The more I convert over to mobservable, the easier it gets to follow code logic and add features. I haven't noticed an deterioration in performance, and I suspect that it can handle heavier loads than the earlier version which held more tightly to Facebook's patterns.  As I move things out of the 'state' object and into mobservable objects, I remove the associated 'setState' code, along with the getter code, and install methods in mobservable-encapsulated objects that cause the application to take care of itself automatically. That is what I did with these buttons.
           <br /><br />
-          <button style={this.style9(dsp,cr38,cr370,cr38)} onClick={() => {this.twoTimes()}}
-            onMouseEnter={() => {this.mouse[37] = 'blue', this.mouse[370] = 'lightblue', this.mouse[38] = 'yellow'}}
-            onMouseLeave={() => {this.mouse[37] = '#000', this.mouse[370] = 'darkred', this.mouse[38] = 'burlywood'}}
-            >
-            {x}
-          </button>
         </div>
 
         <div style={{width: '45%', float: 'left', marginLeft: 12}} >
@@ -481,8 +486,17 @@ Mobservable keeps track of state with (current / most recent) pairs (loosely spe
   With mobservable, there is no need to explicitly designate subscribers, as there would be with RxJS and Bacon. The buttons shown here work fine with React's state and props objects left empty. You might wonder why I use React at all. Mobservable doesn't rely on React. Well, this code is a snippet from my websockets-react project. The complete code is available at <a style={{color: 'red'}} href="https://github.com/dschalk/websockets-react">https://github.com/dschalk/websockets-react</a>. An explanation of the project is at <a style={{color: 'red'}} href="https://www.fpcomplete.com/user/dschalk/Websockets%20Game%20of%20Score">https://www.fpcomplete.com/user/dschalk/Websockets%20Game%20of%20Score</a>. My server is a modified Haskell Wai-Websockets server. Like mobservable, it does much in a very simple and elegant manner.
   <br /><br /> I used 'react_mixin', but it is not necessary for the buttons. I used it to grab a React mixin out of 'node_modules' to support autoFocus ('autofocus' in regular HTML).
             <br />
-            <h2>Unsubscribe</h2>
-You don't have to subscribe to anything, but it is easy to do something like RxJS's 'unsubscribe'. After the first click, you get warned. After the second click, the button evaporates.
+            <h2>Temporary Button</h2>
+            Clicking this button does nothing but increment 'data.w', but there there is an observer function named 'data.twoTimes()' that reacts to changes in 'data.w' by mutating 'data.message' and 'data.dsp'. Click the button and see what happens when data.twoTimes changes the values of 'data.message' and 'data.dsp'.
+<br />
+
+          <h2 style={{display: dsp, color: 'red'}} > {warning} </h2>
+          <button style={this.style9(dsp,cr38,cr370,'#000')} onClick={() => {increaseW()}}
+            onMouseEnter={() => {this.mouse[37] = 'blue', this.mouse[370] = 'lightblue', this.mouse[38] = 'yellow'}}
+            onMouseLeave={() => {this.mouse[37] = '#000', this.mouse[370] = 'darkred', this.mouse[38] = 'burlywood'}}
+            >
+            {message}
+          </button>
 
 
   </div>
