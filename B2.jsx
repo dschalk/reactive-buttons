@@ -321,7 +321,7 @@ data.fib = (x) => {
 
     return (
       <div style={{ backgroundColor: '#000', height: 2800, width: '100%', color: 'turquoise' }}>
-        <br /><br /><br /><br /><br />
+        <br /><br /><br />
           <h2 style={{textAlign: 'center'}} >Sensitivity of Observable Functions and Methods</h2>
         <div style={{width: '40%', marginLeft: 85, float: 'right', marginRight: 2}} >
           Fibonacci numbers ( [temp][1] ):
