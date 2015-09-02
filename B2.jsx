@@ -1,7 +1,7 @@
 'use strict'
 import React from'react';
 import mobservable from 'mobservable';
-import {reactiveComponent} from 'mobservable-react';  
+import {reactiveComponent} from 'mobservable-react';
 require('mobservable-react-devtools');
 let reactMixin = require('react-mixin');
 export {B2};
@@ -130,7 +130,7 @@ let data = mobservable.makeReactive({
       mouseHandler.Sborder = 'green';
       mouseHandler.Scolor = 'burlywood';
     }
-    else if (this.group === 'GroupB' && this.test) { 
+    else if (this.group === 'GroupB' && this.test) {
       mouseHandler.Bbackground = 'green';
       mouseHandler.Bborder = 'lawngreen';
       mouseHandler.Bcolor = 'yellow';
@@ -253,7 +253,7 @@ data.fib = (x) => {
 
   twoTimes = () => {
     this.data.n += 1;
-    if (this.data.n === 2) {
+    if (this.data.n === 3) {
       this.data.dsp = 'none';
       return;
     };
@@ -309,57 +309,39 @@ data.fib = (x) => {
     let cr38 = this.mouse[38];
 
     return (
-      <div style={{ backgroundColor: '#000', height: 2800, color: 'turquoise' }}> 
-        <div style={{width: '80%', marginLeft: 85}} >
+      <div style={{ backgroundColor: '#000', height: 2800, color: 'turquoise' }}>
+        <div style={{width: '40%', marginLeft: 85, float: 'right', marginRight: 2}} >
           <br /><br /><br />
 
-          <h2 style={{textAlign: 'center'}} >Sensitivity of Mobservable</h2>
-          <br /> 
-          <p>When React renders the the main component (B2), reactive functions merely mentioned in the render function are executed. The variable 'data.x' is not involved in the method 'g', which computes sequential Fibonacci numbers, yet incrementing x causes the next fibonacci number to be displayed. In fact, just moving the mouse pointer in or out of the 'Value of data.x" button causes the sequence to increment. You dont's have to click the button.</p>
-          <p>Rolling over any rollover button or entering text causes the sequence to progress, unless the rollover or text entry doesn't change anything. It is reassuring to see that if a rollover button is already selected, rolling over it or clicking it to select an already-selected group does not increase the Fibonacci number. That means there is no unnecessary rendering</p>
-          <p>The line 'let g = this.data.g' in 'render' is all it takes to invoke this behavior. 
-         Note that 'g' is not called and its argument is not modified (that is, not until g modifies it). Being aware of this behavior facilitates writing concise code and avoiding magical bugs. </p> 
 
-       The line 'let increaseX = this.data.increaseX' is also present in 'render()', but rendering does not trigger its execution. The relevant difference between 'increaseX' and 'g' from a practical perspective is that 'g' is defined inside of the data object but 'increaseX' is incorporated into 'data' externally with with the code: 'data.increaseX = ...'. Another way of looking at this is to see that 'g' was inside of 'data' when it was encapsulated, but 'increaseX' was tacked on after encapsulation. The precise explanation for this behavior can be found in the details of the code.
-          <br /><br />
-
-          Fibonacci numbers ( [temp][1] ): 
+          Fibonacci numbers ( [temp][1] ):
           <button style={this.style8(cr27,cr270,cr28)} >
             {temp[1]}
           </button>
           <br /><br />
-          Value of data.x: 
-          <button style={this.style8(cr27,cr270,cr28)} onClick={() => {increaseX()}} 
+          Value of data.x:
+          <button style={this.style8(cr27,cr270,cr28)} onClick={() => {increaseX()}}
             onMouseEnter={() => {this.mouse[27] = 'blue', this.mouse[270] = 'lightblue', this.mouse[28] = 'yellow'}}
             onMouseLeave={() => {this.mouse[27] = '#000', this.mouse[270] = 'darkred', this.mouse[28] = 'burlywood'}}
             >
             {x}
           </button>
-********************************************************************************************************************
-          
-<h1>More Fibonacci Numbers</h1>
-The 1475th number in the Fibonacci sequence is about the biggest number browsers can display.<br /><br />
-fib(1475) = 4.992254605477766e+307  <br />
-fib(1500) = Infinity<br />
-<br />
+**************************
 
-You might be interested in seeing how many milliseconds it takes your device to compute fib(1475) the first time, and then another couple of times. The first time after reloading is the slowest. Or maybe try 10000000. That's ten million. The display says "Infinity" but the mobservable function will performe ten million computations, mostly computing fib(Infinity) = Infinity or some such nonsense after it gets a little past fib(1475). A browser on modern desktop computer can perform the 10,000,000 computations in around 200 milliseconds (0.5 seconds).  <br /><br />
-Mobservable keeps track of state with (current / most recent) pairs (loosely speaking). If the current pair is (a,b), then my fibonacci routine sets the next one to (a+b, a). The next pair has numbers equalling (a+b+a, a+b) and so on and so forth ten million times, in 1.5 seconds. Using mobservable, I hardly had to write any code. 
-<br /><br />
+<h1>More Fibonacci Numbers</h1>
           <h2> fib({p}) = {q} </h2>
           <Fibonacci fib = {this.blib}> </Fibonacci>
-          Elapsed time = {t};
+          Elapsed time = {t} milliseconds.
           <br /><br /><br />
           The computer code is at <a style={{color: 'red'}} href="https://github.com/dschalk/mobservable-react-buttons">mobservable-react-buttons</a>
-*********************************************************************************************************************
+**************************
           <h2 style={{textAlign: 'center'}} >Rollover Buttons</h2>
 
-        Current Group: 
+        Current Group:
       <button style={this.style8('blue', 'lightgreen', 'red')} >
         {group}
       </button>
         <br /><br /><br />
-        The buttons below are inter-connected with one another and with the input box. Click the buttons and enter some text to see how they interact. These are dumned-down buttons from my <a target=" _blank" style={{color: 'red'}} href="http://machinegun.ninja">Game of Score</a> Haskell websockets multiplayer math game. The buttons presented here demonstrate the full functionality of the rollover effects, along with some other features that don't come with HTML select/option forms. 
         <br /><br />
           <button onClick={() => {
                   this.data.group = 'GroupA';
@@ -379,7 +361,7 @@ Mobservable keeps track of state with (current / most recent) pairs (loosely spe
                   this.data.test = true;
                   this.mouse.Abackground = Abackground;
                   this.mouse.Aborder  = Aborder;
-                  this.mouse.Acolor = Acolor; 
+                  this.mouse.Acolor = Acolor;
                 }
               }
             }
@@ -405,7 +387,7 @@ Mobservable keeps track of state with (current / most recent) pairs (loosely spe
                   this.data.test = true;
                   this.mouse.Bbackground = Bbackground;
                   this.mouse.Bborder  = Bborder;
-                  this.mouse.Bcolor = Bcolor; 
+                  this.mouse.Bcolor = Bcolor;
                 }
               }
             }
@@ -431,7 +413,7 @@ Mobservable keeps track of state with (current / most recent) pairs (loosely spe
                   this.data.test = true;
                   this.mouse.Cbackground = Cbackground;
                   this.mouse.Cborder  = Cborder;
-                  this.mouse.Ccolor = Ccolor; 
+                  this.mouse.Ccolor = Ccolor;
                 }
               }
             }
@@ -457,7 +439,7 @@ Mobservable keeps track of state with (current / most recent) pairs (loosely spe
                   this.data.test = true;
                   this.mouse.Sbackground = Sbackground;
                   this.mouse.Sborder  = Sborder;
-                  this.mouse.Scolor = Scolor; 
+                  this.mouse.Scolor = Scolor;
                 }
               }
             }
@@ -467,29 +449,54 @@ Mobservable keeps track of state with (current / most recent) pairs (loosely spe
           <br /><br />
           <GroupNew key='GroupNew' setGroup={(x) => {this.data.group = x }} name={this.data.name} />
           <br /><br /><br />
-          When the value of 'data.test' is 'true', data.groupWatch() automatically changes button highlighting when the value of 'data.group' changes. When the mouse enters a button, data.test is set to 'false' allowing the rollover effect to override 'data.groupWatch()'. 
+        The buttons above are inter-connected with one another and with the input box. Click the buttons and enter some text to see how they interact. These are dumned-down buttons from my <a target=" _blank" style={{color: 'red'}} href="http://machinegun.ninja">Game of Score</a> Haskell websockets multiplayer math game. The buttons presented here demonstrate the full functionality of the rollover effects, along with some other features that don't come with HTML select/option forms.
+          When the value of 'data.test' is 'true', data.groupWatch() automatically changes button highlighting when the value of 'data.group' changes. When the mouse enters a button, data.test is set to 'false' allowing the rollover effect to override 'data.groupWatch()'.
           <br /><br />
-          The movement from MVC frameworks to Facebook's React to Mr. Weststrate's mobservable-React hybrid seems to portend a progression into a future hybrid not only free from Flux and its progeny, but possibly free even from React's 'state' object, which at first appears to be essential. Now it could be that Facebook's website needs Flux, and would flounder if it were to substitue mobservable for its dispatchers, stores, state object, and Flux. My websockets-react project isn't handling much traffic, but it is fairly complex. The more I convert over to mobservable, the easier it gets to follow code logic and add features. I haven't noticed an deterioration in performance, and I suspect that it can handle heavier loads than the earlier version which held more tightly to Facebook's patterns.  As I move things out of the 'state' object and into mobservable objects, I remove the associated 'setState' code, along with the getter code, and install methods in mobservable-encapsulated objects that cause the application to take care of itself automatically. That is what I did with these buttons. 
+          The movement from MVC frameworks to Facebook's React to Mr. Weststrate's mobservable-React hybrid seems to portend a progression into a future hybrid not only free from Flux and its progeny, but possibly free even from React's 'state' object, which at first appears to be essential. Now it could be that Facebook's website needs Flux, and would flounder if it were to substitue mobservable for its dispatchers, stores, state object, and Flux. My websockets-react project isn't handling much traffic, but it is fairly complex. The more I convert over to mobservable, the easier it gets to follow code logic and add features. I haven't noticed an deterioration in performance, and I suspect that it can handle heavier loads than the earlier version which held more tightly to Facebook's patterns.  As I move things out of the 'state' object and into mobservable objects, I remove the associated 'setState' code, along with the getter code, and install methods in mobservable-encapsulated objects that cause the application to take care of itself automatically. That is what I did with these buttons.
           <br /><br />
-
-  With mobservable, there is no need to explicitly designate subscribers, as there would be with RxJS and Bacon. The buttons shown here work fine with React's state and props objects left empty. You might wonder why I use React at all. Mobservable doesn't rely on React. Well, this code is a snippet from my websockets-react project. The complete code is available at <a style={{color: 'red'}} href="https://github.com/dschalk/websockets-react">https://github.com/dschalk/websockets-react</a>. An explanation of the project is at <a style={{color: 'red'}} href="https://www.fpcomplete.com/user/dschalk/Websockets%20Game%20of%20Score">https://www.fpcomplete.com/user/dschalk/Websockets%20Game%20of%20Score</a>. My server is a modified Haskell Wai-Websockets server. Like mobservable, it does much in a very simple and elegant manner. 
-  <br /><br /> I used 'react_mixin', but it is not necessary for the buttons. I used it to grab a React mixin out of 'node_modules' to support autoFocus ('autofocus' in regular HTML).
-            <br /><br />
-            <h2>Unsubscribe</h2>
- You don't have to subscribe to anything, but it is easy to do something like RxJS's 'unsubscribe'. After the first click, you get warned. After the second click, the button evaporates.
-
-          <button style={this.style9(dsp,cr38,cr370,cr38)} onClick={() => {this.twoTimes()}} 
+          <button style={this.style9(dsp,cr38,cr370,cr38)} onClick={() => {this.twoTimes()}}
             onMouseEnter={() => {this.mouse[37] = 'blue', this.mouse[370] = 'lightblue', this.mouse[38] = 'yellow'}}
             onMouseLeave={() => {this.mouse[37] = '#000', this.mouse[370] = 'darkred', this.mouse[38] = 'burlywood'}}
             >
             {x}
           </button>
         </div>
+
+
+
+
+        <div style={{width: '45%', float: 'left', marginLeft: 12}} >
+          <h2 style={{textAlign: 'left'}} >Sensitivity of Observable Functions and Methods</h2>
+          <p>When React renders the the main component (B2), reactive functions merely mentioned in the render function are executed. The variable 'data.x' is not involved in the method 'g', which computes sequential Fibonacci numbers, yet incrementing x causes the next fibonacci number to be displayed. In fact, just moving the mouse pointer in or out of the 'Value of data.x" button causes the sequence to increment. You dont's have to click the button.</p>
+          <p>Rolling over any rollover button or entering text causes the sequence to progress, unless the rollover or text entry doesn't change anything. It is reassuring to see that if a rollover button is already selected, rolling over it or clicking it to select an already-selected group does not increase the Fibonacci number. That means there is no unnecessary rendering</p>
+          <p>The line 'let g = this.data.g' in 'render' is all it takes to invoke this behavior.
+         Note that 'g' is not called and its argument is not modified (that is, not until g modifies it). Being aware of this behavior facilitates writing concise code and avoiding magical bugs. </p>
+
+       The line 'let increaseX = this.data.increaseX' is also present in 'render()', but rendering does not trigger its execution. The relevant difference between 'increaseX' and 'g' from a practical perspective is that 'g' is defined inside of the data object but 'increaseX' is incorporated into 'data' externally with with the code: 'data.increaseX = ...'. Another way of looking at this is to see that 'g' was inside of 'data' when it was encapsulated, but 'increaseX' was tacked on after encapsulation. The precise explanation for this behavior can be found in the details of the code.
+          <br />
+<h1>More Fibonacci Numbers</h1>
+The 1475th number in the Fibonacci sequence is about the biggest number browsers can display.<br /><br />
+fib(1475) = 4.992254605477766e+307  <br />
+fib(1500) = Infinity<br />
+<br />
+
+You might be interested in seeing how many milliseconds it takes your device to compute fib(1475) the first time, and then another couple of times. The first time after reloading is the slowest. Or maybe try 10000000. That's ten million. The display says "Infinity" but the mobservable function will performe ten million computations, mostly computing fib(Infinity) = Infinity or some such nonsense after it gets a little past fib(1475). A browser on modern desktop computer can perform the 10,000,000 computations in around 200 milliseconds (0.5 seconds).  <br /><br />
+Mobservable keeps track of state with (current / most recent) pairs (loosely speaking). If the current pair is (a,b), then my fibonacci routine sets the next one to (a+b, a). The next pair has numbers equalling (a+b+a, a+b) and so on and so forth ten million times, in 1.5 seconds. Using mobservable, I hardly had to write any code.
+<br /><br />
+
+
+  With mobservable, there is no need to explicitly designate subscribers, as there would be with RxJS and Bacon. The buttons shown here work fine with React's state and props objects left empty. You might wonder why I use React at all. Mobservable doesn't rely on React. Well, this code is a snippet from my websockets-react project. The complete code is available at <a style={{color: 'red'}} href="https://github.com/dschalk/websockets-react">https://github.com/dschalk/websockets-react</a>. An explanation of the project is at <a style={{color: 'red'}} href="https://www.fpcomplete.com/user/dschalk/Websockets%20Game%20of%20Score">https://www.fpcomplete.com/user/dschalk/Websockets%20Game%20of%20Score</a>. My server is a modified Haskell Wai-Websockets server. Like mobservable, it does much in a very simple and elegant manner.
+  <br /><br /> I used 'react_mixin', but it is not necessary for the buttons. I used it to grab a React mixin out of 'node_modules' to support autoFocus ('autofocus' in regular HTML).
+            <br />
+            <h2>Unsubscribe</h2>
+You don't have to subscribe to anything, but it is easy to do something like RxJS's 'unsubscribe'. After the first click, you get warned. After the second click, the button evaporates.
+
+
   </div>
+</div>
     )}
   };
 
 reactMixin(B2.prototype, require('./node_modules/react/lib/AutoFocusMixin'));
-B2.defaultProps = {key: 'B2'};
 
 React.render(<B2 key='B2' />, document.getElementById('divSix'));
