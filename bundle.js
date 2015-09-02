@@ -347,12 +347,13 @@
 	  }
 	  if (n > 3) {
 	    var ar = [2, 1];
+	    var k = 0;
 	    var rf = _mobservable2['default'].makeReactive(1);
 	    rf.observe(function (a, b) {
 	      ar = [a + b, a];
 	    });
 	    var a = Date.now();
-	    for (var k = 4; k < n; k += 1) {
+	    for (k = 4; k < n; k += 1) {
 	      rf(ar[0]);
 	    }
 	    var b = Date.now();
@@ -454,8 +455,6 @@
 	      return _react2['default'].createElement(
 	        'div',
 	        { style: { backgroundColor: '#000', height: 2800, width: '100%', color: 'turquoise' } },
-	        _react2['default'].createElement('br', null),
-	        _react2['default'].createElement('br', null),
 	        _react2['default'].createElement('br', null),
 	        _react2['default'].createElement('br', null),
 	        _react2['default'].createElement('br', null),

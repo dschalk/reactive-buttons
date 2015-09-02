@@ -221,12 +221,13 @@ data.fib = (x) => {
   }
   if ( n > 3) {
       let ar = [2,1];
+      let k = 0;
       let rf = mobservable.makeReactive(1);
       rf.observe(function(a,b) {
         ar = [a+b,a];
       });
       let a = Date.now();
-      for (let k=4; k<n; k+=1) {
+      for (k=4; k<n; k+=1) {
         rf(ar[0]);
       }
       let b = Date.now();
