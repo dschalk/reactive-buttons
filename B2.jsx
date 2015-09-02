@@ -102,7 +102,7 @@ let data = mobservable.makeReactive({
   nx: [1,1],
   n: 1,
   dsp: 'inline',
-  p: 0,
+  p: 1,
   t: 0,
   q: 0,
   x: 1,
