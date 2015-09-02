@@ -309,11 +309,10 @@ data.fib = (x) => {
     let cr38 = this.mouse[38];
 
     return (
-      <div style={{ backgroundColor: '#000', height: 2800, color: 'turquoise' }}>
+      <div style={{ backgroundColor: '#000', height: 2800, width: '100%', color: 'turquoise' }}>
+        <br /><br /><br /><br /><br />
+          <h2 style={{textAlign: 'center'}} >Sensitivity of Observable Functions and Methods</h2>
         <div style={{width: '40%', marginLeft: 85, float: 'right', marginRight: 2}} >
-          <br /><br /><br />
-
-
           Fibonacci numbers ( [temp][1] ):
           <button style={this.style8(cr27,cr270,cr28)} >
             {temp[1]}
@@ -326,15 +325,13 @@ data.fib = (x) => {
             >
             {x}
           </button>
-**************************
 
-<h1>More Fibonacci Numbers</h1>
+<h3>More Fibonacci Numbers</h3>
           <h2> fib({p}) = {q} </h2>
           <Fibonacci fib = {this.blib}> </Fibonacci>
           Elapsed time = {t} milliseconds.
-          <br /><br /><br />
+          <br />
           The computer code is at <a style={{color: 'red'}} href="https://github.com/dschalk/mobservable-react-buttons">mobservable-react-buttons</a>
-**************************
           <h2 style={{textAlign: 'center'}} >Rollover Buttons</h2>
 
         Current Group:
@@ -462,11 +459,7 @@ data.fib = (x) => {
           </button>
         </div>
 
-
-
-
         <div style={{width: '45%', float: 'left', marginLeft: 12}} >
-          <h2 style={{textAlign: 'left'}} >Sensitivity of Observable Functions and Methods</h2>
           <p>When React renders the the main component (B2), reactive functions merely mentioned in the render function are executed. The variable 'data.x' is not involved in the method 'g', which computes sequential Fibonacci numbers, yet incrementing x causes the next fibonacci number to be displayed. In fact, just moving the mouse pointer in or out of the 'Value of data.x" button causes the sequence to increment. You dont's have to click the button.</p>
           <p>Rolling over any rollover button or entering text causes the sequence to progress, unless the rollover or text entry doesn't change anything. It is reassuring to see that if a rollover button is already selected, rolling over it or clicking it to select an already-selected group does not increase the Fibonacci number. That means there is no unnecessary rendering</p>
           <p>The line 'let g = this.data.g' in 'render' is all it takes to invoke this behavior.
@@ -474,7 +467,7 @@ data.fib = (x) => {
 
        The line 'let increaseX = this.data.increaseX' is also present in 'render()', but rendering does not trigger its execution. The relevant difference between 'increaseX' and 'g' from a practical perspective is that 'g' is defined inside of the data object but 'increaseX' is incorporated into 'data' externally with with the code: 'data.increaseX = ...'. Another way of looking at this is to see that 'g' was inside of 'data' when it was encapsulated, but 'increaseX' was tacked on after encapsulation. The precise explanation for this behavior can be found in the details of the code.
           <br />
-<h1>More Fibonacci Numbers</h1>
+<h3>Discussion of Fibonacci Numbers</h3>
 The 1475th number in the Fibonacci sequence is about the biggest number browsers can display.<br /><br />
 fib(1475) = 4.992254605477766e+307  <br />
 fib(1500) = Infinity<br />
