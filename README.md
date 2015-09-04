@@ -31,22 +31,22 @@ The 1477th number in the Fibonacci sequence is the biggest number browsers can d
 fib(1477) =  1.3069892237633987e+308 <br />
 fib(1478) = Infinity<br />
 
-To see how much overhead is entailed in working inside a number created by:
+To get a feel for how much overhead is entailed in working inside a number created by:
 ```javascript
 let rf = mobservable.makeReactive(1)
 ```
-and comparing it to an algorithm that performs operations on an array [a, b], mutating it to [a+b, a] to increment the sequence and eventually returning [a, b][0]. On a Chrome browser, I got
+I compared it to an algorithm that performs operations on an array [a, b], mutating it to [a+b, a] to increment the sequence and eventually returning [a, b][0]. In all cases, I computed the 100,000,000th number in the fibonacci sequence ('Infinity' of course). In a Chrome browser, I got
 
 ```javascript
-mobservable fib(100,000,000) elapsed time 2019 milliseconds
+mobservable fib(100000000) elapsed time 2019 milliseconds
 ```
  and
  ```javascript
- ordinary fib(100,000,000) elapsed time 815 milliseconds.
+ ordinary fib(100000000) elapsed time 815 milliseconds.
  ```
 In the code published here, I used the same technique only without the array. There was no noticeable difference in performance.
 
- On Firefox, I got 1452 and 380 milliseconds and on Opera, 1816 and 815 milliseconds. Repeated computations after the first two or three did not differ significantly from one another. There seemed to be some caching taking place, although on Chrome and Opera, the first ordinary computation was much faster than the subsequent ordinary computations. The data was gathered on a run-of-the-mill Ubuntu 14.04 desktop box.
+ In Firefox, I got 1452 and 380 milliseconds and on Opera, 1816 and 815 milliseconds. Repeated computations after the first two or three did not differ significantly from one another. There seemed to be some caching taking place, although on Chrome and Opera, the first ordinary computation was much faster than the subsequent ordinary computations. The data was gathered on a run-of-the-mill Ubuntu 14.04 desktop box.
  All of this was done mainly for amusement, but it did provide some reassurance that using mobservabale to access current and most recent state will not entail a performance hit. A user requesting fib(1477) won't notice the extra 2 or 3 microseconds involved in getting it through a sequence of mobservable reactive numbers.
 
    I was able to perform 10,000,000 computations in less than 250 milliseconds in browsers running in a run-of-the-mill desktop computer. Each computation added a number to the Fibonacci sequence until fib(1478) when the series becomes Infinity, Infinity, ...  Here is the method which produces the sequence:
