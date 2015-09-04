@@ -548,7 +548,7 @@ data.fib2 = (x) => {
        The line 'let increaseX = this.data.increaseX' is also present in 'render()', but rendering does not trigger its execution. The relevant difference between 'increaseX' and 'g' from a practical perspective is that 'g' is defined inside of the data object but 'increaseX' is incorporated into 'data' externally with with the code: 'data.increaseX = ...'. Another way of looking at this is to see that 'g' was inside of 'data' when it was encapsulated, but 'increaseX' was tacked on after encapsulation. The precise explanation for this behavior can be found in the details of the code.
           <br />
 <h3>Discussion of Fibonacci Numbers</h3>
-The 1475th number in the Fibonacci sequence is about the biggest number browsers can display.<br /><br />
+The 1477th number in the Fibonacci sequence is the largest number browsers can handle.<br /><br />
 fib(1477) =  1.3069892237633987e+308 <br />
 fib(1478) = Infinity<br />
 <br />

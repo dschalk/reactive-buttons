@@ -800,7 +800,7 @@
 	            null,
 	            'Discussion of Fibonacci Numbers'
 	          ),
-	          'The 1475th number in the Fibonacci sequence is about the biggest number browsers can display.',
+	          'The 1477th number in the Fibonacci sequence is the largest number browsers can handle.',
 	          _react2['default'].createElement('br', null),
 	          _react2['default'].createElement('br', null),
 	          'fib(1477) =  1.3069892237633987e+308 ',
