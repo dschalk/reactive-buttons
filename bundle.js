@@ -394,19 +394,19 @@
 	      return 1;
 	  }
 	  if (n > 3) {
-	    var ar = [2, 1];
+	    var xx = 2;
 	    var k = 0;
 	    var rf = _mobservable2['default'].makeReactive(1);
 	    rf.observe(function (a, b) {
-	      ar = [a + b, a];
+	      xx = a + b;
 	    });
 	    var a = Date.now();
 	    for (k = 4; k < n; k += 1) {
-	      rf(ar[0]);
+	      rf(xx);
 	    }
 	    var b = Date.now();
 	    data.t = b - a;
-	    return ar[0];
+	    return xx;
 	  } else return "Enter an integer greater than 0";
 	};
 
@@ -670,6 +670,7 @@
 	              _this4.data.group = x;
 	            }, name: _this4.data.name }),
 	          _react2['default'].createElement('br', null),
+	          _react2['default'].createElement('br', null),
 	          'Fibonacci numbers ( [temp][1] ):',
 	          _react2['default'].createElement(
 	            'button',
@@ -761,7 +762,7 @@
 	          ' milliseconds.',
 	          _react2['default'].createElement('br', null),
 	          _react2['default'].createElement('br', null),
-	          'The buttons at the top of this column are inter-connected with one another and with the input box. Click the buttons and enter some text to see how they interact. These are dumned-down buttons from my ',
+	          'The buttons above are inter-connected with one another and with the input box. Click the buttons and enter some text to see how they interact. These are dumned-down buttons from my ',
 	          _react2['default'].createElement(
 	            'a',
 	            { target: ' _blank', style: { color: 'red' }, href: 'http://machinegun.ninja' },
@@ -799,7 +800,7 @@
 	            null,
 	            'Discussion of Fibonacci Numbers'
 	          ),
-	          'The 1477th number in the Fibonacci sequence is the biggest number browsers can display.',
+	          'The 1475th number in the Fibonacci sequence is about the biggest number browsers can display.',
 	          _react2['default'].createElement('br', null),
 	          _react2['default'].createElement('br', null),
 	          'fib(1477) =  1.3069892237633987e+308 ',
@@ -807,17 +808,17 @@
 	          'fib(1478) = Infinity',
 	          _react2['default'].createElement('br', null),
 	          _react2['default'].createElement('br', null),
-	          'To see how much overhead is entailed in working inside a number created by',
+	          'To see how much overhead is entailed by working inside a number created by',
 	          _react2['default'].createElement(
 	            'div',
 	            null,
 	            'let rf = mobservable.makeReactive(1)'
 	          ),
-	          'and a series that performs operations on a list [a, b], mutating it to [a+b, a] to increment the sequence and eventually returning [a, b][0]. On a Chrome browser, I got',
+	          'and a series that performs operations on an array [a, b], mutating it to [a+b, a] to increment the sequence and eventually returning [a, b][0]. I used the same technique only without the array in the code here. On a Chrome browser, I got',
 	          _react2['default'].createElement('br', null),
-	          'mobservable fib(100,000,000) elapsed time 2137 milliseconds',
+	          'mobservable fib(100,000,000) elapsed time 1883 milliseconds',
 	          _react2['default'].createElement('br', null),
-	          'and ordinary fib(100,000,000) elapsed time 766 milliseconds. On Firefox, I got 1602 and 380 milliseconds and on Opera, 2028 and 757 milliseconds. Repeated computations after the first two or three did not differ segnificantly from one another. There seemed to be some chaching taking place, although on Chrome and Opera, the first ordinary computation was much faster than the subsequent ordinary computations. The data was gathered on a run-of-the-mill Ubuntu 14.04 desktop box.',
+	          'and ordinary fib(100,000,000) elapsed time 815 milliseconds. On Firefox, I got 1452 and 380 milliseconds and on Opera, 1709 and 760 milliseconds. Repeated computations did not differ segnificantly from one another except that on Chrome and Opera, the first ordinary computation was much faster than the subsequent ones. The data was gathered on a run-of-the-mill Ubuntu 14.04 desktop box.',
 	          _react2['default'].createElement(
 	            'p',
 	            null,

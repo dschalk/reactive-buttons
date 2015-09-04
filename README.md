@@ -24,7 +24,32 @@ Commentary is included with the running app. You can see the buttons at [http://
 
    My websockets-react project isn't handling much traffic, but it is fairly complex. The more I convert over to mobservable, the easier it gets to follow code logic and hence the easier it is to add and modify features. I haven't noticed an deterioration in performance, and I suspect that my [Game of Score](http://machinegun.ninja) site could handle heavier loads than the earlier version which held more tightly to Facebook's patterns.  As I move things out of the 'state' object and into mobservable objects, I remove the associated 'setState' code, along with the getter code, and install methods in mobservable-encapsulated objects that cause the application to take care of itself automatically. That is what I did with these buttons.
 
-   I was able to perform 10,000,000 computations in less than 250 milliseconds in browsers running in a run-of-the-mill desktop computer. Each computation added a number to the Fibonacci sequence until a little past fib(1475) when the series becomes Infinity, Infinity, ...  Here is the method which produces the sequence:
+##Fibonacci Numbers
+
+The 1477th number in the Fibonacci sequence is the biggest number browsers can display.
+
+fib(1477) =  1.3069892237633987e+308 <br />
+fib(1478) = Infinity<br />
+
+To see how much overhead is entailed in working inside a number created by:
+```javascript
+let rf = mobservable.makeReactive(1)
+```
+and comparing it to an algorithm that performs operations on an array [a, b], mutating it to [a+b, a] to increment the sequence and eventually returning [a, b][0]. On a Chrome browser, I got
+
+```javascript
+mobservable fib(100,000,000) elapsed time 2019 milliseconds
+```
+ and
+ ```javascript
+ ordinary fib(100,000,000) elapsed time 815 milliseconds.
+ ```
+In the code published here, I used the same technique only without the array. There was no noticeable difference in performance.
+
+ On Firefox, I got 1452 and 380 milliseconds and on Opera, 1816 and 815 milliseconds. Repeated computations after the first two or three did not differ significantly from one another. There seemed to be some caching taking place, although on Chrome and Opera, the first ordinary computation was much faster than the subsequent ordinary computations. The data was gathered on a run-of-the-mill Ubuntu 14.04 desktop box.
+ All of this was done mainly for amusement, but it did provide some reassurance that using mobservabale to access current and most recent state will not entail a performance hit. A user requesting fib(1477) won't notice the extra 2 or 3 microseconds involved in getting it through a sequence of mobservable reactive numbers.
+
+   I was able to perform 10,000,000 computations in less than 250 milliseconds in browsers running in a run-of-the-mill desktop computer. Each computation added a number to the Fibonacci sequence until fib(1478) when the series becomes Infinity, Infinity, ...  Here is the method which produces the sequence:
    ```javascript
    data.fib = (x) => {
      let n = 1*x;
@@ -37,18 +62,19 @@ Commentary is included with the running app. You can see the buttons at [http://
          return 1;
      }
      if ( n > 3) {
-         let ar = [2,1];
+         let xx = 2;
+         let k = 0;
          let rf = mobservable.makeReactive(1);
          rf.observe(function(a,b) {
-           ar = [a+b,a];
+           xx = a+b;
          });
          let a = Date.now();
-         for (let k=4; k<n; k+=1) {
-           rf(ar[0]);
+         for (k=4; k<n; k+=1) {
+           rf(xx);
          }
          let b = Date.now();
          data.t = b - a;
-         return ar[0]; }
+         return xx; }
          else return "Enter an integer greater than 0";
    };
  ```
@@ -56,14 +82,41 @@ Commentary is included with the running app. You can see the buttons at [http://
   ```javascript
   rf(ar[0]) = [a+b+a+a+b, a+b+a]
   ```
-  This is reminiscent of Haskell's state monad, which carries the current state along with the most recent state in an (a,a2) tupple. The similarity grows stronger if mobservable functions and methods are kept pure except when wrapped in the sideEffect(function) function. That would be analogous to Haskell developers confining all side effects to the IO Monad in main. Haskell doesn't require this, but the GHC compiler isn't as understanding as V8; there's no room for surprises.
+  This is reminiscent of Haskell's state monad, which carries the current state along with the most recent state in an (a,a2) tupple. The similarity grows stronger if mobservable functions and methods are kept pure except when wrapped in the mobservable sideEffect(function) function. That would be analogous to Haskell developers confining all side effects to the IO Monad in main. Haskell doesn't require this, but the GHC compiler isn't as understanding as V8. GHC has no room for surprises. I wonder if there would be any practical use for mobservable monads.
 
-  With mobservable, there is no need to explicitly designate observers, as there would be with RxJS and Bacon. I used RxJS for a while in my Game of Score project, and it required quite a bit of code.
+  I compared the version using mobservable reactive fibonacci numbers to one using raw javascript. Raw javascript ripped through the sequence three or four times faster than the mobservabale version, but with fast computations like these, there is no performance hit involved in using mobservable reactive numbers.  A user requesting fib(1477) won't notice the extra 2 or 3 microseconds involved in getting it through a sequence of mobservable reactive numbers. Here is the code for the plain Javascript version:
 
-  The buttons shown here work fine with React's state and props objects left empty. You might wonder why I use React at all. Mobservable doesn't rely on React. Well, this code is a snippet from my websockets-react project. The complete code is available at [https://github.com/dschalk/websockets-react](https://github.com/dschalk/websockets-react) An explanation of the project is at [Game of Score Tutorial](https://www.fpcomplete.com/user/dschalk/Websockets%20Game%20of%20Score). My server is a modified Haskell Wai-Websockets server. Like mobservable, it accomplishes much in a very simple and elegant manner.
-
-  I use 'react_mixin' in this demonstration, but it isn't necessary. I used it to grab a React mixin out of 'node_modules' to conveniently support autoFocus ('autofocus' in regular HTML). Otherwise, I think I would have to use a React 'ref' to find the 'select' dom node. After the page loads, you can just start entering a number. Then press <ENTER> and the corresponding Fibonacci number appears.
-
+  ```javascript
+  data.fib2 = (x) => {
+    let n = 1*x;
+    switch (n) {
+      case 1:
+        return 0;
+      case 2:
+        return 1;
+      case 3:
+        return 1;
+    }
+    if ( n > 3) {
+        let k = 0;
+        let temp;
+        let a;
+        let b;
+        let rf = function() {
+          temp = a;
+          a = a + b;
+          b = temp;
+        }
+        let a = Date.now();
+        for (k=4; k<n; k+=1) {
+          rf();
+        }
+        let b = Date.now();
+        data.t2 = b - a;
+        return ar[0]; }
+        else return "Enter an integer greater than 0";
+  };
+  ```
 ##Reactive Methods
 
   Every time React renders the B2 component, reactive functions merely mentioned in the render function are executed. The variable 'data.x' is not involved in the method 'g', which computes sequential Fibinacci numbers, yet incrementing x causes the next fibinacci number to be displayed. In fact, just moving the mouse pointer in or out of the 'Value of data.x" button causes the sequence to increment. You dont's have to click the button.
@@ -73,3 +126,7 @@ Commentary is included with the running app. You can see the buttons at [http://
   The line 'let g = this.data.g' in 'render' is all it takes to invoke the automatic incrementing of the Fibonacci series. Note that 'g' is not called and its argument is not modified (that is, not until g modifies it). Being aware of this behavior facilitates writing concise code and helps to avoid magical bugs.  
 
   The line 'let increaseX = this.data.increaseX' is also present in 'render()', but rendering does not trigger its execution. The relevant difference between 'increaseX' and 'g' from a practical perspective is that 'g' is defined inside of the data object but 'increaseX' is incorporated into 'data' externally with with the code: 'data.increaseX = ...'. Another way of looking at this is to see that 'g' was inside of 'data' when it was encapsulated, but 'increaseX' was tacked on after encapsulation. The precise explanation for this behavior can be found in the details of the code.
+
+  The buttons shown here work fine with React's state and props objects left empty. You might wonder why I use React at all. Mobservable doesn't rely on React. Well, this code is a snippet from my websockets-react project. The complete code is available at [https://github.com/dschalk/websockets-react](https://github.com/dschalk/websockets-react) An explanation of the project is at [Game of Score Tutorial](https://www.fpcomplete.com/user/dschalk/Websockets%20Game%20of%20Score). My server is a modified Haskell Wai-Websockets server. Like mobservable, it accomplishes much in a very simple and elegant manner.
+
+  I use 'react_mixin' in this demonstration, but it isn't necessary. I used it to grab a React mixin out of 'node_modules' to conveniently support autoFocus ('autofocus' in regular HTML). Otherwise, I think I would have to use a React 'ref' to find the 'select' dom node. After the page loads, you can just start entering a number. Then press <ENTER> and the corresponding Fibonacci number appears.

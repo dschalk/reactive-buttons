@@ -246,19 +246,19 @@ data.fib = (x) => {
       return 1;
   }
   if ( n > 3) {
-      let ar = [2,1];
+      let xx = 2;
       let k = 0;
       let rf = mobservable.makeReactive(1);
       rf.observe(function(a,b) {
-        ar = [a+b,a];
+        xx = a+b;
       });
       let a = Date.now();
       for (k=4; k<n; k+=1) {
-        rf(ar[0]);
+        rf(xx);
       }
       let b = Date.now();
       data.t = b - a;
-      return ar[0]; }
+      return xx; }
       else return "Enter an integer greater than 0";
 };
 
@@ -502,8 +502,9 @@ data.fib2 = (x) => {
           </button>
           <br /><br />
           <GroupNew key='GroupNew' setGroup={(x) => {this.data.group = x }} name={this.data.name} />
-          <br />
-      Fibonacci numbers ( [temp][1] ):
+<br /><br />
+
+          Fibonacci numbers ( [temp][1] ):
           <button style={this.style8(cr27,cr270,cr28)} >
             {temp[1]}
           </button>
@@ -530,7 +531,8 @@ data.fib2 = (x) => {
   <Fibonacci2 fib2={this.blib2} > </Fibonacci2>
   <br />Elapsed time = {t2} milliseconds.
   <br /><br />
-        The buttons at the top of this column are inter-connected with one another and with the input box. Click the buttons and enter some text to see how they interact. These are dumned-down buttons from my <a target=" _blank" style={{color: 'red'}} href="http://machinegun.ninja">Game of Score</a> Haskell websockets multiplayer math game. The buttons presented here demonstrate the full functionality of the rollover effects, along with some other features that don't come with HTML select/option forms.
+
+        The buttons above are inter-connected with one another and with the input box. Click the buttons and enter some text to see how they interact. These are dumned-down buttons from my <a target=" _blank" style={{color: 'red'}} href="http://machinegun.ninja">Game of Score</a> Haskell websockets multiplayer math game. The buttons presented here demonstrate the full functionality of the rollover effects, along with some other features that don't come with HTML select/option forms.
           When the value of 'data.test' is 'true', data.groupWatch() automatically changes button highlighting when the value of 'data.group' changes. When the mouse enters a button, data.test is set to 'false' allowing the rollover effect to override 'data.groupWatch()'.
           <br /><br />
           The movement from MVC frameworks to Facebook's React to Mr. Weststrate's mobservable-React hybrid seems to portend a progression into a future hybrid not only free from Flux and its progeny, but possibly free even from React's 'state' object, which at first appears to be essential. Now it could be that Facebook's website needs Flux, and would flounder if it were to substitue mobservable for its dispatchers, stores, state object, and Flux. My websockets-react project isn't handling much traffic, but it is fairly complex. The more I convert over to mobservable, the easier it gets to follow code logic and add features. I haven't noticed an deterioration in performance, and I suspect that it can handle heavier loads than the earlier version which held more tightly to Facebook's patterns.  As I move things out of the 'state' object and into mobservable objects, I remove the associated 'setState' code, along with the getter code, and install methods in mobservable-encapsulated objects that cause the application to take care of itself automatically. That is what I did with these buttons.
@@ -546,16 +548,18 @@ data.fib2 = (x) => {
        The line 'let increaseX = this.data.increaseX' is also present in 'render()', but rendering does not trigger its execution. The relevant difference between 'increaseX' and 'g' from a practical perspective is that 'g' is defined inside of the data object but 'increaseX' is incorporated into 'data' externally with with the code: 'data.increaseX = ...'. Another way of looking at this is to see that 'g' was inside of 'data' when it was encapsulated, but 'increaseX' was tacked on after encapsulation. The precise explanation for this behavior can be found in the details of the code.
           <br />
 <h3>Discussion of Fibonacci Numbers</h3>
-The 1477th number in the Fibonacci sequence is the biggest number browsers can display.<br /><br />
+The 1475th number in the Fibonacci sequence is about the biggest number browsers can display.<br /><br />
 fib(1477) =  1.3069892237633987e+308 <br />
 fib(1478) = Infinity<br />
 <br />
-To see how much overhead is entailed in working inside a number created by
+To see how much overhead is entailed by working inside a number created by
 <div>let rf = mobservable.makeReactive(1)</div>
-and a series that performs operations on a list [a, b], mutating it to [a+b, a] to increment the sequence and eventually returning [a, b][0]. On a Chrome browser, I got<br />
- mobservable fib(100,000,000) elapsed time 2137 milliseconds<br />
- and ordinary fib(100,000,000) elapsed time 766 milliseconds.
- On Firefox, I got 1602 and 380 milliseconds and on Opera, 2028 and 757 milliseconds. Repeated computations after the first two or three did not differ segnificantly from one another. There seemed to be some chaching taking place, although on Chrome and Opera, the first ordinary computation was much faster than the subsequent ordinary computations. The data was gathered on a run-of-the-mill Ubuntu 14.04 desktop box.
+and a series that performs operations on an array [a, b], mutating it to [a+b, a] to increment the sequence and eventually returning [a, b][0]. I used the same technique only without the array in the code here.
+
+On a Chrome browser, I got<br />
+ mobservable fib(100,000,000) elapsed time 1883 milliseconds<br />
+ and ordinary fib(100,000,000) elapsed time 815 milliseconds.
+ On Firefox, I got 1452 and 380 milliseconds and on Opera, 1709 and 760 milliseconds. Repeated computations did not differ segnificantly from one another except that on Chrome and Opera, the first ordinary computation was much faster than the subsequent ones. The data was gathered on a run-of-the-mill Ubuntu 14.04 desktop box.
  <p>All of this was done mainly for amusement, but it did provide some reasurrance that using mobservabale to access current and most recent state will not entail a performance hit. A user requesting fib(1477) won't notice the extra 2 or 3 microseconds involved in getting it through a sequence of mobservable reactive numbers.</p>
  <br />
   The buttons shown here work fine with React's state and props objects left empty. You might wonder why I use React at all. Mobservable doesn't rely on React. Well, this code is a snippet from my websockets-react project. The complete code is available at <a style={{color: 'red'}} href="https://github.com/dschalk/websockets-react">https://github.com/dschalk/websockets-react</a>. An explanation of the project is at <a style={{color: 'red'}} href="https://www.fpcomplete.com/user/dschalk/Websockets%20Game%20of%20Score">https://www.fpcomplete.com/user/dschalk/Websockets%20Game%20of%20Score</a>. My server is a modified Haskell Wai-Websockets server. Like mobservable, it does much in a very simple and elegant manner.
