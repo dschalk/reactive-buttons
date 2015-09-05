@@ -2,7 +2,7 @@
 import React from'react';
 import mobservable from 'mobservable';
 import {reactiveComponent} from 'mobservable-react';
-// require('mobservable-react-devtools');
+require('mobservable-react-devtools');
 let reactMixin = require('react-mixin');
 export {B2};
 
@@ -115,22 +115,18 @@ let mouseHandlerx = {
     38: 'burlywood',
     47: '#000',
     470: 'darkred',
-    48: 'yellow',
+    48: 'burlywood',
     57: '#000',
     570: 'darkred',
-    58: 'yellow',
+    58: 'burlywood',
+    67: '#000',
+    670: 'darkred',
+    68: 'burlywood',
 };
 
 let mouseHandler = mobservable.makeReactive(mouseHandlerx);
 
 let temp = [1,1];
-
-let m = mobservable.makeReactive(3);
-m.ret = (x) => m(x);
-m.bind = (g) => g(m());
-m.observe(function(a,b) {
-  console.log('m changed from ', b, ' to ', a);
-});
 
 let data = mobservable.makeReactive({
   group: 'solo',
@@ -248,32 +244,32 @@ data.increaseW = () => {
   return data.w;
 }
 
-data.fib = (x) => {
-  let n = 1*x;
-  switch (n) {
-    case 1:
-      return 0;
-    case 2:
-      return 1;
-    case 3:
-      return 1;
-  }
-  if ( n > 3) {
-      let xx = 2;
-      let k = 0;
-      let rf = mobservable.makeReactive(1);
-      rf.observe(function(a,b) {
-        xx = a+b;
-      });
-      let a = Date.now();
-      for (k=4; k<n; k+=1) {
-        rf(xx);
-      }
-      let b = Date.now();
-      data.t = b - a;
-      return xx; }
-      else return "Enter an integer greater than 0";
-};
+   data.fib = (x) => {
+     let n = 1*x;
+     switch (n) {
+       case 1:
+         return 0;
+       case 2:
+         return 1;
+       case 3:
+         return 1;
+     }
+     if ( n > 3) {
+         let xx = 2;
+         let k = 0;
+         let rf = mobservable.makeReactive(1);
+         rf.observe(function(a,b) {
+           xx = a+b;
+         });
+         let a = Date.now();
+         for (k=4; k<n; k+=1) {
+           rf(xx);
+         }
+         let b = Date.now();
+         data.t = b - a;
+         return xx; }
+         else return "Enter an integer greater than 0";
+   };
 
 data.fib2 = (x) => {
   let n = 1*x;
@@ -303,7 +299,26 @@ data.fib2 = (x) => {
       else return "Enter an integer greater than 0";
 };
 
+@reactiveComponent class Monad {
+  constructor(z) {
+    this.x = mobservable.makeReactive(z);
+    this.x.ret = (a) => {
+      return this.x(a);
+    }
 
+    this.x.bnd = (func) => {
+      let z = func(this.x());
+      return(z);
+    }
+  }
+}
+
+let m = new Monad(1);
+m.x.observe(function(a,b) {
+  m3.x(a*a);
+});
+let m2 = new Monad(1);
+let m3 = new Monad(0);
 
 @reactiveComponent class B2 extends React.Component {
   constructor(props) {
@@ -311,14 +326,29 @@ data.fib2 = (x) => {
     this.mouse = mouseHandler;
     this.data = data;
     this.m = m;
+    this.m2 = m2;
+    this.m3 = m3;
     this.state = {
       fibonacci2: 0,
       t2: 0
     }
   }
 
-  f = x => this.m(x * x * x);
-  g = x => this.m(3);
+  f = x => this.m2.x(x + 1);
+
+  fself = w => {
+    this.m.x(w + 1);
+    return this.m.x;
+  }
+
+  f3self = w => {
+    this.m.x(w + 3);
+    return this.m.x;
+  }
+
+  reset_1 = x => this.m.x(1);
+  reset_2 = x => this.m2.x(1);
+  reset_3 = x => this.m3.x(0);
 
   blib = (x) => {
     this.data.p = x;
@@ -409,9 +439,12 @@ data.fib2 = (x) => {
     let cr57 = this.mouse[57];
     let cr570 = this.mouse[570];
     let cr58 = this.mouse[58];
+    let cr67 = this.mouse[67];
+    let cr670 = this.mouse[670];
+    let cr68 = this.mouse[68];
 
     return (
-      <div style={{ backgroundColor: '#000', height: 3800, width: '100%', color: '#FFE4C4' }}>
+      <div style={{ backgroundColor: '#000', height: 2800, width: '100%', color: '#FFE4C4' }}>
         <br /><br /><br />
           <h2 style={{textAlign: 'center'}} >Sensitivity of Observable Functions and Methods</h2>
         <div style={{width: '40%', marginLeft: 85, float: 'right', marginRight: 2}} >
@@ -601,31 +634,43 @@ On a Chrome browser, I got<br />
             >
             {message}
           </button>
+
+
   </div>
 
-  <div style={{width: '100%', textAlign: 'center', float: 'left' }} > 
-    
-    <h1>Monads</h1>
+    <div style={{width: '100%', textAlign: 'center', float: 'left' }} >
 
-            <h2> The monad m: {this.m()} </h2>
+        <h1>Mobservable Monads</h1>
 
-          <button style={this.style8(cr47,cr470,cr48)} onClick={() => {this.m.bind(this.f)}}
+            <h2> The monad m: {this.m.x()} </h2>
+            <h2> The monad m2: {this.m2.x()} </h2>
+            <h2> The monad m3: {this.m3.x()} </h2>
+
+          <button style={this.style8(cr27,cr270,cr28)} onClick={() => {this.m.x.bnd(this.fself)}}
+            onMouseEnter={() => {this.mouse[27] = 'blue', this.mouse[270] = 'lightblue', this.mouse[28] = 'yellow'}}
+            onMouseLeave={() => {this.mouse[27] = '#000', this.mouse[270] = 'darkred', this.mouse[28] = 'burlywood'}}
+            > Click to increase m1.
+          </button>
+          <br /><br />
+          <button style={this.style8(cr67,cr670,cr68)} onClick={() => {this.m.x.bnd(this.f)}}
+            onMouseEnter={() => {this.mouse[67] = 'blue', this.mouse[670] = 'lightblue', this.mouse[68] = 'yellow'}}
+            onMouseLeave={() => {this.mouse[67] = '#000', this.mouse[670] = 'darkred', this.mouse[68] = 'burlywood'}}
+            > Click to cause m2 = m1 + 1.
+          </button>
+          <br /><br />
+          <button style={this.style8(cr47,cr470,cr48)} onClick={() => {this.m.x.bnd(this.reset_1)}}
             onMouseEnter={() => {this.mouse[47] = 'blue', this.mouse[470] = 'lightblue', this.mouse[48] = 'yellow'}}
             onMouseLeave={() => {this.mouse[47] = '#000', this.mouse[470] = 'darkred', this.mouse[48] = 'burlywood'}}
-            > Click to tripple the monad.
+            > Click to re-set m1.
           </button>
-        <br /><br />
-          <button style={this.style8(cr57,cr570,cr58)} onClick={() => {this.m.bind(this.g)}}
+          <br /><br />
+          <button style={this.style8(cr57,cr570,cr58)} onClick={() => {this.m3.x.bnd(this.reset_3)}}
             onMouseEnter={() => {this.mouse[57] = 'blue', this.mouse[570] = 'lightblue', this.mouse[58] = 'yellow'}}
             onMouseLeave={() => {this.mouse[57] = '#000', this.mouse[570] = 'darkred', this.mouse[58] = 'burlywood'}}
-            > Click to reset the monad.
+            > Click to reset m3.
           </button>
-
-
-
-
-<br /><br />
-</div>
+         <br /><br />
+  </div>
 
 </div>
     )}
