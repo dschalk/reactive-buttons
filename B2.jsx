@@ -2,7 +2,7 @@
 import React from'react';
 import mobservable from 'mobservable';
 import {reactiveComponent} from 'mobservable-react';
-require('mobservable-react-devtools');
+// require('mobservable-react-devtools');
 let reactMixin = require('react-mixin');
 export {B2};
 
@@ -112,12 +112,25 @@ let mouseHandlerx = {
     28: 'burlywood',
     37: '#000',
     370: 'darkred',
-    38: 'burlywood'
+    38: 'burlywood',
+    47: '#000',
+    470: 'darkred',
+    48: 'yellow',
+    57: '#000',
+    570: 'darkred',
+    58: 'yellow',
 };
 
 let mouseHandler = mobservable.makeReactive(mouseHandlerx);
 
 let temp = [1,1];
+
+let m = mobservable.makeReactive(3);
+m.ret = (x) => m(x);
+m.bind = (g) => g(m());
+m.observe(function(a,b) {
+  console.log('m changed from ', b, ' to ', a);
+});
 
 let data = mobservable.makeReactive({
   group: 'solo',
@@ -290,16 +303,22 @@ data.fib2 = (x) => {
       else return "Enter an integer greater than 0";
 };
 
+
+
 @reactiveComponent class B2 extends React.Component {
   constructor(props) {
     super(props);
     this.mouse = mouseHandler;
     this.data = data;
+    this.m = m;
     this.state = {
       fibonacci2: 0,
       t2: 0
     }
   }
+
+  f = x => this.m(x * x * x);
+  g = x => this.m(3);
 
   blib = (x) => {
     this.data.p = x;
@@ -384,9 +403,15 @@ data.fib2 = (x) => {
     let cr37 = this.mouse[37];
     let cr370 = this.mouse[370];
     let cr38 = this.mouse[38];
+    let cr47 = this.mouse[47];
+    let cr470 = this.mouse[470];
+    let cr48 = this.mouse[48];
+    let cr57 = this.mouse[57];
+    let cr570 = this.mouse[570];
+    let cr58 = this.mouse[58];
 
     return (
-      <div style={{ backgroundColor: '#000', height: 2800, width: '100%', color: '#FFE4C4' }}>
+      <div style={{ backgroundColor: '#000', height: 3800, width: '100%', color: '#FFE4C4' }}>
         <br /><br /><br />
           <h2 style={{textAlign: 'center'}} >Sensitivity of Observable Functions and Methods</h2>
         <div style={{width: '40%', marginLeft: 85, float: 'right', marginRight: 2}} >
@@ -576,9 +601,32 @@ On a Chrome browser, I got<br />
             >
             {message}
           </button>
-
-
   </div>
+
+  <div style={{width: '100%', textAlign: 'center', float: 'left' }} > 
+    
+    <h1>Monads</h1>
+
+            <h2> The monad m: {this.m()} </h2>
+
+          <button style={this.style8(cr47,cr470,cr48)} onClick={() => {this.m.bind(this.f)}}
+            onMouseEnter={() => {this.mouse[47] = 'blue', this.mouse[470] = 'lightblue', this.mouse[48] = 'yellow'}}
+            onMouseLeave={() => {this.mouse[47] = '#000', this.mouse[470] = 'darkred', this.mouse[48] = 'burlywood'}}
+            > Click to tripple the monad.
+          </button>
+        <br /><br />
+          <button style={this.style8(cr57,cr570,cr58)} onClick={() => {this.m.bind(this.g)}}
+            onMouseEnter={() => {this.mouse[57] = 'blue', this.mouse[570] = 'lightblue', this.mouse[58] = 'yellow'}}
+            onMouseLeave={() => {this.mouse[57] = '#000', this.mouse[570] = 'darkred', this.mouse[58] = 'burlywood'}}
+            > Click to reset the monad.
+          </button>
+
+
+
+
+<br /><br />
+</div>
+
 </div>
     )}
   };
