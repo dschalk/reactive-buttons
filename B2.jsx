@@ -2,7 +2,7 @@
 import React from'react';
 import mobservable from 'mobservable';
 import {reactiveComponent} from 'mobservable-react';
-require('mobservable-react-devtools');
+// require('mobservable-react-devtools');
 let reactMixin = require('react-mixin');
 export {B2};
 
@@ -122,6 +122,27 @@ let mouseHandlerx = {
     67: '#000',
     670: 'darkred',
     68: 'burlywood',
+    77: '#000',
+    770: 'darkred',
+    78: 'burlywood',
+    87: '#000',
+    870: 'darkred',
+    88: 'burlywood',
+    97: '#000',
+    970: 'darkred',
+    98: 'burlywood',
+    107: '#000',
+    1070: 'darkred',
+    108: 'burlywood',
+    117: '#000',
+    1170: 'darkred',
+    118: 'burlywood',
+    127: '#000',
+    1270: 'darkred',
+    128: 'burlywood',
+    137: '#000',
+    1370: 'darkred',
+    138: 'burlywood'
 };
 
 let mouseHandler = mobservable.makeReactive(mouseHandlerx);
@@ -302,19 +323,20 @@ data.fib2 = (x) => {
 @reactiveComponent class Monad {
   constructor(z) {
     this.x = mobservable.makeReactive(z);
-    this.x.ret = (a) => {
-      return this.x(a);
-    }
 
     this.x.bnd = (func) => {
-      let z = func(this.x());
-      return(z);
+      return func(this.x());
     }
   }
 }
 
+let monads = mobservable.makeReactive({
+  newMonad: new Monad(0)  
+});
+
 let m = new Monad(1);
 m.x.observe(function(a,b) {
+  console.log('m changed from ' + b + ' to ' + a);
   m3.x(a*a);
 });
 let m2 = new Monad(1);
@@ -325,30 +347,62 @@ let m3 = new Monad(0);
     super(props);
     this.mouse = mouseHandler;
     this.data = data;
-    this.m = m;
-    this.m2 = m2;
-    this.m3 = m3;
+    this.monads = monads;
+    this.m = m.x;
+    this.m2 = m2.x;
+    this.m3 = m3.x;
     this.state = {
       fibonacci2: 0,
       t2: 0
     }
   }
 
-  f = x => this.m2.x(x + 1);
-
-  fself = w => {
-    this.m.x(w + 1);
-    return this.m.x;
+  f = x => {
+    this.m2(x + 1);
+    return this.m2;
   }
 
-  f3self = w => {
-    this.m.x(w + 3);
-    return this.m.x;
+  fmSubtract1 = w => {
+    this.m(w - 1);
+    return this.m;
   }
 
-  reset_1 = x => this.m.x(1);
-  reset_2 = x => this.m2.x(1);
-  reset_3 = x => this.m3.x(0);
+  fmAdd1 = w => {
+    this.m(w + 1);
+    return this.m;
+  }
+
+  monadReturn = w => {
+    this.monads.newMonad = new Monad(w);
+    return this.monads.newMonad.x;
+  }
+
+  fmSquare = w => {
+    this.m(w * w);
+    return this.m;
+  }
+
+  fmAdd_then_Square = w => {
+    this.m(w + 1);
+    let z = this.m();
+    this.m(z * z);
+    return this.m;
+  }
+
+  reset_1 = () => {
+    this.m(1);
+    return this.m;
+  }
+
+  reset_2 = () => {
+    this.m2(1);
+    return this.m2;
+  }
+
+  reset_3 = () => {
+    this.m3(0);
+    return this.m3;
+  }
 
   blib = (x) => {
     this.data.p = x;
@@ -380,6 +434,7 @@ let m3 = new Monad(0);
 
   render = () => {
     let twoTimes = this.data.twoTimes;
+    let m4 = this.monads.newMonad.x;
     console.log(this);
     let x = this.data.x;
     let g = this.data.g;
@@ -442,9 +497,30 @@ let m3 = new Monad(0);
     let cr67 = this.mouse[67];
     let cr670 = this.mouse[670];
     let cr68 = this.mouse[68];
+    let cr77 = this.mouse[77];
+    let cr770 = this.mouse[770];
+    let cr78 = this.mouse[78];
+    let cr87 = this.mouse[87];
+    let cr870 = this.mouse[870];
+    let cr88 = this.mouse[88];
+    let cr97 = this.mouse[97];
+    let cr970 = this.mouse[970];
+    let cr98 = this.mouse[98];
+    let cr107 = this.mouse[107];
+    let cr1070 = this.mouse[1070];
+    let cr108 = this.mouse[108];
+    let cr117 = this.mouse[117];
+    let cr1170 = this.mouse[1170];
+    let cr118 = this.mouse[118];
+    let cr127 = this.mouse[127];
+    let cr1270 = this.mouse[1270];
+    let cr128 = this.mouse[128];
+    let cr137 = this.mouse[137];
+    let cr1370 = this.mouse[1370];
+    let cr138 = this.mouse[138];
 
     return (
-      <div style={{ backgroundColor: '#000', height: 2800, width: '100%', color: '#FFE4C4' }}>
+      <div style={{ backgroundColor: '#000', height: 3800, width: '100%', color: '#FFE4C4' }}>
         <br /><br /><br />
           <h2 style={{textAlign: 'center'}} >Sensitivity of Observable Functions and Methods</h2>
         <div style={{width: '40%', marginLeft: 85, float: 'right', marginRight: 2}} >
@@ -581,7 +657,7 @@ let m3 = new Monad(0);
 <Fibonacci fib = {this.blib}> </Fibonacci>
           Elapsed time = {t} milliseconds.
           <br />
-          The computer code is at <a style={{color: 'red'}} href="https://github.com/dschalk/mobservable-react-buttons">mobservable-react-buttons</a>
+          The computer code is at <a style={{color: ''}} href="https://github.com/dschalk/mobservable-react-buttons">mobservable-react-buttons</a>
   <br /><br />
 <h3>Plain Fibonacci Numbers</h3>
 <h3>Ordinary array [a, b] -> [a+b, a]</h3>
@@ -590,7 +666,7 @@ let m3 = new Monad(0);
   <br />Elapsed time = {t2} milliseconds.
   <br /><br />
 
-        The buttons above are inter-connected with one another and with the input box. Click the buttons and enter some text to see how they interact. These are dumned-down buttons from my <a target=" _blank" style={{color: 'red'}} href="http://machinegun.ninja">Game of Score</a> Haskell websockets multiplayer math game. The buttons presented here demonstrate the full functionality of the rollover effects, along with some other features that don't come with HTML select/option forms.
+        The buttons above are inter-connected with one another and with the input box. Click the buttons and enter some text to see how they interact. These are dumned-down buttons from my <a target=" _blank" style={{color: '#f26d6d'}} href="http://machinegun.ninja">Game of Score</a> Haskell websockets multiplayer math game. The buttons presented here demonstrate the full functionality of the rollover effects, along with some other features that don't come with HTML select/option forms.
           When the value of 'data.test' is 'true', data.groupWatch() automatically changes button highlighting when the value of 'data.group' changes. When the mouse enters a button, data.test is set to 'false' allowing the rollover effect to override 'data.groupWatch()'.
           <br /><br />
           The movement from MVC frameworks to Facebook's React to Mr. Weststrate's mobservable-React hybrid seems to portend a progression into a future hybrid not only free from Flux and its progeny, but possibly free even from React's 'state' object, which at first appears to be essential. Now it could be that Facebook's website needs Flux, and would flounder if it were to substitue mobservable for its dispatchers, stores, state object, and Flux. My websockets-react project isn't handling much traffic, but it is fairly complex. The more I convert over to mobservable, the easier it gets to follow code logic and add features. I haven't noticed an deterioration in performance, and I suspect that it can handle heavier loads than the earlier version which held more tightly to Facebook's patterns.  As I move things out of the 'state' object and into mobservable objects, I remove the associated 'setState' code, along with the getter code, and install methods in mobservable-encapsulated objects that cause the application to take care of itself automatically. That is what I did with these buttons.
@@ -620,7 +696,7 @@ On a Chrome browser, I got<br />
  On Firefox, I got 1452 and 380 milliseconds and on Opera, 1709 and 760 milliseconds. Repeated computations did not differ segnificantly from one another except that on Chrome and Opera, the first ordinary computation was much faster than the subsequent ones. The data was gathered on a run-of-the-mill Ubuntu 14.04 desktop box.
  <p>All of this was done mainly for amusement, but it did provide some reasurrance that using mobservabale to access current and most recent state will not entail a performance hit. A user requesting fib(1477) won't notice the extra 2 or 3 microseconds involved in getting it through a sequence of mobservable reactive numbers.</p>
  <br />
-  The buttons shown here work fine with React's state and props objects left empty. You might wonder why I use React at all. Mobservable doesn't rely on React. Well, this code is a snippet from my websockets-react project. The complete code is available at <a style={{color: 'red'}} href="https://github.com/dschalk/websockets-react">https://github.com/dschalk/websockets-react</a>. An explanation of the project is at <a style={{color: 'red'}} href="https://www.fpcomplete.com/user/dschalk/Websockets%20Game%20of%20Score">https://www.fpcomplete.com/user/dschalk/Websockets%20Game%20of%20Score</a>. My server is a modified Haskell Wai-Websockets server. Like mobservable, it does much in a very simple and elegant manner.
+  The buttons shown here work fine with React's state and props objects left empty. You might wonder why I use React at all. Mobservable doesn't rely on React. Well, this code is a snippet from my websockets-react project. The complete code is available at <a style={{color: '#f26d6d'}} href="https://github.com/dschalk/websockets-react">https://github.com/dschalk/websockets-react</a>. An explanation of the project is at <a style={{color: '#f26d6d'}} href="https://www.fpcomplete.com/user/dschalk/Websockets%20Game%20of%20Score">https://www.fpcomplete.com/user/dschalk/Websockets%20Game%20of%20Score</a>. My server is a modified Haskell Wai-Websockets server. Like mobservable, it does much in a very simple and elegant manner.
   <br /><br /> I used 'react_mixin', but it is not necessary for the buttons. I used it to grab a React mixin out of 'node_modules' to support autoFocus ('autofocus' in regular HTML).
             <br />
             <h2>Temporary Button</h2>
@@ -641,35 +717,92 @@ On a Chrome browser, I got<br />
     <div style={{width: '100%', textAlign: 'center', float: 'left' }} >
 
         <h1>Mobservable Monads</h1>
-
-            <h2> The monad m: {this.m.x()} </h2>
-            <h2> The monad m2: {this.m2.x()} </h2>
-            <h2> The monad m3: {this.m3.x()} </h2>
-
-          <button style={this.style8(cr27,cr270,cr28)} onClick={() => {this.m.x.bnd(this.fself)}}
+        <span style={{width: '80%', fontStyle: 'italic', textAlign: 'center', fontSize: 24 }}> If it walks like a duck, and quacks like a duck, it ... </span>
+        <p style={{textAlign: 'left', marginLeft: 40, marginRight: 40 }} > Mobservable reactive entities contain values. I added 'bind'(a/k/a '>>=') and 'return' and tested to see if Mobservable obeys the monad laws. Mobservable passed the test cases with flying colors. I don't have a formal proof, but I'm calling these critters 'monads'.</p> 
+        <p style={{textAlign: 'left', marginLeft: 40, marginRight: 40 }} > We could perform all operations with side effects inside of Mobservable monads, interracting with the world only through 'Mobservable.sideEffect'. The server for my "Game of Score" project at <a style={{color: '#f26d6d'}} href="https://www.fpcomplete.com/user/dschalk/Websockets%20Game%20of%20Score">Explanation of Score</a> and <a style={{ color: '#f26d6d'}} href="http://machinegun.ninja">Online Game of Score</a> works that way, it being a modified Haskell Wai Websockets server. I get a peaceful feeling when I work on my server.  </p>  
+ <div style={{float:'right', width: '40%'}}  >
+   <br /><br /><br /><br /><br />
+            <h2> The monad m: {this.m()} </h2>
+            <h2> The monad m2: {this.m2()} </h2>
+            <h2> The monad m3: {this.m3()} </h2>
+            <h2> Created by monadReturn: {m4()} </h2>
+  </div>
+  <div style={{float:'left', width: '55%'}}  >
+    <br /><br />
+          <button style={this.style8(cr77,cr770,cr78)} onClick={() => {this.m.bnd(this.fmAdd1)}}
+            onMouseEnter={() => {this.mouse[77] = 'blue', this.mouse[770] = 'lightblue', this.mouse[78] = 'yellow'}}
+            onMouseLeave={() => {this.mouse[77] = '#000', this.mouse[770] = 'darkred', this.mouse[78] = 'burlywood'}}
+            > Click to increase m.
+          </button>
+          <br /><br />
+          <button style={this.style8(cr87,cr870,cr88)} onClick={() => {this.m.bnd(this.fmSubtract1)}}
+            onMouseEnter={() => {this.mouse[87] = 'blue', this.mouse[870] = 'lightblue', this.mouse[88] = 'yellow'}}
+            onMouseLeave={() => {this.mouse[87] = '#000', this.mouse[870] = 'darkred', this.mouse[88] = 'burlywood'}}
+            > Click to decrease m.
+          </button>
+          <br /><br />
+          <button style={this.style8(cr97,cr970,cr98)} onClick={() => {this.m.bnd(this.fmSquare)}}
+            onMouseEnter={() => {this.mouse[97] = 'blue', this.mouse[970] = 'lightblue', this.mouse[98] = 'yellow'}}
+            onMouseLeave={() => {this.mouse[97] = '#000', this.mouse[970] = 'darkred', this.mouse[98] = 'burlywood'}}
+            > Click to square m.
+          </button>
+          <h3>Left Identity</h3>
+          <button style={this.style8(cr107,cr1070,cr108)} onClick={() => {this.monadReturn(7).bnd(this.fmSquare)}}
+            onMouseEnter={() => {this.mouse[107] = 'blue', this.mouse[1070] = 'lightblue', this.mouse[108] = 'yellow'}}
+            onMouseLeave={() => {this.mouse[107] = '#000', this.mouse[1070] = 'darkred', this.mouse[108] = 'burlywood'}}
+            > Click to see this.monadReturn(7).bind(this.fmSquare).
+          </button>
+          <br /><br />
+          <button style={this.style8(cr117,cr1170,cr118)} onClick={() => {this.fmSquare(7)}}
+            onMouseEnter={() => {this.mouse[117] = 'blue', this.mouse[1170] = 'lightblue', this.mouse[118] = 'yellow'}}
+            onMouseLeave={() => {this.mouse[117] = '#000', this.mouse[1170] = 'darkred', this.mouse[118] = 'burlywood'}}
+            > Click to see fmSquare(7).
+          </button>
+          <br /><br />
+          <h3>Right Identity</h3>
+          <button style={this.style8(cr127,cr1270,cr128)} onClick={() => {this.m.bnd(this.monadReturn)}}
+            onMouseEnter={() => {this.mouse[127] = 'blue', this.mouse[1270] = 'lightblue', this.mouse[128] = 'yellow'}}
+            onMouseLeave={() => {this.mouse[127] = '#000', this.mouse[1270] = 'darkred', this.mouse[128] = 'burlywood'}}
+            > Click to see this.m.bnd(this.monadReturn).
+          </button>
+          <br /><br />
+          <h3> Associativity </h3>
+          <button style={this.style8(cr137,cr1370,cr138)} onClick={() => {this.m.bnd(this.fmAdd1).bnd(this.fmSquare)}}
+            onMouseEnter={() => {this.mouse[137] = 'blue', this.mouse[1370] = 'lightblue', this.mouse[138] = 'yellow'}}
+            onMouseLeave={() => {this.mouse[137] = '#000', this.mouse[1370] = 'darkred', this.mouse[138] = 'burlywood'}}
+            > Click to bind fmAdd1 to m.x, and then bind fmSquare to the result.
+          </button>
+          <br /><br />
+          <button style={this.style8(cr27,cr270,cr28)} onClick={() => {this.m.bnd(this.fmAdd_then_Square)}}
             onMouseEnter={() => {this.mouse[27] = 'blue', this.mouse[270] = 'lightblue', this.mouse[28] = 'yellow'}}
             onMouseLeave={() => {this.mouse[27] = '#000', this.mouse[270] = 'darkred', this.mouse[28] = 'burlywood'}}
-            > Click to increase m1.
+            > Click to bind fmAdd_then_Square to m.x.
           </button>
           <br /><br />
-          <button style={this.style8(cr67,cr670,cr68)} onClick={() => {this.m.x.bnd(this.f)}}
+          <button style={this.style8(cr67,cr670,cr68)} onClick={() => {this.m.bnd(this.f)}}
             onMouseEnter={() => {this.mouse[67] = 'blue', this.mouse[670] = 'lightblue', this.mouse[68] = 'yellow'}}
             onMouseLeave={() => {this.mouse[67] = '#000', this.mouse[670] = 'darkred', this.mouse[68] = 'burlywood'}}
-            > Click to cause m2 = m1 + 1.
+            > Click to cause m2 = m + 1.
           </button>
           <br /><br />
-          <button style={this.style8(cr47,cr470,cr48)} onClick={() => {this.m.x.bnd(this.reset_1)}}
+          <button style={this.style8(cr47,cr470,cr48)} onClick={() => {this.m.bnd(this.reset_1)}}
             onMouseEnter={() => {this.mouse[47] = 'blue', this.mouse[470] = 'lightblue', this.mouse[48] = 'yellow'}}
             onMouseLeave={() => {this.mouse[47] = '#000', this.mouse[470] = 'darkred', this.mouse[48] = 'burlywood'}}
             > Click to re-set m1.
           </button>
           <br /><br />
-          <button style={this.style8(cr57,cr570,cr58)} onClick={() => {this.m3.x.bnd(this.reset_3)}}
+          <button style={this.style8(cr57,cr570,cr58)} onClick={() => {this.m3.bnd(this.reset_3)}}
             onMouseEnter={() => {this.mouse[57] = 'blue', this.mouse[570] = 'lightblue', this.mouse[58] = 'yellow'}}
             onMouseLeave={() => {this.mouse[57] = '#000', this.mouse[570] = 'darkred', this.mouse[58] = 'burlywood'}}
             > Click to reset m3.
           </button>
          <br /><br />
+  </div>
+
+
+
+
+
   </div>
 
 </div>
