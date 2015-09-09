@@ -689,8 +689,8 @@ fib(1477) =  1.3069892237633987e+308 <br />
 fib(1478) = Infinity<br />
 <br />
 To see how much overhead is entailed by working with a number created by
-"let rf = mobservable.makeReactive(1)", I used the fact that the reactive number had access to its present and previous values to generate the Fibonacci series. Each time the loop calls "rf(xx)", xx is automatically incremented by 
-"rf.observe(function(a,b) '{xx = a+b}')" 
+"let rf = mobservable.makeReactive(1)", I used the fact that the reactive number had access to its present and previous values to generate the Fibonacci series. Each time the loop calls "rf(xx)", xx is automatically incremented by adding the a and b in
+"rf.observe(function(a,b))" 
 So, for example, running "rf(xx)" nine times in a loop is all it takes to compute the 9th number in the series.
 <br /><br />
 

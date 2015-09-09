@@ -35,7 +35,7 @@ To get a feel for how much overhead is entailed in working inside a number creat
 ```javascript
 let rf = mobservable.makeReactive(1)
 ```
-I compared it to an algorithm that performs operations on an array [a, b], mutating it to [a+b, a] to increment the sequence and eventually returning [a, b][0]. In all cases, I computed the 100,000,000th number in the fibonacci sequence ('Infinity' of course). In a Chrome browser, I got
+I compared an algorithm using raw numbers to an algorithm using a mobservable reactive number created by rf = "mobservable.makeReactive(1)". A variable "xx" is updated by "rf.observe(function(a,b) {xx = a + b})". "xx" gets automatically updated each time a for loop runs rf(xx) so, for example, if the loop cycles 9 times, a() is the 9th number in the Fibonacci series.    
 
 ```javascript
 mobservable fib(100000000) elapsed time 2019 milliseconds
@@ -44,8 +44,6 @@ mobservable fib(100000000) elapsed time 2019 milliseconds
  ```javascript
  ordinary fib(100000000) elapsed time 815 milliseconds.
  ```
-In the code published here, I used the same technique only without the array. There was no noticeable difference in performance.
-
  In Firefox, I got 1452 and 380 milliseconds and on Opera, 1816 and 815 milliseconds. Repeated computations after the first two or three did not differ significantly from one another. There seemed to be some caching taking place, although on Chrome and Opera, the first ordinary computation was much faster than the subsequent ordinary computations. The data was gathered on a run-of-the-mill Ubuntu 14.04 desktop box.
  All of this was done mainly for amusement, but it did provide some reassurance that using mobservabale to access current and most recent state will not entail a performance hit. A user requesting fib(1477) won't notice the extra 2 or 3 microseconds involved in getting it through a sequence of mobservable reactive numbers.
 
@@ -119,11 +117,10 @@ In the code published here, I used the same technique only without the array. Th
   ```
 ##Reactive Methods
 
-  Every time React renders the B2 component, reactive functions merely mentioned in the render function are executed. The variable 'data.x' is not involved in the method 'g', which computes sequential Fibinacci numbers, yet incrementing x causes the next fibinacci number to be displayed. In fact, just moving the mouse pointer in or out of the 'Value of data.x" button causes the sequence to increment. You dont's have to click the button.
+When React renders the the main component (B2), reactive functions merely mentioned in the render function are executed. The variable 'data.x' is not involved in the method 'g', which computes sequential Fibonacci numbers, yet incrementing x causes the next fibonacci number to be displayed. In fact, Rolling over any rollover button, clicking any button, or entering text causes the sequence to progress, unless the rollover, click, or text entry doesn't change anything. This is reassuring evidence that no unnecessary rendering is taking place.
 
-  Rolling over any rollover button or entering text causes the sequence to progress, unless the rollover or text entry doesn't change anything. It is reassuring to see that if a rollover button is already selected, rolling over it or clicking it to select an already-selected group does not increase the Fibinacci number. That means there is no unnecessary rendering so we don't need the PureRenderMixin. With mobservable, state might render unnecessarily, but as I incorporate mobservable in the Game of Score app, the state object keeps shrinking. I don't think I will have anything left in 'state' when I am done. My buttons used to be part of the React state object. You can see here how nicely they function outside of the React 'state' object.
 
-  The line 'let g = this.data.g' in 'render' is all it takes to invoke the automatic incrementing of the Fibonacci series. Note that 'g' is not called and its argument is not modified (that is, not until g modifies it). Being aware of this behavior facilitates writing concise code and helps to avoid magical bugs.  
+The line 'let g = this.data.g' in 'render' is all it takes to invoke this ultra-sensitive behavior. Note that 'g' is not called and its argument is not modified (that is, not until g modifies it). Being aware of this automatic behavior facilitates writing concise code (it doesn't get more concise than not having to write anything), and avoiding magical bugs (things seeming to happen spontaneously).
 
   The line 'let increaseX = this.data.increaseX' is also present in 'render()', but rendering does not trigger its execution. The relevant difference between 'increaseX' and 'g' from a practical perspective is that 'g' is defined inside of the data object but 'increaseX' is incorporated into 'data' externally with with the code: 'data.increaseX = ...'. Another way of looking at this is to see that 'g' was inside of 'data' when it was encapsulated, but 'increaseX' was tacked on after encapsulation. The precise explanation for this behavior can be found in the details of the code.
 

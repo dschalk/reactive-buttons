@@ -518,9 +518,6 @@ let m3 = new Monad(0);
     let cr137 = this.mouse[137];
     let cr1370 = this.mouse[1370];
     let cr138 = this.mouse[138];
-    let a = 1;
-    let b = 1;
-    let xx = 1;
 
     return (
       <div style={{ backgroundColor: '#000', height: 3800, width: '100%', color: '#FFE4C4' }}>
