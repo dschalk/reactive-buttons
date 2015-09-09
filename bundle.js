@@ -673,6 +673,9 @@
 	      var cr137 = _this5.mouse[137];
 	      var cr1370 = _this5.mouse[1370];
 	      var cr138 = _this5.mouse[138];
+	      var a = 1;
+	      var b = 1;
+	      var xx = 1;
 
 	      return _react2['default'].createElement(
 	        'div',
@@ -681,9 +684,9 @@
 	        _react2['default'].createElement('br', null),
 	        _react2['default'].createElement('br', null),
 	        _react2['default'].createElement(
-	          'h2',
+	          'h1',
 	          { style: { textAlign: 'center' } },
-	          'Sensitivity of Observable Functions and Methods'
+	          'Reactive Buttons'
 	        ),
 	        _react2['default'].createElement(
 	          'div',
@@ -865,7 +868,7 @@
 	          'The computer code is at ',
 	          _react2['default'].createElement(
 	            'a',
-	            { style: { color: '' }, href: 'https://github.com/dschalk/mobservable-react-buttons' },
+	            { style: { color: '#f26d6d' }, href: 'https://github.com/dschalk/mobservable-react-buttons' },
 	            'mobservable-react-buttons'
 	          ),
 	          _react2['default'].createElement('br', null),
@@ -919,19 +922,14 @@
 	          _react2['default'].createElement(
 	            'p',
 	            null,
-	            'When React renders the the main component (B2), reactive functions merely mentioned in the render function are executed. The variable \'data.x\' is not involved in the method \'g\', which computes sequential Fibonacci numbers, yet incrementing x causes the next fibonacci number to be displayed. In fact, just moving the mouse pointer in or out of the \'Value of data.x" button causes the sequence to increment. You dont\'s have to click the button.'
+	            'When React renders the the main component (B2), reactive functions merely mentioned in the render function are executed. The variable \'data.x\' is not involved in the method \'g\', which computes sequential Fibonacci numbers, yet incrementing x causes the next fibonacci number to be displayed. In fact, Rolling over any rollover button, clicking any button, or entering text causes the sequence to progress, unless the rollover, click, or text entry doesn\'t change anything. This is reassuring evidence that no unnecessary rendering is taking place. '
 	          ),
 	          _react2['default'].createElement(
 	            'p',
 	            null,
-	            'Rolling over any rollover button or entering text causes the sequence to progress, unless the rollover or text entry doesn\'t change anything. It is reassuring to see that if a rollover button is already selected, rolling over it or clicking it to select an already-selected group does not increase the Fibonacci number. That means there is no unnecessary rendering'
+	            'The line \'let g = this.data.g\' in \'render\' is all it takes to invoke this ultra-sensitive behavior. Note that \'g\' is not called and its argument is not modified (that is, not until g modifies it). Being aware of this automatic behavior facilitates writing concise code (it doesn\'t get more concise than not having to write anything), and avoiding magical bugs (things seeming to happen spontaneously). '
 	          ),
-	          _react2['default'].createElement(
-	            'p',
-	            null,
-	            'The line \'let g = this.data.g\' in \'render\' is all it takes to invoke this behavior. Note that \'g\' is not called and its argument is not modified (that is, not until g modifies it). Being aware of this behavior facilitates writing concise code and avoiding magical bugs. '
-	          ),
-	          'The line \'let increaseX = this.data.increaseX\' is also present in \'render()\', but rendering does not trigger its execution. The relevant difference between \'increaseX\' and \'g\' from a practical perspective is that \'g\' is defined inside of the data object but \'increaseX\' is incorporated into \'data\' externally with with the code: \'data.increaseX = ...\'. Another way of looking at this is to see that \'g\' was inside of \'data\' when it was encapsulated, but \'increaseX\' was tacked on after encapsulation. The precise explanation for this behavior can be found in the details of the code.',
+	          'The line \'let increaseX = this.data.increaseX\' is also present in \'render()\', but rendering does not trigger its execution. The relevant difference between \'increaseX\' and \'g\' from a practical perspective is that \'g\' is defined inside of the reactive data object but \'increaseX\' is incorporated into \'data\' externally with with the code: \'data.increaseX = ...\'. Another way of looking at this is to see that \'g\' was inside of \'data\' when it was encapsulated, but \'increaseX\' was tacked on after encapsulation. The precise explanation for this behavior can only be found in the details of the code.',
 	          _react2['default'].createElement('br', null),
 	          _react2['default'].createElement(
 	            'h3',
@@ -946,13 +944,10 @@
 	          'fib(1478) = Infinity',
 	          _react2['default'].createElement('br', null),
 	          _react2['default'].createElement('br', null),
-	          'To see how much overhead is entailed by working inside a number created by',
-	          _react2['default'].createElement(
-	            'div',
-	            null,
-	            'let rf = mobservable.makeReactive(1)'
-	          ),
-	          'and a series that performs operations on an array [a, b], mutating it to [a+b, a] to increment the sequence and eventually returning [a, b][0]. I used the same technique only without the array in the code here. On a Chrome browser, I got',
+	          'To see how much overhead is entailed by working with a number created by "let rf = mobservable.makeReactive(1)", I used the fact that the reactive number had access to its present and previous values to generate the Fibonacci series. Each time the loop calls "rf(xx)", xx is automatically incremented by adding the a and b in "rf.observe(function(a,b))" So, for example, running "rf(xx)" nine times in a loop is all it takes to compute the 9th number in the series.',
+	          _react2['default'].createElement('br', null),
+	          _react2['default'].createElement('br', null),
+	          'On a Chrome browser, I got',
 	          _react2['default'].createElement('br', null),
 	          'mobservable fib(100,000,000) elapsed time 1883 milliseconds',
 	          _react2['default'].createElement('br', null),
@@ -962,29 +957,34 @@
 	            null,
 	            'All of this was done mainly for amusement, but it did provide some reasurrance that using mobservabale to access current and most recent state will not entail a performance hit. A user requesting fib(1477) won\'t notice the extra 2 or 3 microseconds involved in getting it through a sequence of mobservable reactive numbers.'
 	          ),
-	          _react2['default'].createElement('br', null),
-	          'The buttons shown here work fine with React\'s state and props objects left empty. You might wonder why I use React at all. Mobservable doesn\'t rely on React. Well, this code is a snippet from my websockets-react project. The complete code is available at ',
 	          _react2['default'].createElement(
-	            'a',
-	            { style: { color: '#f26d6d' }, href: 'https://github.com/dschalk/websockets-react' },
-	            'https://github.com/dschalk/websockets-react'
-	          ),
-	          '. An explanation of the project is at ',
-	          _react2['default'].createElement(
-	            'a',
-	            { style: { color: '#f26d6d' }, href: 'https://www.fpcomplete.com/user/dschalk/Websockets%20Game%20of%20Score' },
-	            'https://www.fpcomplete.com/user/dschalk/Websockets%20Game%20of%20Score'
-	          ),
-	          '. My server is a modified Haskell Wai-Websockets server. Like mobservable, it does much in a very simple and elegant manner.',
-	          _react2['default'].createElement('br', null),
-	          _react2['default'].createElement('br', null),
-	          ' I used \'react_mixin\', but it is not necessary for the buttons. I used it to grab a React mixin out of \'node_modules\' to support autoFocus (\'autofocus\' in regular HTML).',
-	          _react2['default'].createElement('br', null),
-	          _react2['default'].createElement(
-	            'h2',
+	            'p',
 	            null,
+	            'The buttons shown here work fine with React\'s state and props objects left empty. You might wonder why I use React at all. Mobservable doesn\'t rely on React. Well, this code is a snippet from my websockets-react project. The complete code is available at ',
+	            _react2['default'].createElement(
+	              'a',
+	              { style: { color: '#f26d6d' }, href: 'https://github.com/dschalk/websockets-react' },
+	              'https://github.com/dschalk/websockets-react'
+	            ),
+	            '. An explanation of the project is at ',
+	            _react2['default'].createElement(
+	              'a',
+	              { style: { color: '#f26d6d' }, href: 'https://www.fpcomplete.com/user/dschalk/Websockets%20Game%20of%20Score' },
+	              'https://www.fpcomplete.com/user/dschalk/Websockets%20Game%20of%20Score'
+	            ),
+	            '. My server is a modified Haskell Wai-Websockets server. Like mobservable, it does much in a very simple and elegant manner.'
+	          ),
+	          _react2['default'].createElement(
+	            'p',
+	            null,
+	            ' I used \'react_mixin\', but it is not necessary for the buttons. I used it to grab a React mixin out of \'node_modules\' to support autoFocus (\'autofocus\' in regular HTML).'
+	          ),
+	          _react2['default'].createElement(
+	            'span',
+	            { style: { textAlign: 'center', fontSize: 22 } },
 	            'Temporary Button'
 	          ),
+	          _react2['default'].createElement('br', null),
 	          'Clicking this button does nothing but increment \'data.w\', but there there is an observer function named \'data.twoTimes()\' that reacts to changes in \'data.w\' by mutating \'data.message\' and \'data.dsp\'. Click the button and see what happens when data.twoTimes changes the values of \'data.message\' and \'data.dsp\'.',
 	          _react2['default'].createElement('br', null),
 	          _react2['default'].createElement(
@@ -1009,273 +1009,32 @@
 	            message
 	          )
 	        ),
+	        _react2['default'].createElement('br', null),
+	        _react2['default'].createElement('br', null),
 	        _react2['default'].createElement(
 	          'div',
-	          { style: { width: '100%', textAlign: 'center', float: 'left' } },
+	          { style: { textAlign: 'center', fontSize: 26, width: '100%', float: 'left' } },
+	          'Mobservable Monads'
+	        ),
+	        ' ',
+	        _react2['default'].createElement('br', null),
+	        _react2['default'].createElement(
+	          'div',
+	          { style: { marginRight: '25%', marginLeft: '25%', float: 'left' } },
+	          'I added bind and return functions to mobservable reactive entities. Tests with reactive numbers and strings indicate that the enhanced reactive entities are monads, so that is what I call them. The bind function facilitates the chaining of computations and parsing operations. The general form is monad.bind(function(a1, ...args).bind(function(a2, ...args).bind( ... "a1" is the value of the starting reactive number or string. "a2" is the value of the reactive string or number produced by first operation. "bind" takes the value of the reactive entity, applies the function to it and any other arguments provided, and re-encapsulates it into the same, a different, or a new reactive entity enhanced with the bind and return methods for possible use in processing its value. A demononstration is online at ',
 	          _react2['default'].createElement(
-	            'h1',
-	            null,
-	            'Mobservable Monads'
+	            'a',
+	            { style: { color: '#f26d6d' }, href: 'http://transcendent.ninja' },
+	            'transcendent ninja'
 	          ),
+	          '. The code is at ',
 	          _react2['default'].createElement(
-	            'span',
-	            { style: { width: '80%', fontStyle: 'italic', textAlign: 'center', fontSize: 24 } },
-	            ' If it walks like a duck, and quacks like a duck, it ... '
+	            'a',
+	            { style: { color: '#f26d6d' }, href: 'https://github.com/dschalk/mobservable-monads' },
+	            'github.com/dschalk/mobservable-monads'
 	          ),
-	          _react2['default'].createElement(
-	            'p',
-	            { style: { textAlign: 'left', marginLeft: 40, marginRight: 40 } },
-	            ' Mobservable reactive entities contain values. I added \'bind\'(a/k/a \'>>=\') and \'return\' and tested to see if Mobservable obeys the monad laws. Mobservable passed the test cases with flying colors. I don\'t have a formal proof, but I\'m calling these critters \'monads\'.'
-	          ),
-	          _react2['default'].createElement(
-	            'p',
-	            { style: { textAlign: 'left', marginLeft: 40, marginRight: 40 } },
-	            ' We could perform all operations with side effects inside of Mobservable monads, interracting with the world only through \'Mobservable.sideEffect\'. The server for my "Game of Score" project at ',
-	            _react2['default'].createElement(
-	              'a',
-	              { style: { color: '#f26d6d' }, href: 'https://www.fpcomplete.com/user/dschalk/Websockets%20Game%20of%20Score' },
-	              'Explanation of Score'
-	            ),
-	            ' and ',
-	            _react2['default'].createElement(
-	              'a',
-	              { style: { color: '#f26d6d' }, href: 'http://machinegun.ninja' },
-	              'Online Game of Score'
-	            ),
-	            ' works that way, it being a modified Haskell Wai Websockets server. I get a peaceful feeling when I work on my server.  '
-	          ),
-	          _react2['default'].createElement(
-	            'div',
-	            { style: { float: 'right', width: '40%' } },
-	            _react2['default'].createElement('br', null),
-	            _react2['default'].createElement('br', null),
-	            _react2['default'].createElement('br', null),
-	            _react2['default'].createElement('br', null),
-	            _react2['default'].createElement('br', null),
-	            _react2['default'].createElement(
-	              'h2',
-	              null,
-	              ' The monad m: ',
-	              _this5.m(),
-	              ' '
-	            ),
-	            _react2['default'].createElement(
-	              'h2',
-	              null,
-	              ' The monad m2: ',
-	              _this5.m2(),
-	              ' '
-	            ),
-	            _react2['default'].createElement(
-	              'h2',
-	              null,
-	              ' The monad m3: ',
-	              _this5.m3(),
-	              ' '
-	            ),
-	            _react2['default'].createElement(
-	              'h2',
-	              null,
-	              ' Created by monadReturn: ',
-	              m4(),
-	              ' '
-	            )
-	          ),
-	          _react2['default'].createElement(
-	            'div',
-	            { style: { float: 'left', width: '55%' } },
-	            _react2['default'].createElement('br', null),
-	            _react2['default'].createElement('br', null),
-	            _react2['default'].createElement(
-	              'button',
-	              { style: _this5.style8(cr77, cr770, cr78), onClick: function () {
-	                  _this5.m.bnd(_this5.fmAdd1);
-	                },
-	                onMouseEnter: function () {
-	                  _this5.mouse[77] = 'blue', _this5.mouse[770] = 'lightblue', _this5.mouse[78] = 'yellow';
-	                },
-	                onMouseLeave: function () {
-	                  _this5.mouse[77] = '#000', _this5.mouse[770] = 'darkred', _this5.mouse[78] = 'burlywood';
-	                }
-	              },
-	              ' Click to increase m.'
-	            ),
-	            _react2['default'].createElement('br', null),
-	            _react2['default'].createElement('br', null),
-	            _react2['default'].createElement(
-	              'button',
-	              { style: _this5.style8(cr87, cr870, cr88), onClick: function () {
-	                  _this5.m.bnd(_this5.fmSubtract1);
-	                },
-	                onMouseEnter: function () {
-	                  _this5.mouse[87] = 'blue', _this5.mouse[870] = 'lightblue', _this5.mouse[88] = 'yellow';
-	                },
-	                onMouseLeave: function () {
-	                  _this5.mouse[87] = '#000', _this5.mouse[870] = 'darkred', _this5.mouse[88] = 'burlywood';
-	                }
-	              },
-	              ' Click to decrease m.'
-	            ),
-	            _react2['default'].createElement('br', null),
-	            _react2['default'].createElement('br', null),
-	            _react2['default'].createElement(
-	              'button',
-	              { style: _this5.style8(cr97, cr970, cr98), onClick: function () {
-	                  _this5.m.bnd(_this5.fmSquare);
-	                },
-	                onMouseEnter: function () {
-	                  _this5.mouse[97] = 'blue', _this5.mouse[970] = 'lightblue', _this5.mouse[98] = 'yellow';
-	                },
-	                onMouseLeave: function () {
-	                  _this5.mouse[97] = '#000', _this5.mouse[970] = 'darkred', _this5.mouse[98] = 'burlywood';
-	                }
-	              },
-	              ' Click to square m.'
-	            ),
-	            _react2['default'].createElement(
-	              'h3',
-	              null,
-	              'Left Identity'
-	            ),
-	            _react2['default'].createElement(
-	              'button',
-	              { style: _this5.style8(cr107, cr1070, cr108), onClick: function () {
-	                  _this5.monadReturn(7).bnd(_this5.fmSquare);
-	                },
-	                onMouseEnter: function () {
-	                  _this5.mouse[107] = 'blue', _this5.mouse[1070] = 'lightblue', _this5.mouse[108] = 'yellow';
-	                },
-	                onMouseLeave: function () {
-	                  _this5.mouse[107] = '#000', _this5.mouse[1070] = 'darkred', _this5.mouse[108] = 'burlywood';
-	                }
-	              },
-	              ' Click to see this.monadReturn(7).bind(this.fmSquare).'
-	            ),
-	            _react2['default'].createElement('br', null),
-	            _react2['default'].createElement('br', null),
-	            _react2['default'].createElement(
-	              'button',
-	              { style: _this5.style8(cr117, cr1170, cr118), onClick: function () {
-	                  _this5.fmSquare(7);
-	                },
-	                onMouseEnter: function () {
-	                  _this5.mouse[117] = 'blue', _this5.mouse[1170] = 'lightblue', _this5.mouse[118] = 'yellow';
-	                },
-	                onMouseLeave: function () {
-	                  _this5.mouse[117] = '#000', _this5.mouse[1170] = 'darkred', _this5.mouse[118] = 'burlywood';
-	                }
-	              },
-	              ' Click to see fmSquare(7).'
-	            ),
-	            _react2['default'].createElement('br', null),
-	            _react2['default'].createElement('br', null),
-	            _react2['default'].createElement(
-	              'h3',
-	              null,
-	              'Right Identity'
-	            ),
-	            _react2['default'].createElement(
-	              'button',
-	              { style: _this5.style8(cr127, cr1270, cr128), onClick: function () {
-	                  _this5.m.bnd(_this5.monadReturn);
-	                },
-	                onMouseEnter: function () {
-	                  _this5.mouse[127] = 'blue', _this5.mouse[1270] = 'lightblue', _this5.mouse[128] = 'yellow';
-	                },
-	                onMouseLeave: function () {
-	                  _this5.mouse[127] = '#000', _this5.mouse[1270] = 'darkred', _this5.mouse[128] = 'burlywood';
-	                }
-	              },
-	              ' Click to see this.m.bnd(this.monadReturn).'
-	            ),
-	            _react2['default'].createElement('br', null),
-	            _react2['default'].createElement('br', null),
-	            _react2['default'].createElement(
-	              'h3',
-	              null,
-	              ' Associativity '
-	            ),
-	            _react2['default'].createElement(
-	              'button',
-	              { style: _this5.style8(cr137, cr1370, cr138), onClick: function () {
-	                  _this5.m.bnd(_this5.fmAdd1).bnd(_this5.fmSquare);
-	                },
-	                onMouseEnter: function () {
-	                  _this5.mouse[137] = 'blue', _this5.mouse[1370] = 'lightblue', _this5.mouse[138] = 'yellow';
-	                },
-	                onMouseLeave: function () {
-	                  _this5.mouse[137] = '#000', _this5.mouse[1370] = 'darkred', _this5.mouse[138] = 'burlywood';
-	                }
-	              },
-	              ' Click to bind fmAdd1 to m.x, and then bind fmSquare to the result.'
-	            ),
-	            _react2['default'].createElement('br', null),
-	            _react2['default'].createElement('br', null),
-	            _react2['default'].createElement(
-	              'button',
-	              { style: _this5.style8(cr27, cr270, cr28), onClick: function () {
-	                  _this5.m.bnd(_this5.fmAdd_then_Square);
-	                },
-	                onMouseEnter: function () {
-	                  _this5.mouse[27] = 'blue', _this5.mouse[270] = 'lightblue', _this5.mouse[28] = 'yellow';
-	                },
-	                onMouseLeave: function () {
-	                  _this5.mouse[27] = '#000', _this5.mouse[270] = 'darkred', _this5.mouse[28] = 'burlywood';
-	                }
-	              },
-	              ' Click to bind fmAdd_then_Square to m.x.'
-	            ),
-	            _react2['default'].createElement('br', null),
-	            _react2['default'].createElement('br', null),
-	            _react2['default'].createElement(
-	              'button',
-	              { style: _this5.style8(cr67, cr670, cr68), onClick: function () {
-	                  _this5.m.bnd(_this5.f);
-	                },
-	                onMouseEnter: function () {
-	                  _this5.mouse[67] = 'blue', _this5.mouse[670] = 'lightblue', _this5.mouse[68] = 'yellow';
-	                },
-	                onMouseLeave: function () {
-	                  _this5.mouse[67] = '#000', _this5.mouse[670] = 'darkred', _this5.mouse[68] = 'burlywood';
-	                }
-	              },
-	              ' Click to cause m2 = m + 1.'
-	            ),
-	            _react2['default'].createElement('br', null),
-	            _react2['default'].createElement('br', null),
-	            _react2['default'].createElement(
-	              'button',
-	              { style: _this5.style8(cr47, cr470, cr48), onClick: function () {
-	                  _this5.m.bnd(_this5.reset_1);
-	                },
-	                onMouseEnter: function () {
-	                  _this5.mouse[47] = 'blue', _this5.mouse[470] = 'lightblue', _this5.mouse[48] = 'yellow';
-	                },
-	                onMouseLeave: function () {
-	                  _this5.mouse[47] = '#000', _this5.mouse[470] = 'darkred', _this5.mouse[48] = 'burlywood';
-	                }
-	              },
-	              ' Click to re-set m1.'
-	            ),
-	            _react2['default'].createElement('br', null),
-	            _react2['default'].createElement('br', null),
-	            _react2['default'].createElement(
-	              'button',
-	              { style: _this5.style8(cr57, cr570, cr58), onClick: function () {
-	                  _this5.m3.bnd(_this5.reset_3);
-	                },
-	                onMouseEnter: function () {
-	                  _this5.mouse[57] = 'blue', _this5.mouse[570] = 'lightblue', _this5.mouse[58] = 'yellow';
-	                },
-	                onMouseLeave: function () {
-	                  _this5.mouse[57] = '#000', _this5.mouse[570] = 'darkred', _this5.mouse[58] = 'burlywood';
-	                }
-	              },
-	              ' Click to reset m3.'
-	            ),
-	            _react2['default'].createElement('br', null),
-	            _react2['default'].createElement('br', null)
-	          )
+	          _react2['default'].createElement('br', null),
+	          _react2['default'].createElement('br', null)
 	        )
 	      );
 	    };
@@ -1501,7 +1260,9 @@
 	        currentQueue = queue;
 	        queue = [];
 	        while (++queueIndex < len) {
-	            currentQueue[queueIndex].run();
+	            if (currentQueue) {
+	                currentQueue[queueIndex].run();
+	            }
 	        }
 	        queueIndex = -1;
 	        len = queue.length;
@@ -1553,7 +1314,6 @@
 	    throw new Error('process.binding is not supported');
 	};
 
-	// TODO(shtylman)
 	process.cwd = function () { return '/' };
 	process.chdir = function (dir) {
 	    throw new Error('process.chdir is not supported');
