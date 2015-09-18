@@ -1,7 +1,7 @@
 {
   "name": "client",
   "version": "1.0.0",
-  "description": "",
+  "description": "The included index.html file is ready to go. Just load it into a browser as a file or with a web server. If you modify the code, you will need to run the following code from your terminal:",
   "main": "bundle.js",
   "dependencies": {
     "babel": "latest",
@@ -22,5 +22,13 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dschalk/mobservable-react-buttons.git"
+  },
+  "bugs": {
+    "url": "https://github.com/dschalk/mobservable-react-buttons/issues"
+  },
+  "homepage": "https://github.com/dschalk/mobservable-react-buttons#readme"
 }
