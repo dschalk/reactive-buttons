@@ -21705,10 +21705,6 @@
 	    }
 	    mobservable.isReactive = isReactive;
 	    function sideEffect(func, scope) {
-	        return observe(func, scope);
-	    }
-	    mobservable.sideEffect = sideEffect;
-	    function observe(func, scope) {
 	        var observable = new _.ObservableView(func, scope, {
 	            object: scope,
 	            name: func.name
@@ -21722,17 +21718,7 @@
 	        disposer.$mobservable = observable;
 	        return disposer;
 	    }
-	    mobservable.observe = observe;
-	    function when(predicate, effect, scope) {
-	        var disposer = observe(function () {
-	            if (predicate.call(scope)) {
-	                disposer();
-	                effect.call(scope);
-	            }
-	        });
-	        return disposer;
-	    }
-	    mobservable.when = when;
+	    mobservable.sideEffect = sideEffect;
 	    function extendReactive(target, properties, context) {
 	        return _.extendReactive(target, properties, true, context);
 	    }
@@ -22773,7 +22759,7 @@
 /* 159 */
 /***/ function(module, exports, __webpack_require__) {
 
-	!function(e,t){ true?module.exports=t(__webpack_require__(158),__webpack_require__(2)):"function"==typeof define&&define.amd?define(["mobservable","react"],t):"object"==typeof exports?exports.mobservableReact=t(require("mobservable"),require("react")):e.mobservableReact=t(e.mobservable,e.react)}(this,function(e,t){return function(e){function t(o){if(n[o])return n[o].exports;var r=n[o]={exports:{},id:o,loaded:!1};return e[o].call(r.exports,r,r.exports,t),r.loaded=!0,r.exports}var n={};return t.m=e,t.c=n,t.p="",t(0)}([function(e,t,n){var o,r,i;!function(){function s(e,t){function n(e){var n=t.findDOMNode(e);n&&p.set(n,e),c.emit({event:"render",renderTime:e.__renderEnd-e.__renderStart,totalTime:Date.now()-e.__renderStart,component:e,node:n})}function o(e,t){var n=e[t],o=u[t];e[t]=function(){n&&n.apply(this,arguments),o.apply(this,arguments)}}function r(e){if("function"==typeof e&&!e.prototype.render&&!e.isReactClass)return r(t.createClass({displayName:e.name,render:function(){return e.call(this,this.props)}}));if(!e)throw new Error("Please pass a valid component to 'reactiveComponent'");var n=e.prototype||e;return["componentWillMount","componentWillUnmount","componentDidMount","componentDidUpdate"].forEach(function(e){o(n,e)}),n.shouldComponentUpdate||(n.shouldComponentUpdate=u.shouldComponentUpdate),e}function i(){if("undefined"==typeof WeakMap)throw new Error("tracking components is not supported in this browser");a||(a=!0)}var s=1,a=!1,p="undefined"!=typeof WeakMap?new WeakMap:void 0,c=new e._.SimpleEventEmitter,u={componentWillMount:function(){var n=((this.displayName||this.constructor.name||"ReactiveComponent")+s++,this.render);this.render=function(){a&&(this.__renderStart=Date.now()),this.__watchDisposer&&this.__watchDisposer();var o,r=!1;return this.__watchDisposer=e.sideEffect(function(){r?t.Component.prototype.forceUpdate.call(this):(r=!0,o=n.call(this))},this),this.$mobservable=this.__watchDisposer.$mobservable,a&&(this.__renderEnd=Date.now()),o}},componentWillUnmount:function(){if(this.__watchDisposer&&this.__watchDisposer(),delete this.$mobservable,a){var e=t.findDOMNode(this);e&&(p.delete(e),c.emit({event:"destroy",component:this,node:e}))}},componentDidMount:function(){a&&n(this)},componentDidUpdate:function(){a&&n(this)},shouldComponentUpdate:function(t,n){if(this.state!==n)return!0;var o,r=Object.keys(this.props);if(r.length!==Object.keys(t).length)return!0;for(var i=r.length-1;o=r[i];i--){var s=t[o];if(s!==this.props[o])return!0;if(s&&"object"==typeof s&&!e.isReactive(s))return!0}return!1}};return{reactiveComponent:r,renderReporter:c,componentByNodeRegistery:p,trackComponents:i}}r=[n(1),n(2)],o=s,i="function"==typeof o?o.apply(t,r):o,!(void 0!==i&&(e.exports=i))}()},function(t,n){t.exports=e},function(e,n){e.exports=t}])});
+	!function(e,t){ true?module.exports=t(__webpack_require__(158),__webpack_require__(2)):"function"==typeof define&&define.amd?define(["mobservable","react"],t):"object"==typeof exports?exports.mobservableReact=t(require("mobservable"),require("react")):e.mobservableReact=t(e.mobservable,e.react)}(this,function(e,t){return function(e){function t(o){if(n[o])return n[o].exports;var r=n[o]={exports:{},id:o,loaded:!1};return e[o].call(r.exports,r,r.exports,t),r.loaded=!0,r.exports}var n={};return t.m=e,t.c=n,t.p="",t(0)}([function(e,t,n){var o,r,i;!function(){function s(e,t){function n(e){var n=t.findDOMNode(e);n&&c.set(n,e),u.emit({event:"render",renderTime:e.__renderEnd-e.__renderStart,totalTime:Date.now()-e.__renderStart,component:e,node:n})}function o(e,t){var n=e[t],o=d[t];e[t]=function(){n&&n.apply(this,arguments),o.apply(this,arguments)}}function r(e){if(!e)throw new Error("Please pass a valid component to 'reactiveComponent'");var t=e.prototype||e;return["componentWillMount","componentWillUnmount","componentDidMount","componentDidUpdate"].forEach(function(e){o(t,e)}),t.shouldComponentUpdate||(t.shouldComponentUpdate=d.shouldComponentUpdate),e}function i(){if("undefined"==typeof WeakMap)throw new Error("tracking components is not supported in this browser");a||(a=!0)}var s=1,a=!1,p=e.observeUntilInvalid,c="undefined"!=typeof WeakMap?new WeakMap:void 0,u=new e._.SimpleEventEmitter,d={componentWillMount:function(){var e=(this.displayName||this.constructor.name||"ReactiveComponent")+s++,n=this.render;this.render=function(){var o=this;a&&(this.__renderStart=Date.now()),this.__watchDisposer&&this.__watchDisposer();var r=p(function(){return n.call(o)},function(){t.Component.prototype.forceUpdate.call(o)},{object:this,name:e});return this.__watchDisposer=r[1],this.$mobservable=r[2],a&&(this.__renderEnd=Date.now()),r[0]}},componentWillUnmount:function(){if(this.__watchDisposer&&this.__watchDisposer(),delete this.$mobservable,a){var e=t.findDOMNode(this);e&&(c.delete(e),u.emit({event:"destroy",component:this,node:e}))}},componentDidMount:function(){a&&n(this)},componentDidUpdate:function(){a&&n(this)},shouldComponentUpdate:function(e,t){if(this.state!==t)return!0;var n,o=Object.keys(this.props);if(o.length!==Object.keys(e).length)return!0;for(var r=o.length-1;n=o[r];r--)if(e[n]!==this.props[n])return!0;return!1}};return{reactiveComponent:r,renderReporter:u,componentByNodeRegistery:c,trackComponents:i}}r=[n(1),n(2)],o=s,i="function"==typeof o?o.apply(t,r):o,!(void 0!==i&&(e.exports=i))}()},function(t,n){t.exports=e},function(e,n){e.exports=t}])});
 
 /***/ },
 /* 160 */
@@ -22919,35 +22905,12 @@
 	  var reactMixin = mixinProto;
 
 	  reactMixin.onClass = function(reactClass, mixin) {
-	    var mixinClone = assign({}, mixin);
-	    return mixinClass(reactClass, mixinClone);
+	    return mixinClass(reactClass, mixin);
 	  };
 
 	  reactMixin.decorate = function(mixin) {
 	    return function(reactClass) {
-	      // Clone the incoming class
-	      var newClass = function(props) {
-	        reactClass.apply(this, arguments);
-	      };
-	      // Collect static properties
-	      var statics = {};
-	      for (var key in reactClass) {
-	        // Ordinarily, you'd use reactClass.hasOwnProperty(key) here
-	        // But we want to catch ALL static properties
-	        if (!Function.prototype[key]) {
-	          statics[key] = reactClass[key];
-	        }
-	      }
-	      assign(newClass, statics);
-	      newClass.prototype = Object.create(reactClass.prototype, {
-	          constructor: {
-	              value: newClass,
-	              enumerable: false,
-	              writable: true,
-	              configurable: true
-	          }
-	      });
-	      return reactMixin.onClass(newClass, mixin);
+	      return reactMixin.onClass(reactClass, mixin);
 	    };
 	  };
 

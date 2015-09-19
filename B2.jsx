@@ -2,7 +2,6 @@
 import React from'react';
 import mobservable from 'mobservable';
 import {reactiveComponent} from 'mobservable-react';
-// require('mobservable-react-devtools');
 let reactMixin = require('react-mixin');
 export {B2};
 
