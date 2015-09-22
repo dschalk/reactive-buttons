@@ -1,1 +1,1 @@
-Reactive rollover buttons. Focus highlighting coordinated among buttons, reminiscent of HTML <select><option>; and also coordination with with text input. Enter the name of one of the four buttons and it lights up. Enter some other text and the buttons all go dim.
+Reactive rollover buttons. Focus highlighting coordinated among buttons, reminiscent of HTML select/option; and also coordination with with text input. Enter the name of one of the four buttons and it lights up. Enter some other text and the buttons all go dim.
