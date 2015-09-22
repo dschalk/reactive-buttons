@@ -57,8 +57,6 @@
 	  value: true
 	});
 
-	var _slicedToArray = (function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i['return']) _i['return'](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError('Invalid attempt to destructure non-iterable instance'); } }; })();
-
 	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
 	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
@@ -79,7 +77,6 @@
 
 	var _mobservableReact = __webpack_require__(159);
 
-	// require('mobservable-react-devtools');
 	var reactMixin = __webpack_require__(160);
 	exports.B2 = B2;
 
@@ -119,7 +116,7 @@
 	        return;
 	      } else {
 	        if (event.keyCode == 13) {
-	          this.props.setGroup(group);
+	          this.props.data.group = group;
 	        }
 	      }
 	    }
@@ -130,7 +127,7 @@
 	      if (group == '') {
 	        return;
 	      } else {
-	        this.props.setGroup(group);
+	        this.props.data.group = group;
 	      }
 	    }
 	  }]);
@@ -142,538 +139,61 @@
 
 	;
 
-	var Fibonacci = (function (_React$Component2) {
-	  _inherits(Fibonacci, _React$Component2);
-
-	  function Fibonacci(props) {
-	    var _this2 = this;
-
-	    _classCallCheck(this, _Fibonacci);
-
-	    _get(Object.getPrototypeOf(_Fibonacci.prototype), 'constructor', this).call(this, props);
-
-	    this.render = function () {
-	      if (_this2.props.hidden2) {
-	        return null;
-	      }
-	      return _react2['default'].createElement(
-	        'div',
-	        { style: { marginLeft: 5 } },
-	        _react2['default'].createElement(
-	          'label',
-	          null,
-	          'Enter a number:  ',
-	          _react2['default'].createElement('input', { autoFocus: true, type: 'text', id: 'cow', onKeyDown: _this2.handleEnter.bind(_this2),
-	            style: { width: 90, backgroundColor: '#d8d17d', marginLeft: 10 } })
-	        )
-	      );
-	    };
-	  }
-
-	  _createClass(Fibonacci, [{
-	    key: 'handleEnter',
-	    value: function handleEnter(event) {
-	      var num = event.target.value;
-	      if (event.keyCode == 13) {
-	        this.props.fib(num);
-	      }
-	    }
-	  }]);
-
-	  var _Fibonacci = Fibonacci;
-	  Fibonacci = (0, _mobservableReact.reactiveComponent)(Fibonacci) || Fibonacci;
-	  return Fibonacci;
-	})(_react2['default'].Component);
-
-	;
-
-	var Fibonacci2 = (function (_React$Component3) {
-	  _inherits(Fibonacci2, _React$Component3);
-
-	  function Fibonacci2(props) {
-	    var _this3 = this;
-
-	    _classCallCheck(this, _Fibonacci2);
-
-	    _get(Object.getPrototypeOf(_Fibonacci2.prototype), 'constructor', this).call(this, props);
-
-	    this.render = function () {
-	      if (_this3.props.hidden2) {
-	        return null;
-	      }
-	      return _react2['default'].createElement(
-	        'div',
-	        { style: { marginLeft: 5 } },
-	        _react2['default'].createElement(
-	          'label',
-	          null,
-	          'Enter a number:  ',
-	          _react2['default'].createElement('input', { type: 'text', id: 'horse', onKeyDown: _this3.handleEnter.bind(_this3),
-	            style: { width: 90, backgroundColor: '#d8d17d', marginLeft: 10 } })
-	        )
-	      );
-	    };
-	  }
-
-	  _createClass(Fibonacci2, [{
-	    key: 'handleEnter',
-	    value: function handleEnter(event) {
-	      var num = event.target.value;
-	      if (event.keyCode == 13) {
-	        this.props.fib2(num);
-	      }
-	    }
-	  }]);
-
-	  var _Fibonacci2 = Fibonacci2;
-	  Fibonacci2 = (0, _mobservableReact.reactiveComponent)(Fibonacci2) || Fibonacci2;
-	  return Fibonacci2;
-	})(_react2['default'].Component);
-
-	;
-
-	var mouseHandlerx = {
-	  Abackground: '#000',
-	  Aborder: 'green',
-	  Acolor: 'burlywood',
-	  Asize: 12,
-	  Bbackground: '#000',
-	  Bborder: 'green',
-	  Bcolor: 'burlywood',
-	  Bsize: 12,
-	  Cbackground: '#000',
-	  Cborder: 'green',
-	  Ccolor: 'burlywood',
-	  Csize: 12,
-	  Sbackground: '#000',
-	  Sborder: 'green',
-	  Scolor: 'burlywood',
-	  Ssize: 12,
-	  rSbackground: 'green',
-	  rSborder: 'lightgreen',
-	  rScolor: 'yellow',
-	  27: '#000',
-	  270: 'darkred',
-	  28: 'burlywood',
-	  37: '#000',
-	  370: 'darkred',
-	  38: 'burlywood',
-	  47: '#000',
-	  470: 'darkred',
-	  48: 'burlywood',
-	  57: '#000',
-	  570: 'darkred',
-	  58: 'burlywood',
-	  67: '#000',
-	  670: 'darkred',
-	  68: 'burlywood',
-	  77: '#000',
-	  770: 'darkred',
-	  78: 'burlywood',
-	  87: '#000',
-	  870: 'darkred',
-	  88: 'burlywood',
-	  97: '#000',
-	  970: 'darkred',
-	  98: 'burlywood',
-	  107: '#000',
-	  1070: 'darkred',
-	  108: 'burlywood',
-	  117: '#000',
-	  1170: 'darkred',
-	  118: 'burlywood',
-	  127: '#000',
-	  1270: 'darkred',
-	  128: 'burlywood',
-	  137: '#000',
-	  1370: 'darkred',
-	  138: 'burlywood'
-	};
-
-	var mouseHandler = _mobservable2['default'].makeReactive(mouseHandlerx);
-
-	var temp = [1, 1];
-
 	var data = _mobservable2['default'].makeReactive({
 	  group: 'solo',
-	  name: '',
-	  nx: [1, 1],
-	  n: 1,
-	  w: 1,
-	  warning: '',
-	  message: 'Do Not Click Me',
-	  twoTimes: function twoTimes() {
-	    if (this.w === 2) {
-	      this.warning = 'If you click me again, I will disappear';this.message = 'YOU HAVE BEEN WARNED';
-	    };
-	    if (this.w === 3) {
-	      this.dsp = 'none';
-	      return;
-	    };
-	  },
-	  dsp: 'inline',
-	  p: 1,
-	  p2: 1,
-	  t: 0,
-	  t2: 0,
-	  q: 0,
-	  q2: 0,
-	  x: 1,
-	  f: function f(_ref) {
-	    var _ref2 = _slicedToArray(_ref, 2);
-
-	    var a = _ref2[0];
-	    var b = _ref2[1];
-
-	    temp = [a + b, a];
-	    return [a + b, a];
-	  },
-	  g: function g() {
-	    temp = this.f(temp);
-	    return temp;
-	  },
-	  test: true,
-	  groupWatch: function groupWatch() {
-	    if (this.group === 'GroupA' && this.test) {
-	      mouseHandler.Abackground = 'green';
-	      mouseHandler.Aborder = 'lawngreen';
-	      mouseHandler.Acolor = 'yellow';
-	      mouseHandler.Bbackground = '#000';
-	      mouseHandler.Bborder = 'green';
-	      mouseHandler.Bcolor = 'burlywood';
-	      mouseHandler.Cbackground = '#000';
-	      mouseHandler.Cborder = 'green';
-	      mouseHandler.Ccolor = 'burlywood';
-	      mouseHandler.Sbackground = '#000';
-	      mouseHandler.Sborder = 'green';
-	      mouseHandler.Scolor = 'burlywood';
-	    } else if (this.group === 'GroupB' && this.test) {
-	      mouseHandler.Bbackground = 'green';
-	      mouseHandler.Bborder = 'lawngreen';
-	      mouseHandler.Bcolor = 'yellow';
-	      mouseHandler.Abackground = '#000';
-	      mouseHandler.Aborder = 'green';
-	      mouseHandler.Acolor = 'burlywood';
-	      mouseHandler.Cbackground = '#000';
-	      mouseHandler.Cborder = 'green';
-	      mouseHandler.Ccolor = 'burlywood';
-	      mouseHandler.Sbackground = '#000';
-	      mouseHandler.Sborder = 'green';
-	      mouseHandler.Scolor = 'burlywood';
-	    } else if (this.group === 'GroupC' && this.test) {
-	      mouseHandler.Cbackground = 'green';
-	      mouseHandler.Cborder = 'lawngreen';
-	      mouseHandler.Ccolor = 'yellow';
-	      mouseHandler.Abackground = '#000';
-	      mouseHandler.Aborder = 'green';
-	      mouseHandler.Acolor = 'burlywood';
-	      mouseHandler.Bbackground = '#000';
-	      mouseHandler.Bborder = 'green';
-	      mouseHandler.Bcolor = 'burlywood';
-	      mouseHandler.Sbackground = '#000';
-	      mouseHandler.Sborder = 'green';
-	      mouseHandler.Scolor = 'burlywood';
-	    } else if (this.group === 'solo' && this.test) {
-	      mouseHandler.Sbackground = 'green';
-	      mouseHandler.Sborder = 'lawngreen';
-	      mouseHandler.Scolor = 'yellow';
-	      mouseHandler.Abackground = '#000';
-	      mouseHandler.Aborder = 'green';
-	      mouseHandler.Acolor = 'burlywood';
-	      mouseHandler.Bbackground = '#000';
-	      mouseHandler.Bborder = 'green';
-	      mouseHandler.Bcolor = 'burlywood';
-	      mouseHandler.Cbackground = '#000';
-	      mouseHandler.Cborder = 'green';
-	      mouseHandler.Ccolor = 'burlywood';
-	    } else if (this.test) {
-	      mouseHandler.Abackground = '#000';
-	      mouseHandler.Aborder = 'green';
-	      mouseHandler.Acolor = 'burlywood';
-	      mouseHandler.Bbackground = '#000';
-	      mouseHandler.Bborder = 'green';
-	      mouseHandler.Bcolor = 'burlywood';
-	      mouseHandler.Cbackground = '#000';
-	      mouseHandler.Cborder = 'green';
-	      mouseHandler.Ccolor = 'burlywood';
-	      mouseHandler.Sbackground = '#000';
-	      mouseHandler.Sborder = 'green';
-	      mouseHandler.Scolor = 'burlywood';
+	  Ahover: false,
+	  Afocus: false,
+	  Bhover: false,
+	  Bfocus: false,
+	  Chover: false,
+	  Cfocus: false,
+	  Shover: false,
+	  Sfocus: false,
+	  style1: { a: '#000', b: 'green', c: '#FFE4C4' },
+	  style2: { a: 'blue', b: 'skyblue', c: 'yellow' },
+	  fA: function fA() {
+	    if (this.Ahover || this.group === 'GroupA') {
+	      return this.style2;
 	    }
+	    return this.style1;
+	  },
+	  fB: function fB() {
+	    if (this.Bhover || this.group === 'GroupB') {
+	      return this.style2;
+	    }
+	    return this.style1;
+	  },
+	  fC: function fC() {
+	    if (this.Chover || this.group === 'GroupC') {
+	      return this.style2;
+	    }
+	    return this.style1;
+	  },
+	  fS: function fS() {
+	    if (this.Shover || this.group === 'solo') {
+	      return this.style2;
+	    }
+	    return this.style1;
 	  }
 	});
 
-	data.increaseX = function () {
-	  data.x = data.x + 1;
-	  return data.x;
-	};
-
-	data.increaseW = function () {
-	  data.w = data.w + 1;
-	  return data.w;
-	};
-
-	data.fib = function (x) {
-	  var n = 1 * x;
-	  switch (n) {
-	    case 1:
-	      return 0;
-	    case 2:
-	      return 1;
-	    case 3:
-	      return 1;
-	  }
-	  if (n > 3) {
-	    var xx = 2;
-	    var k = 0;
-	    var rf = _mobservable2['default'].makeReactive(1);
-	    rf.observe(function (a, b) {
-	      xx = a + b;
-	    });
-	    var a = Date.now();
-	    for (k = 4; k < n; k += 1) {
-	      rf(xx);
-	    }
-	    var b = Date.now();
-	    data.t = b - a;
-	    return xx;
-	  } else return "Enter an integer greater than 0";
-	};
-
-	data.fib2 = function (x) {
-	  var n = 1 * x;
-	  switch (n) {
-	    case 1:
-	      return 0;
-	    case 2:
-	      return 1;
-	    case 3:
-	      return 1;
-	  }
-	  if (n > 3) {
-	    var ar = [2, 1];
-	    var k = 0;
-	    var rf = function rf(x) {
-	      var b = x[0];
-	      x[0] = x[0] + x[1];
-	      x[1] = b;
-	    };
-	    var a = Date.now();
-	    for (k = 4; k < n; k += 1) {
-	      rf(ar);
-	    }
-	    var b = Date.now();
-	    data.t2 = b - a;
-	    return ar[0];
-	  } else return "Enter an integer greater than 0";
-	};
-
-	var Monad = (function () {
-	  function Monad(z) {
-	    var _this4 = this;
-
-	    _classCallCheck(this, _Monad);
-
-	    this.x = _mobservable2['default'].makeReactive(z);
-
-	    this.x.bnd = function (func) {
-	      return func(_this4.x());
-	    };
-	  }
-
-	  var _Monad = Monad;
-	  Monad = (0, _mobservableReact.reactiveComponent)(Monad) || Monad;
-	  return Monad;
-	})();
-
-	var monads = _mobservable2['default'].makeReactive({
-	  newMonad: new Monad(0)
-	});
-
-	var m = new Monad(1);
-	m.x.observe(function (a, b) {
-	  console.log('m changed from ' + b + ' to ' + a);
-	  m3.x(a * a);
-	});
-	var m2 = new Monad(1);
-	var m3 = new Monad(0);
-
-	var B2 = (function (_React$Component4) {
-	  _inherits(B2, _React$Component4);
+	var B2 = (function (_React$Component2) {
+	  _inherits(B2, _React$Component2);
 
 	  function B2(props) {
-	    var _this5 = this;
+	    var _this2 = this;
 
 	    _classCallCheck(this, _B2);
 
 	    _get(Object.getPrototypeOf(_B2.prototype), 'constructor', this).call(this, props);
-
-	    this.f = function (x) {
-	      _this5.m2(x + 1);
-	      return _this5.m2;
-	    };
-
-	    this.fmSubtract1 = function (w) {
-	      _this5.m(w - 1);
-	      return _this5.m;
-	    };
-
-	    this.fmAdd1 = function (w) {
-	      _this5.m(w + 1);
-	      return _this5.m;
-	    };
-
-	    this.monadReturn = function (w) {
-	      _this5.monads.newMonad = new Monad(w);
-	      return _this5.monads.newMonad.x;
-	    };
-
-	    this.fmSquare = function (w) {
-	      _this5.m(w * w);
-	      return _this5.m;
-	    };
-
-	    this.fmAdd_then_Square = function (w) {
-	      _this5.m(w + 1);
-	      var z = _this5.m();
-	      _this5.m(z * z);
-	      return _this5.m;
-	    };
-
-	    this.reset_1 = function () {
-	      _this5.m(1);
-	      return _this5.m;
-	    };
-
-	    this.reset_2 = function () {
-	      _this5.m2(1);
-	      return _this5.m2;
-	    };
-
-	    this.reset_3 = function () {
-	      _this5.m3(0);
-	      return _this5.m3;
-	    };
-
-	    this.blib = function (x) {
-	      _this5.data.p = x;
-	      _this5.data.q = _this5.data.fib(x);
-	    };
-
-	    this.blib2 = function (x) {
-	      _this5.data.p2 = x;
-	      _this5.data.q2 = _this5.data.fib2(x);
-	    };
-
-	    this.st = function () {
-	      var x = _this5.data.fib2;
-	      var y = fib3();
-	      var z = [x, y[0], y[1]];
-	      console.log(z);
-	      return z;
-	    };
-
-	    this.setGroup = function (x) {
-	      _this5.data.group = x;
-	    };
 
 	    this.style8 = function (x, y, z) {
 	      return { backgroundColor: x, textAlign: 'left', borderColor: y, outline: 0,
 	        color: z, borderRadius: 10, paddingTop: 1.1, paddingBottom: 0.9, marginRight: 3, marginLeft: 12, fontSize: 20 };
 	    };
 
-	    this.style9 = function (w, x, y, z) {
-	      return { display: w, backgroundColor: x, textAlign: 'left', borderColor: y, outline: 0,
-	        color: z, borderRadius: 10, paddingTop: 1.1, paddingBottom: 0.9, marginRight: 3, marginLeft: 12, fontSize: 20 };
-	    };
-
 	    this.render = function () {
-	      var twoTimes = _this5.data.twoTimes;
-	      var m4 = _this5.monads.newMonad.x;
-	      console.log(_this5);
-	      var x = _this5.data.x;
-	      var g = _this5.data.g;
-	      var p = _this5.data.p;
-	      var q = _this5.data.q;
-	      var p2 = _this5.data.p2;
-	      var q2 = _this5.data.q2;
-	      var t = _this5.data.t;
-	      var t2 = _this5.data.t2;
-	      var w = _this5.data.w;
-	      var warning = _this5.data.warning;
-	      var message = _this5.data.message;
-	      var increaseX = _this5.data.increaseX;
-	      var increaseW = _this5.data.increaseW;
-	      var group = _this5.data.group;
-	      var groupWatch = _this5.data.groupWatch;
-	      var dsp = _this5.data.dsp;
-	      var Abackground = '#000';
-	      var Aborder = 'green';
-	      var Acolor = 'burlywood';
-	      var Bbackground = '#000';
-	      var Bborder = 'green';
-	      var Bcolor = 'burlywood';
-	      var Cbackground = '#000';
-	      var Cborder = 'green';
-	      var Ccolor = 'burlywood';
-	      var Sbackground = '#000';
-	      var Sborder = 'green';
-	      var Scolor = 'burlywood';
-	      var Ubackground = '#000';
-	      var Uborder = 'green';
-	      var Ucolor = 'burlywood';
-	      var Tbackground = '#000';
-	      var Tborder = 'green';
-	      var Tcolor = 'burlywood';
-	      var rAbackground = 'green';
-	      var rAborder = 'lightgreen';
-	      var rAcolor = 'yellow';
-	      var rBbackground = 'green';
-	      var rBborder = 'lightgreen';
-	      var rBcolor = 'yellow';
-	      var rCbackground = 'green';
-	      var rCborder = 'lightgreen';
-	      var rCcolor = 'yellow';
-	      var rSbackground = 'green';
-	      var rSborder = 'lightgreen';
-	      var rScolor = 'yellow';
-	      var cr27 = _this5.mouse[27];
-	      var cr270 = _this5.mouse[270];
-	      var cr28 = _this5.mouse[28];
-	      var cr37 = _this5.mouse[37];
-	      var cr370 = _this5.mouse[370];
-	      var cr38 = _this5.mouse[38];
-	      var cr47 = _this5.mouse[47];
-	      var cr470 = _this5.mouse[470];
-	      var cr48 = _this5.mouse[48];
-	      var cr57 = _this5.mouse[57];
-	      var cr570 = _this5.mouse[570];
-	      var cr58 = _this5.mouse[58];
-	      var cr67 = _this5.mouse[67];
-	      var cr670 = _this5.mouse[670];
-	      var cr68 = _this5.mouse[68];
-	      var cr77 = _this5.mouse[77];
-	      var cr770 = _this5.mouse[770];
-	      var cr78 = _this5.mouse[78];
-	      var cr87 = _this5.mouse[87];
-	      var cr870 = _this5.mouse[870];
-	      var cr88 = _this5.mouse[88];
-	      var cr97 = _this5.mouse[97];
-	      var cr970 = _this5.mouse[970];
-	      var cr98 = _this5.mouse[98];
-	      var cr107 = _this5.mouse[107];
-	      var cr1070 = _this5.mouse[1070];
-	      var cr108 = _this5.mouse[108];
-	      var cr117 = _this5.mouse[117];
-	      var cr1170 = _this5.mouse[1170];
-	      var cr118 = _this5.mouse[118];
-	      var cr127 = _this5.mouse[127];
-	      var cr1270 = _this5.mouse[1270];
-	      var cr128 = _this5.mouse[128];
-	      var cr137 = _this5.mouse[137];
-	      var cr1370 = _this5.mouse[1370];
-	      var cr138 = _this5.mouse[138];
-
+	      var group = _this2.data.group;
 	      return _react2['default'].createElement(
 	        'div',
 	        { style: { backgroundColor: '#000', height: 3800, width: '100%', color: '#FFE4C4' } },
@@ -687,17 +207,12 @@
 	        ),
 	        _react2['default'].createElement(
 	          'div',
-	          { style: { width: '40%', marginLeft: 85, float: 'right', marginRight: 2 } },
-	          _react2['default'].createElement(
-	            'h2',
-	            { style: { textAlign: 'center' } },
-	            'Rollover Buttons'
-	          ),
+	          { style: { width: '80%', marginLeft: 85, float: 'right', marginRight: 2, color: '#FFE4C4' } },
 	          _react2['default'].createElement('br', null),
 	          'Current Group:',
 	          _react2['default'].createElement(
 	            'button',
-	            { style: _this5.style8('blue', 'lightgreen', 'red') },
+	            { style: _this2.style8('blue', 'lightgreen', 'red') },
 	            group
 	          ),
 	          _react2['default'].createElement('br', null),
@@ -705,357 +220,75 @@
 	          _react2['default'].createElement(
 	            'button',
 	            { onClick: function () {
-	                _this5.data.group = 'GroupA';
-	                _this5.data.test = true;
+	                _this2.data.group = 'GroupA';
 	              },
 	              onMouseEnter: function () {
-	                if (group !== 'GroupA') {
-	                  _this5.data.test = false;
-	                  _this5.mouse.Abackground = rAbackground;
-	                  _this5.mouse.Aborder = rAborder;
-	                  _this5.mouse.Acolor = rAcolor;
-	                }
+	                _this2.data.Ahover = true;
 	              },
 	              onMouseLeave: function () {
-	                if (group !== 'GroupA') {
-	                  _this5.data.test = true;
-	                  _this5.mouse.Abackground = Abackground;
-	                  _this5.mouse.Aborder = Aborder;
-	                  _this5.mouse.Acolor = Acolor;
-	                }
+	                _this2.data.Ahover = false;
 	              },
-	              style: _this5.style8(_this5.mouse.Abackground, _this5.mouse.Aborder, _this5.mouse.Acolor) },
+	              style: _this2.style8(_this2.data.fA.a, _this2.data.fA.b, _this2.data.fA.c) },
 	            'GroupA'
 	          ),
 	          _react2['default'].createElement(
 	            'button',
 	            { onClick: function () {
-	                _this5.data.group = 'GroupB';
-	                _this5.data.test = true;
+	                _this2.data.group = 'GroupB';
 	              },
 	              onMouseEnter: function () {
-	                if (group !== 'GroupB') {
-	                  _this5.data.test = false;
-	                  _this5.mouse.Bbackground = rBbackground;
-	                  _this5.mouse.Bborder = rBborder;
-	                  _this5.mouse.Ncolor = rBcolor;
-	                }
+	                _this2.data.Bhover = true;
 	              },
 	              onMouseLeave: function () {
-	                if (group !== 'GroupB') {
-	                  _this5.data.test = true;
-	                  _this5.mouse.Bbackground = Bbackground;
-	                  _this5.mouse.Bborder = Bborder;
-	                  _this5.mouse.Bcolor = Bcolor;
-	                }
+	                _this2.data.Bhover = false;
 	              },
-	              style: _this5.style8(_this5.mouse.Bbackground, _this5.mouse.Bborder, _this5.mouse.Bcolor) },
+	              style: _this2.style8(_this2.data.fB.a, _this2.data.fB.b, _this2.data.fB.c) },
 	            'GroupB'
 	          ),
 	          _react2['default'].createElement(
 	            'button',
 	            { onClick: function () {
-	                _this5.data.group = 'GroupC';
-	                _this5.data.test = true;
+	                _this2.data.group = 'GroupC';
 	              },
 	              onMouseEnter: function () {
-	                if (group !== 'GroupC') {
-	                  _this5.data.test = false;
-	                  _this5.mouse.Cbackground = rCbackground;
-	                  _this5.mouse.Cborder = rCborder;
-	                  _this5.mouse.Ccolor = rCcolor;
-	                }
+	                _this2.data.Chover = true;
 	              },
 	              onMouseLeave: function () {
-	                if (group !== 'GroupC') {
-	                  _this5.data.test = true;
-	                  _this5.mouse.Cbackground = Cbackground;
-	                  _this5.mouse.Cborder = Cborder;
-	                  _this5.mouse.Ccolor = Ccolor;
-	                }
+	                _this2.data.Chover = false;
 	              },
-	              style: _this5.style8(_this5.mouse.Cbackground, _this5.mouse.Cborder, _this5.mouse.Ccolor) },
+	              style: _this2.style8(_this2.data.fC.a, _this2.data.fC.b, _this2.data.fC.c) },
 	            'GroupC'
 	          ),
 	          _react2['default'].createElement(
 	            'button',
 	            { onClick: function () {
-	                _this5.data.group = 'solo';
-	                _this5.data.test = true;
+	                _this2.data.group = 'solo';
 	              },
 	              onMouseEnter: function () {
-	                if (group !== 'solo') {
-	                  _this5.data.test = false;
-	                  _this5.mouse.Sbackground = rSbackground;
-	                  _this5.mouse.Sborder = rSborder;n;
-	                  _this5.mouse.Scolor = rScolor;
-	                }
+	                _this2.data.Shover = true;
 	              },
 	              onMouseLeave: function () {
-	                if (group !== 'solo') {
-	                  _this5.data.test = true;
-	                  _this5.mouse.Sbackground = Sbackground;
-	                  _this5.mouse.Sborder = Sborder;
-	                  _this5.mouse.Scolor = Scolor;
-	                }
+	                _this2.data.Shover = false;
 	              },
-	              style: _this5.style8(_this5.mouse.Sbackground, _this5.mouse.Sborder, _this5.mouse.Scolor) },
+	              style: _this2.style8(_this2.data.fS.a, _this2.data.fS.b, _this2.data.fS.c) },
 	            'solo'
 	          ),
 	          _react2['default'].createElement('br', null),
 	          _react2['default'].createElement('br', null),
-	          _react2['default'].createElement(GroupNew, { key: 'GroupNew', setGroup: function (x) {
-	              _this5.data.group = x;
-	            }, name: _this5.data.name }),
-	          _react2['default'].createElement('br', null),
-	          _react2['default'].createElement('br', null),
-	          'Fibonacci numbers ( [temp][1] ):',
-	          _react2['default'].createElement(
-	            'button',
-	            { style: _this5.style8(cr27, cr270, cr28) },
-	            temp[1]
-	          ),
-	          _react2['default'].createElement('br', null),
-	          _react2['default'].createElement('br', null),
-	          'Value of data.x:',
-	          _react2['default'].createElement(
-	            'button',
-	            { style: _this5.style8(cr27, cr270, cr28), onClick: function () {
-	                increaseX();
-	              },
-	              onMouseEnter: function () {
-	                _this5.mouse[27] = 'blue', _this5.mouse[270] = 'lightblue', _this5.mouse[28] = 'yellow';
-	              },
-	              onMouseLeave: function () {
-	                _this5.mouse[27] = '#000', _this5.mouse[270] = 'darkred', _this5.mouse[28] = 'burlywood';
-	              }
-	            },
-	            x
-	          ),
-	          _react2['default'].createElement('br', null),
-	          _react2['default'].createElement('br', null),
-	          _react2['default'].createElement(
-	            'h3',
-	            null,
-	            'Reactive Fibonacci Numbers'
-	          ),
-	          _react2['default'].createElement(
-	            'h3',
-	            null,
-	            'Using mobservable properties of the fibonacci number'
-	          ),
-	          _react2['default'].createElement(
-	            'h2',
-	            null,
-	            ' fib(',
-	            p,
-	            ') = ',
-	            q,
-	            ' '
-	          ),
-	          _react2['default'].createElement(
-	            Fibonacci,
-	            { fib: _this5.blib },
-	            ' '
-	          ),
-	          'Elapsed time = ',
-	          t,
-	          ' milliseconds.',
-	          _react2['default'].createElement('br', null),
-	          'The computer code is at ',
-	          _react2['default'].createElement(
-	            'a',
-	            { style: { color: '#f26d6d' }, href: 'https://github.com/dschalk/mobservable-react-buttons' },
-	            'mobservable-react-buttons'
-	          ),
-	          _react2['default'].createElement('br', null),
-	          _react2['default'].createElement('br', null),
-	          _react2['default'].createElement(
-	            'h3',
-	            null,
-	            'Plain Fibonacci Numbers'
-	          ),
-	          _react2['default'].createElement(
-	            'h3',
-	            null,
-	            'Ordinary array [a, b] -> [a+b, a]'
-	          ),
-	          _react2['default'].createElement(
-	            'h2',
-	            null,
-	            ' fib(',
-	            p2,
-	            ') = ',
-	            q2,
-	            ' '
-	          ),
-	          _react2['default'].createElement(
-	            Fibonacci2,
-	            { fib2: _this5.blib2 },
-	            ' '
-	          ),
-	          _react2['default'].createElement('br', null),
-	          'Elapsed time = ',
-	          t2,
-	          ' milliseconds.',
-	          _react2['default'].createElement('br', null),
-	          _react2['default'].createElement('br', null),
-	          'The buttons above are inter-connected with one another and with the input box. Click the buttons and enter some text to see how they interact. These are dumned-down buttons from my ',
-	          _react2['default'].createElement(
-	            'a',
-	            { target: ' _blank', style: { color: '#f26d6d' }, href: 'http://machinegun.ninja' },
-	            'Game of Score'
-	          ),
-	          ' Haskell websockets multiplayer math game. The buttons presented here demonstrate the full functionality of the rollover effects, along with some other features that don\'t come with HTML select/option forms. When the value of \'data.test\' is \'true\', data.groupWatch() automatically changes button highlighting when the value of \'data.group\' changes. When the mouse enters a button, data.test is set to \'false\' allowing the rollover effect to override \'data.groupWatch()\'.',
-	          _react2['default'].createElement('br', null),
-	          _react2['default'].createElement('br', null),
-	          'The movement from MVC frameworks to Facebook\'s React to Mr. Weststrate\'s mobservable-React hybrid seems to portend a progression into a future hybrid not only free from Flux and its progeny, but possibly free even from React\'s \'state\' object, which at first appears to be essential. Now it could be that Facebook\'s website needs Flux, and would flounder if it were to substitue mobservable for its dispatchers, stores, state object, and Flux. My websockets-react project isn\'t handling much traffic, but it is fairly complex. The more I convert over to mobservable, the easier it gets to follow code logic and add features. I haven\'t noticed an deterioration in performance, and I suspect that it can handle heavier loads than the earlier version which held more tightly to Facebook\'s patterns.  As I move things out of the \'state\' object and into mobservable objects, I remove the associated \'setState\' code, along with the getter code, and install methods in mobservable-encapsulated objects that cause the application to take care of itself automatically. That is what I did with these buttons.',
-	          _react2['default'].createElement('br', null),
-	          _react2['default'].createElement('br', null)
-	        ),
-	        _react2['default'].createElement(
-	          'div',
-	          { style: { width: '45%', float: 'left', marginLeft: 12 } },
-	          _react2['default'].createElement(
-	            'p',
-	            null,
-	            'When React renders the the main component (B2), reactive functions merely mentioned in the render function are executed. The variable \'data.x\' is not involved in the method \'g\', which computes sequential Fibonacci numbers, yet incrementing x causes the next fibonacci number to be displayed. In fact, Rolling over any rollover button, clicking any button, or entering text causes the sequence to progress, unless the rollover, click, or text entry doesn\'t change anything. This is reassuring evidence that no unnecessary rendering is taking place. '
-	          ),
-	          _react2['default'].createElement(
-	            'p',
-	            null,
-	            'The line \'let g = this.data.g\' in \'render\' is all it takes to invoke this ultra-sensitive behavior. Note that \'g\' is not called and its argument is not modified (that is, not until g modifies it). Being aware of this automatic behavior facilitates writing concise code (it doesn\'t get more concise than not having to write anything), and avoiding magical bugs (things seeming to happen spontaneously). '
-	          ),
-	          'The line \'let increaseX = this.data.increaseX\' is also present in \'render()\', but rendering does not trigger its execution. The relevant difference between \'increaseX\' and \'g\' from a practical perspective is that \'g\' is defined inside of the reactive data object but \'increaseX\' is incorporated into \'data\' externally with with the code: \'data.increaseX = ...\'. Another way of looking at this is to see that \'g\' was inside of \'data\' when it was encapsulated, but \'increaseX\' was tacked on after encapsulation. The precise explanation for this behavior can only be found in the details of the code.',
-	          _react2['default'].createElement('br', null),
-	          _react2['default'].createElement(
-	            'h3',
-	            null,
-	            'Discussion of Fibonacci Numbers'
-	          ),
-	          'The 1477th number in the Fibonacci sequence is the largest number browsers can handle.',
-	          _react2['default'].createElement('br', null),
-	          _react2['default'].createElement('br', null),
-	          'fib(1477) =  1.3069892237633987e+308 ',
-	          _react2['default'].createElement('br', null),
-	          'fib(1478) = Infinity',
-	          _react2['default'].createElement('br', null),
-	          _react2['default'].createElement('br', null),
-	          'To see how much overhead is entailed by working with a number created by "let rf = mobservable.makeReactive(1)", I used the fact that the reactive number had access to its present and previous values to generate the Fibonacci series. Each time the loop calls "rf(xx)", xx is automatically incremented by adding the a and b in "rf.observe(function(a,b))" So, for example, running "rf(xx)" nine times in a loop is all it takes to compute the 9th number in the series.',
-	          _react2['default'].createElement('br', null),
-	          _react2['default'].createElement('br', null),
-	          'On a Chrome browser, I got',
-	          _react2['default'].createElement('br', null),
-	          'mobservable fib(100,000,000) elapsed time 1883 milliseconds',
-	          _react2['default'].createElement('br', null),
-	          'and ordinary fib(100,000,000) elapsed time 815 milliseconds. On Firefox, I got 1452 and 380 milliseconds and on Opera, 1709 and 760 milliseconds. Repeated computations did not differ segnificantly from one another except that on Chrome and Opera, the first ordinary computation was much faster than the subsequent ones. The data was gathered on a run-of-the-mill Ubuntu 14.04 desktop box.',
-	          _react2['default'].createElement(
-	            'p',
-	            null,
-	            'All of this was done mainly for amusement, but it did provide some reasurrance that using mobservabale to access current and most recent state will not entail a performance hit. A user requesting fib(1477) won\'t notice the extra 2 or 3 microseconds involved in getting it through a sequence of mobservable reactive numbers.'
-	          ),
-	          _react2['default'].createElement(
-	            'p',
-	            null,
-	            'The buttons shown here work fine with React\'s state and props objects left empty. You might wonder why I use React at all. Mobservable doesn\'t rely on React. Well, this code is a snippet from my websockets-react project. The complete code is available at ',
-	            _react2['default'].createElement(
-	              'a',
-	              { style: { color: '#f26d6d' }, href: 'https://github.com/dschalk/websockets-react' },
-	              'https://github.com/dschalk/websockets-react'
-	            ),
-	            '. An explanation of the project is at ',
-	            _react2['default'].createElement(
-	              'a',
-	              { style: { color: '#f26d6d' }, href: 'https://www.fpcomplete.com/user/dschalk/Websockets%20Game%20of%20Score' },
-	              'https://www.fpcomplete.com/user/dschalk/Websockets%20Game%20of%20Score'
-	            ),
-	            '. My server is a modified Haskell Wai-Websockets server. Like mobservable, it does much in a very simple and elegant manner.'
-	          ),
-	          _react2['default'].createElement(
-	            'p',
-	            null,
-	            ' I used \'react_mixin\', but it is not necessary for the buttons. I used it to grab a React mixin out of \'node_modules\' to support autoFocus (\'autofocus\' in regular HTML).'
-	          ),
-	          _react2['default'].createElement(
-	            'span',
-	            { style: { textAlign: 'center', fontSize: 22 } },
-	            'Temporary Button'
-	          ),
-	          _react2['default'].createElement('br', null),
-	          'Clicking this button does nothing but increment \'data.w\', but there there is an observer function named \'data.twoTimes()\' that reacts to changes in \'data.w\' by mutating \'data.message\' and \'data.dsp\'. Click the button and see what happens when data.twoTimes changes the values of \'data.message\' and \'data.dsp\'.',
-	          _react2['default'].createElement('br', null),
-	          _react2['default'].createElement(
-	            'h2',
-	            { style: { display: dsp, color: 'red' } },
-	            ' ',
-	            warning,
-	            ' '
-	          ),
-	          _react2['default'].createElement(
-	            'button',
-	            { style: _this5.style9(dsp, cr38, cr370, '#000'), onClick: function () {
-	                increaseW();
-	              },
-	              onMouseEnter: function () {
-	                _this5.mouse[37] = 'blue', _this5.mouse[370] = 'lightblue', _this5.mouse[38] = 'yellow';
-	              },
-	              onMouseLeave: function () {
-	                _this5.mouse[37] = '#000', _this5.mouse[370] = 'darkred', _this5.mouse[38] = 'burlywood';
-	              }
-	            },
-	            message
-	          )
-	        ),
-	        _react2['default'].createElement('br', null),
-	        _react2['default'].createElement('br', null),
-	        _react2['default'].createElement(
-	          'div',
-	          { style: { textAlign: 'center', fontSize: 26, width: '100%', float: 'left' } },
-	          'Mobservable Monads'
-	        ),
-	        ' ',
-	        _react2['default'].createElement('br', null),
-	        _react2['default'].createElement(
-	          'div',
-	          { style: { marginRight: '25%', marginLeft: '25%', float: 'left' } },
-	          'I added bind and return functions to mobservable reactive entities. Tests with reactive numbers and strings indicate that the enhanced reactive entities are monads, so that is what I call them. The bind function facilitates the chaining of computations and parsing operations. The general form is monad.bind(function(a1, ...args).bind(function(a2, ...args).bind( ... "a1" is the value of the starting reactive number or string. "a2" is the value of the reactive string or number produced by first operation. "bind" takes the value of the reactive entity, applies the function to it and any other arguments provided, and re-encapsulates it into the same, a different, or a new reactive entity enhanced with the bind and return methods for possible use in processing its value. A demononstration is online at ',
-	          _react2['default'].createElement(
-	            'a',
-	            { style: { color: '#f26d6d' }, href: 'http://transcendent.ninja' },
-	            'transcendent ninja'
-	          ),
-	          '. The code is at ',
-	          _react2['default'].createElement(
-	            'a',
-	            { style: { color: '#f26d6d' }, href: 'https://github.com/dschalk/mobservable-monads' },
-	            'github.com/dschalk/mobservable-monads'
-	          ),
+	          _react2['default'].createElement(GroupNew, { key: 'GroupNew', data: _this2.data }),
 	          _react2['default'].createElement('br', null),
 	          _react2['default'].createElement('br', null)
 	        )
 	      );
 	    };
 
-	    this.mouse = mouseHandler;
 	    this.data = data;
-	    this.monads = monads;
-	    this.m = m.x;
-	    this.m2 = m2.x;
-	    this.m3 = m3.x;
-	    this.state = {
-	      fibonacci2: 0,
-	      t2: 0
-	    };
 	  }
 
 	  var _B2 = B2;
 	  B2 = (0, _mobservableReact.reactiveComponent)(B2) || B2;
 	  return B2;
 	})(_react2['default'].Component);
-
-	;
-
-	reactMixin(B2.prototype, __webpack_require__(115));
 
 	_react2['default'].render(_react2['default'].createElement(B2, { key: 'B2' }), document.getElementById('divSix'));
 
@@ -21705,6 +20938,10 @@
 	    }
 	    mobservable.isReactive = isReactive;
 	    function sideEffect(func, scope) {
+	        return observe(func, scope);
+	    }
+	    mobservable.sideEffect = sideEffect;
+	    function observe(func, scope) {
 	        var observable = new _.ObservableView(func, scope, {
 	            object: scope,
 	            name: func.name
@@ -21718,7 +20955,17 @@
 	        disposer.$mobservable = observable;
 	        return disposer;
 	    }
-	    mobservable.sideEffect = sideEffect;
+	    mobservable.observe = observe;
+	    function when(predicate, effect, scope) {
+	        var disposer = observe(function () {
+	            if (predicate.call(scope)) {
+	                disposer();
+	                effect.call(scope);
+	            }
+	        });
+	        return disposer;
+	    }
+	    mobservable.when = when;
 	    function extendReactive(target, properties, context) {
 	        return _.extendReactive(target, properties, true, context);
 	    }
@@ -22759,7 +22006,7 @@
 /* 159 */
 /***/ function(module, exports, __webpack_require__) {
 
-	!function(e,t){ true?module.exports=t(__webpack_require__(158),__webpack_require__(2)):"function"==typeof define&&define.amd?define(["mobservable","react"],t):"object"==typeof exports?exports.mobservableReact=t(require("mobservable"),require("react")):e.mobservableReact=t(e.mobservable,e.react)}(this,function(e,t){return function(e){function t(o){if(n[o])return n[o].exports;var r=n[o]={exports:{},id:o,loaded:!1};return e[o].call(r.exports,r,r.exports,t),r.loaded=!0,r.exports}var n={};return t.m=e,t.c=n,t.p="",t(0)}([function(e,t,n){var o,r,i;!function(){function s(e,t){function n(e){var n=t.findDOMNode(e);n&&c.set(n,e),u.emit({event:"render",renderTime:e.__renderEnd-e.__renderStart,totalTime:Date.now()-e.__renderStart,component:e,node:n})}function o(e,t){var n=e[t],o=d[t];e[t]=function(){n&&n.apply(this,arguments),o.apply(this,arguments)}}function r(e){if(!e)throw new Error("Please pass a valid component to 'reactiveComponent'");var t=e.prototype||e;return["componentWillMount","componentWillUnmount","componentDidMount","componentDidUpdate"].forEach(function(e){o(t,e)}),t.shouldComponentUpdate||(t.shouldComponentUpdate=d.shouldComponentUpdate),e}function i(){if("undefined"==typeof WeakMap)throw new Error("tracking components is not supported in this browser");a||(a=!0)}var s=1,a=!1,p=e.observeUntilInvalid,c="undefined"!=typeof WeakMap?new WeakMap:void 0,u=new e._.SimpleEventEmitter,d={componentWillMount:function(){var e=(this.displayName||this.constructor.name||"ReactiveComponent")+s++,n=this.render;this.render=function(){var o=this;a&&(this.__renderStart=Date.now()),this.__watchDisposer&&this.__watchDisposer();var r=p(function(){return n.call(o)},function(){t.Component.prototype.forceUpdate.call(o)},{object:this,name:e});return this.__watchDisposer=r[1],this.$mobservable=r[2],a&&(this.__renderEnd=Date.now()),r[0]}},componentWillUnmount:function(){if(this.__watchDisposer&&this.__watchDisposer(),delete this.$mobservable,a){var e=t.findDOMNode(this);e&&(c.delete(e),u.emit({event:"destroy",component:this,node:e}))}},componentDidMount:function(){a&&n(this)},componentDidUpdate:function(){a&&n(this)},shouldComponentUpdate:function(e,t){if(this.state!==t)return!0;var n,o=Object.keys(this.props);if(o.length!==Object.keys(e).length)return!0;for(var r=o.length-1;n=o[r];r--)if(e[n]!==this.props[n])return!0;return!1}};return{reactiveComponent:r,renderReporter:u,componentByNodeRegistery:c,trackComponents:i}}r=[n(1),n(2)],o=s,i="function"==typeof o?o.apply(t,r):o,!(void 0!==i&&(e.exports=i))}()},function(t,n){t.exports=e},function(e,n){e.exports=t}])});
+	!function(e,t){ true?module.exports=t(__webpack_require__(158),__webpack_require__(2)):"function"==typeof define&&define.amd?define(["mobservable","react"],t):"object"==typeof exports?exports.mobservableReact=t(require("mobservable"),require("react")):e.mobservableReact=t(e.mobservable,e.React)}(this,function(e,t){return function(e){function t(n){if(o[n])return o[n].exports;var r=o[n]={exports:{},id:n,loaded:!1};return e[n].call(r.exports,r,r.exports,t),r.loaded=!0,r.exports}var o={};return t.m=e,t.c=o,t.p="",t(0)}([function(e,t,o){var n,r,i;!function(){function s(e,t){function o(e){var o=t.findDOMNode(e);o&&p.set(o,e),a.emit({event:"render",renderTime:e.__$mobRenderEnd-e.__$mobRenderStart,totalTime:Date.now()-e.__$mobRenderStart,component:e,node:o})}function n(e,t){var o=e[t],n=c[t];e[t]=function(){o&&o.apply(this,arguments),n.apply(this,arguments)}}function r(e){if("function"==typeof e&&!e.prototype.render&&!e.isReactClass&&!t.Component.isPrototypeOf(e))return r(t.createClass({displayName:e.name,render:function(){return e.call(this,this.props)}}));if(!e)throw new Error("Please pass a valid component to 'reactiveComponent'");var o=e.prototype||e;return["componentWillMount","componentWillUnmount","componentDidMount","componentDidUpdate"].forEach(function(e){n(o,e)}),o.shouldComponentUpdate||(o.shouldComponentUpdate=c.shouldComponentUpdate),e}function i(){if("undefined"==typeof WeakMap)throw new Error("tracking components is not supported in this browser");s||(s=!0)}var s=!1,p="undefined"!=typeof WeakMap?new WeakMap:void 0,a=new e._.SimpleEventEmitter,c={componentWillMount:function(){var o=this.render;this.__$mobDependencies=[],this.render=function(){s&&(this.__$mobRenderStart=Date.now());var n,r=!1;this.__$mobDisposer=e.observe(function(){r?(this.__$mobDisposer(),t.Component.prototype.forceUpdate.call(this)):(r=!0,n=o.call(this))},this),this.$mobservable=this.__$mobDisposer.$mobservable;var i=this.$mobservable.observing.map(function(e){return e.setRefCount(1),e});return this.__$mobDependencies.forEach(function(e){e.setRefCount(-1)}),this.__$mobDependencies=i,s&&(this.__$mobRenderEnd=Date.now()),n}},componentWillUnmount:function(){if(this.__$mobDisposer&&this.__$mobDisposer(),this.__$mobDependencies.forEach(function(e){e.setRefCount(-1)}),delete this.$mobservable,s){var e=t.findDOMNode(this);e&&(p.delete(e),a.emit({event:"destroy",component:this,node:e}))}},componentDidMount:function(){s&&o(this)},componentDidUpdate:function(){s&&o(this)},shouldComponentUpdate:function(t,o){if(this.state!==o)return!0;var n,r=Object.keys(this.props);if(r.length!==Object.keys(t).length)return!0;for(var i=r.length-1;n=r[i];i--){var s=t[n];if(s!==this.props[n])return!0;if(s&&"object"==typeof s&&!e.isReactive(s))return!0}return!1}};return{reactiveComponent:r,renderReporter:a,componentByNodeRegistery:p,trackComponents:i}}r=[o(1),o(2)],n=s,i="function"==typeof n?n.apply(t,r):n,!(void 0!==i&&(e.exports=i))}()},function(t,o){t.exports=e},function(e,o){e.exports=t}])});
 
 /***/ },
 /* 160 */
