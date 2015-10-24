@@ -1,11 +1,12 @@
 'use strict'
-import React from'react';
+
 import mobservable from 'mobservable';
-import {reactiveComponent} from 'mobservable-react';
-let reactMixin = require('react-mixin');
+import React from 'react';
+import {render} from 'react-dom';
+import {observer} from 'mobservable-react';
 export {B2};
 
-@reactiveComponent class GroupNew extends React.Component {
+@observer class GroupNew extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -39,7 +40,7 @@ export {B2};
   }
 };
 
-let data = mobservable.makeReactive({
+let data = mobservable.observable({
   group: 'solo',
   Ahover: false,
   Afocus: false,
@@ -77,12 +78,11 @@ let data = mobservable.makeReactive({
   }
 });
 
-@reactiveComponent class B2 extends React.Component {
+@observer class B2 extends React.Component {
   constructor(props) {
     super(props);
     this.data = data;
   }
-
 
   style8 = (x,y,z) => {return {backgroundColor: x, textAlign: 'left', borderColor: y, outline: 0,
     color: z, borderRadius: 10, paddingTop: 1.1, paddingBottom: 0.9, marginRight: 3, marginLeft: 12, fontSize: 20 }};
@@ -90,7 +90,7 @@ let data = mobservable.makeReactive({
   render = () => {
     let group = this.data.group;
        return (
-      <div style={{ backgroundColor: '#000', height: 3800, width: '100%', color: '#FFE4C4' }}>
+      <div style={{ color: '#FFE4C4' }}>
         <br /><br /><br />
           <h1 style={{textAlign: 'center'}} >Reactive Buttons</h1>
         <div style={{width: '80%', marginLeft: 85, float: 'right', marginRight: 2, color: '#FFE4C4' }} >
@@ -161,4 +161,4 @@ let data = mobservable.makeReactive({
       </div>
        )}
 }
-React.render(<B2 key='B2' />, document.getElementById('divSix'));
+render(<B2 key='B2' />, document.getElementById('divSix'));

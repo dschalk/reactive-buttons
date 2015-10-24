@@ -4,16 +4,17 @@
   "description": "How is hover and focus possible if \"it is not allowed to change the state during the computation of a reactive view.\" My rollover buttons alter button colors when the mouse pointer hovers over a button or selects it. How can I accomplish this effect without altering state?",
   "main": "bundle.js",
   "dependencies": {
-    "babel": "5.8.23",
-    "babel-core": "5.8.23",
-    "babel-loader": "5.3.2",
-    "file": "0.2.2",
-    "mobservable": "0.6.8",
-    "mobservable-react": "0.1.8",
-    "webpack": "1.12.1",
-    "react": "0.13.3",
-    "react-mixin": "1.7.0",
-    "webpack-dev-server": "1.11.0"
+    "babel": "latest",
+    "babel-core": "latest",
+    "babel-loader": "latest",
+    "file": "latest",
+    "mobservable": "latest",
+    "mobservable-react": "latest",
+    "webpack": "latest",
+    "react": "latest",
+    "react-dom": "latest",
+    "react-mixin": "latest",
+    "webpack-dev-server": "latest"
   },
   "devDependencies": {},
   "scripts": {
