@@ -85,18 +85,23 @@ let data = mobservable.observable({
   }
 
   style8 = (x,y,z) => {return {backgroundColor: x, textAlign: 'left', borderColor: y, outline: 0,
-    color: z, borderRadius: 10, paddingTop: 1.1, paddingBottom: 0.9, marginRight: 3, marginLeft: 12, fontSize: 20 }};
+    color: z, borderRadius: 10, paddingTop: 1.1, paddingBottom: 0.9, marginLeft: 200, 
+      fontSize: 20 }};
+
+  style9 = (x,y,z) => {return {backgroundColor: x, textAlign: 'left', borderColor: y, outline: 0,
+    color: z, borderRadius: 10, paddingTop: 1.1, paddingBottom: 0.9, marginRight: 60,
+      fontSize: 30, float: 'right', marginTop: 60 }};
+
 
   render = () => {
     let group = this.data.group;
        return (
-      <div style={{ color: '#FFE4C4' }}>
+      <div style={{ color: '#FFE4C4', leftMargin: '10%', rightMargin: '10%' }}>
         <br /><br /><br />
           <h1 style={{textAlign: 'center'}} >Reactive Buttons</h1>
-        <div style={{width: '80%', marginLeft: 85, float: 'right', marginRight: 2, color: '#FFE4C4' }} >
+        <div style={{width: '80%', color: '#FFE4C4' }} >
           <br />
-        Current Group:
-      <button style={this.style8('blue', 'lightgreen', 'red')} >
+      <button style={this.style9('blue', 'lightgreen', 'red')} >
         {group}
       </button>
         <br /><br />
@@ -113,6 +118,7 @@ let data = mobservable.observable({
             style={this.style8(this.data.fA.a,this.data.fA.b,this.data.fA.c)} >
             GroupA
           </button>
+        <br /><br />
           <button onClick={() => {
                   this.data.group = 'GroupB';
             }}
@@ -126,6 +132,7 @@ let data = mobservable.observable({
             style={this.style8(this.data.fB.a,this.data.fB.b,this.data.fB.c)} >
             GroupB
           </button>
+        <br /><br />
           <button onClick={() => {
                   this.data.group = 'GroupC';
             }}
@@ -139,6 +146,7 @@ let data = mobservable.observable({
             style={this.style8(this.data.fC.a,this.data.fC.b,this.data.fC.c)} >
             GroupC
           </button>
+        <br /><br />
           <button onClick={() => {
                   this.data.group = 'solo';
             }}
@@ -152,13 +160,15 @@ let data = mobservable.observable({
             style={this.style8(this.data.fS.a,this.data.fS.b,this.data.fS.c)} >
             solo
           </button>
-
             <br /><br />
+            <div style={{marginLeft: 200}}>
           <GroupNew key='GroupNew' data={this.data} />
+        </div>
             <br /><br />
 
         </div>
       </div>
-       )}
+       )
+   }
 }
 render(<B2 key='B2' />, document.getElementById('divSix'));

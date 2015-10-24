@@ -191,14 +191,21 @@
 
 	    this.style8 = function (x, y, z) {
 	      return { backgroundColor: x, textAlign: 'left', borderColor: y, outline: 0,
-	        color: z, borderRadius: 10, paddingTop: 1.1, paddingBottom: 0.9, marginRight: 3, marginLeft: 12, fontSize: 20 };
+	        color: z, borderRadius: 10, paddingTop: 1.1, paddingBottom: 0.9, marginLeft: 200,
+	        fontSize: 20 };
+	    };
+
+	    this.style9 = function (x, y, z) {
+	      return { backgroundColor: x, textAlign: 'left', borderColor: y, outline: 0,
+	        color: z, borderRadius: 10, paddingTop: 1.1, paddingBottom: 0.9, marginRight: 60,
+	        fontSize: 30, float: 'right', marginTop: 60 };
 	    };
 
 	    this.render = function () {
 	      var group = _this2.data.group;
 	      return _react2['default'].createElement(
 	        'div',
-	        { style: { color: '#FFE4C4' } },
+	        { style: { color: '#FFE4C4', leftMargin: '10%', rightMargin: '10%' } },
 	        _react2['default'].createElement('br', null),
 	        _react2['default'].createElement('br', null),
 	        _react2['default'].createElement('br', null),
@@ -209,12 +216,11 @@
 	        ),
 	        _react2['default'].createElement(
 	          'div',
-	          { style: { width: '80%', marginLeft: 85, float: 'right', marginRight: 2, color: '#FFE4C4' } },
+	          { style: { width: '80%', color: '#FFE4C4' } },
 	          _react2['default'].createElement('br', null),
-	          'Current Group:',
 	          _react2['default'].createElement(
 	            'button',
-	            { style: _this2.style8('blue', 'lightgreen', 'red') },
+	            { style: _this2.style9('blue', 'lightgreen', 'red') },
 	            group
 	          ),
 	          _react2['default'].createElement('br', null),
@@ -233,6 +239,8 @@
 	              style: _this2.style8(_this2.data.fA.a, _this2.data.fA.b, _this2.data.fA.c) },
 	            'GroupA'
 	          ),
+	          _react2['default'].createElement('br', null),
+	          _react2['default'].createElement('br', null),
 	          _react2['default'].createElement(
 	            'button',
 	            { onClick: function () {
@@ -247,6 +255,8 @@
 	              style: _this2.style8(_this2.data.fB.a, _this2.data.fB.b, _this2.data.fB.c) },
 	            'GroupB'
 	          ),
+	          _react2['default'].createElement('br', null),
+	          _react2['default'].createElement('br', null),
 	          _react2['default'].createElement(
 	            'button',
 	            { onClick: function () {
@@ -261,6 +271,8 @@
 	              style: _this2.style8(_this2.data.fC.a, _this2.data.fC.b, _this2.data.fC.c) },
 	            'GroupC'
 	          ),
+	          _react2['default'].createElement('br', null),
+	          _react2['default'].createElement('br', null),
 	          _react2['default'].createElement(
 	            'button',
 	            { onClick: function () {
@@ -277,7 +289,11 @@
 	          ),
 	          _react2['default'].createElement('br', null),
 	          _react2['default'].createElement('br', null),
-	          _react2['default'].createElement(GroupNew, { key: 'GroupNew', data: _this2.data }),
+	          _react2['default'].createElement(
+	            'div',
+	            { style: { marginLeft: 200 } },
+	            _react2['default'].createElement(GroupNew, { key: 'GroupNew', data: _this2.data })
+	          ),
 	          _react2['default'].createElement('br', null),
 	          _react2['default'].createElement('br', null)
 	        )
