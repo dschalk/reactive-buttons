@@ -99,6 +99,7 @@ let data = mobservable.observable({
       <div style={{ color: '#FFE4C4', leftMargin: '10%', rightMargin: '10%' }}>
         <br /><br /><br />
           <h1 style={{textAlign: 'center'}} >Reactive Buttons</h1>
+          <h style={{textAlign: 'center'}} >Uses a deprecated version of "Monad".</h1>
         <div style={{width: '80%', color: '#FFE4C4' }} >
           <br />
       <button style={this.style9('blue', 'lightgreen', 'red')} >
